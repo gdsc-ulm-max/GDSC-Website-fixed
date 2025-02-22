@@ -1,0 +1,291 @@
+/* Dark theme for CodeClash - Isolated from main site */
+.codeclash-page {
+  min-height: calc(100vh - 64px); /* Account for navbar height */
+  background: linear-gradient(135deg, #0a0a2e 0%, #1a1a3e 100%);
+  color: white;
+  padding: 2rem;
+  margin-top: -64px; /* Offset the navbar */
+  padding-top: calc(2rem + 64px); /* Add padding to account for navbar */
+}
+
+/* Override Ant Design styles for dark theme - Scoped to codeclash-page */
+.codeclash-page .ant-card {
+  background: rgba(13, 13, 44, 0.7);
+  border: 1px solid rgba(0, 242, 255, 0.1);
+  backdrop-filter: blur(10px);
+  height: 100%;
+}
+
+.codeclash-page .ant-card-body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.codeclash-page .ant-typography {
+  color: white !important;
+}
+
+.codeclash-page .ant-btn {
+  background: linear-gradient(45deg, #00f2ff 30%, #ff00ff 90%) !important;
+  border: none !important;
+  color: white !important;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  height: 48px;
+  padding: 0 32px;
+  transition: all 0.3s ease;
+}
+
+.codeclash-page .ant-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 242, 255, .5);
+  color: white !important;
+  background: linear-gradient(45deg, #00f2ff 30%, #ff00ff 90%) !important;
+}
+
+/* Neon text effect - Scoped to codeclash-page */
+.codeclash-page .neon-text {
+  text-shadow: 0 0 7px #fff,
+               0 0 10px #fff,
+               0 0 21px #fff,
+               0 0 42px #00f2ff,
+               0 0 82px #00f2ff,
+               0 0 92px #00f2ff;
+  color: #fff !important;
+  animation: flicker 1.5s infinite alternate;
+}
+
+@keyframes flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    text-shadow: 0 0 7px #fff,
+                 0 0 10px #fff,
+                 0 0 21px #fff,
+                 0 0 42px #00f2ff,
+                 0 0 82px #00f2ff,
+                 0 0 92px #00f2ff;
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+  }
+}
+
+/* Features section - Scoped to codeclash-page */
+.codeclash-page .features-grid {
+  margin-bottom: 3rem;
+}
+
+.codeclash-page .feature-card {
+  background: rgba(13, 13, 44, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 242, 255, 0.1);
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.codeclash-page .feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 242, 255, 0.2);
+  border: 1px solid rgba(0, 242, 255, 0.3);
+}
+
+.codeclash-page .feature-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  color: #00f2ff;
+}
+
+/* Gradient text - Scoped to codeclash-page */
+.codeclash-page .gradient-text {
+  background: linear-gradient(45deg, #00f2ff, #ff00ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+  font-weight: 700;
+}
+
+/* Event info section - Scoped to codeclash-page */
+.codeclash-page .event-info {
+  background: rgba(13, 13, 44, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 242, 255, 0.2);
+  border-radius: 20px;
+  padding: 32px;
+  margin-top: 40px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Leaderboard section - Scoped to codeclash-page */
+.codeclash-page .leaderboard-container {
+  margin-top: 60px;
+  margin-bottom: 40px;
+}
+
+.codeclash-page .table-container {
+  background: rgba(13, 13, 44, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 242, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.codeclash-page .leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+}
+
+.codeclash-page .leaderboard-table th,
+.codeclash-page .leaderboard-table td {
+  padding: 16px 24px;
+  text-align: left;
+  border-bottom: 1px solid rgba(0, 242, 255, 0.2);
+}
+
+.codeclash-page .leaderboard-table th {
+  background: rgba(0, 242, 255, 0.1);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.codeclash-page .leaderboard-table tr {
+  transition: all 0.3s ease;
+}
+
+.codeclash-page .leaderboard-table tr:hover {
+  background: rgba(255, 0, 255, 0.1);
+}
+
+.codeclash-page .rank-cell {
+  width: 80px;
+  text-align: center;
+}
+
+.codeclash-page .rank-cell .anticon {
+  margin-right: 8px;
+  font-size: 20px;
+}
+
+.codeclash-page .score-cell {
+  color: #00f2ff;
+  font-weight: 600;
+}
+
+.codeclash-page .rank-1 { color: #FFD700; } /* Gold */
+.codeclash-page .rank-2 { color: #C0C0C0; } /* Silver */
+.codeclash-page .rank-3 { color: #CD7F32; } /* Bronze */
+
+/* Responsive adjustments - Scoped to codeclash-page */
+@media screen and (max-width: 768px) {
+  .codeclash-page {
+    padding: 1rem;
+    padding-top: calc(1rem + 64px);
+  }
+  
+  .codeclash-page .leaderboard-table th,
+  .codeclash-page .leaderboard-table td {
+    padding: 12px 16px;
+  }
+
+  .codeclash-page .neon-text {
+    font-size: 2.5rem !important;
+  }
+
+  .codeclash-page .gradient-text {
+    font-size: 1.2rem !important;
+  }
+}
+
+.codeclash-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.page-title {
+  text-align: center;
+  color: #1a73e8;
+  margin-bottom: 32px;
+  font-family: 'Google Sans', 'Roboto', sans-serif;
+}
+
+.leaderboard-table {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the table header */
+.leaderboard-table .ant-table-thead > tr > th {
+  background: #f8f9fa;
+  color: #1a73e8;
+  font-weight: 600;
+  padding: 16px;
+}
+
+/* Style table rows */
+.leaderboard-table .ant-table-tbody > tr > td {
+  padding: 16px;
+}
+
+/* Highlight top 3 rows */
+.leaderboard-table .ant-table-tbody > tr:nth-child(1) td {
+  background-color: rgba(255, 215, 0, 0.1);
+}
+
+.leaderboard-table .ant-table-tbody > tr:nth-child(2) td {
+  background-color: rgba(192, 192, 192, 0.1);
+}
+
+.leaderboard-table .ant-table-tbody > tr:nth-child(3) td {
+  background-color: rgba(205, 127, 50, 0.1);
+}
+
+/* Loading container */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+/* Upload Modal */
+.ant-upload-drag {
+  padding: 24px;
+}
+
+.ant-upload-drag-icon {
+  font-size: 48px;
+  color: #1a73e8;
+}
+
+.ant-upload-text {
+  margin: 8px 0;
+  color: #5f6368;
+}
+
+.ant-upload-hint {
+  color: #5f6368;
+  font-size: 0.9em;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .codeclash-container {
+    padding: 16px;
+  }
+
+  .page-title {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+
+  .leaderboard-table .ant-table-thead > tr > th,
+  .leaderboard-table .ant-table-tbody > tr > td {
+    padding: 12px 8px;
+    font-size: 14px;
+  }
+} 

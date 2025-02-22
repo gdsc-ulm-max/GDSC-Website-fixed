@@ -1,0 +1,44 @@
+.eventCard {
+  height: 30vh;
+  background-color: #ffffff7a;
+  box-shadow: 5px 5px 20px rgb(161, 170, 180);
+  border-radius: 10px;
+  width: 40%;
+  margin: 30px 20px 0px 20px;
+  text-align: center;
+  padding-bottom: 23px;
+}
+
+.eventCard > * {
+  padding: 0px 10px 0px 10px;
+}
+
+.eventCard > h3 {
+  font-size: 2rem;
+}
+
+.eventButton {
+  margin-top: 25px;
+  background-color: white;
+  border: none;
+  border-radius: 10px;
+  height: 40px;
+  width: 100px;
+  box-shadow: 5px 10px 10px rgb(158, 167, 177);
+  transition: ease-in-out 300ms;
+}
+
+.eventButton:hover {
+  transform: scale(1.05);
+}
+
+@media screen and (max-width: 800px) {
+  .eventCard {
+    width: 90%;
+    height: fit-content;
+    margin-top: 10px;
+  }
+  .eventCard > h3 {
+    font-size: 1.5rem;
+  }
+}

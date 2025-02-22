@@ -1,0 +1,88 @@
+.landingPage {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+  background: transparent;
+}
+
+.content {
+  max-width: 800px;
+  padding: 3rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.landingPage h1 {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(45deg, #4285F4, #DB4437, #F4B400, #0F9D58);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1.2;
+}
+
+.landingPage p {
+  font-size: 1.25rem;
+  color: rgba(0, 0, 0, 0.75);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.button-group {
+  margin-top: 2rem;
+}
+
+.action-button {
+  height: 48px !important;
+  padding: 0 32px !important;
+  font-size: 1.1rem !important;
+  border-radius: 24px !important;
+  transition: all 0.3s ease !important;
+}
+
+.action-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.join-button {
+  background: #0F9D58 !important;
+  border-color: #0F9D58 !important;
+}
+
+.events-button {
+  background: #4285F4 !important;
+  border-color: #4285F4 !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .landingPage h1 {
+    font-size: 2.5rem;
+  }
+
+  .landingPage p {
+    font-size: 1.1rem;
+  }
+
+  .content {
+    padding: 2rem;
+  }
+
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .action-button {
+    width: 100% !important;
+  }
+} 

@@ -1,0 +1,192 @@
+.techxpo-announcement {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 12px;
+  font-family: 'Google Sans', 'Roboto', sans-serif;
+  color: #202124;
+  background: #ffffff;
+}
+
+/* Hero Section */
+.hero-section {
+  text-align: center;
+  background: white;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(to bottom right, #4285f4, #34a853, #fbbc04, #ea4335);
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 0% 100%);
+  z-index: 0;
+}
+
+.techxpo-logo {
+  width: 180px;
+  height: auto;
+  margin-bottom: 12px;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-section h1 {
+  font-size: 2rem;
+  color: #ffffff;
+  margin: 0 0 12px 0;
+  line-height: 1.2;
+  position: relative;
+  z-index: 1;
+}
+
+.tagline {
+  font-size: 1.4rem;
+  color: #ea4335;
+  margin: 0;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+
+/* Content Section */
+.content-section {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+}
+
+.content-section h2 {
+  color: #34a853;
+  font-size: 1.4rem;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e8f0fe;
+}
+
+/* Event Details */
+.event-details {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.event-details dt {
+  color: #4285f4;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.event-details dd {
+  margin: 0;
+  color: #202124;
+}
+
+/* Highlights */
+.content-section ul:not(.sponsors-list) li {
+  background: #f8f9fa;
+  padding: 16px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  display: grid;
+  gap: 8px;
+}
+
+.content-section ul li strong {
+  color: #4285f4;
+  font-size: 1.1rem;
+  display: block;
+}
+
+/* Sponsors */
+.sponsors-list {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.sponsors-list li {
+  font-weight: 500;
+  color: #5f6368;
+}
+
+/* Open Badge */
+.open-badge {
+  background: #ea4335;
+  color: white;
+  padding: 8px 24px;
+  border-radius: 20px;
+  display: inline-block;
+  font-weight: 600;
+  margin-top: 16px;
+}
+
+/* Links */
+a {
+  color: #4285f4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 1.8rem;
+  }
+
+  .tagline {
+    font-size: 1.2rem;
+  }
+
+  .event-details {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section h1 {
+    font-size: 1.6rem;
+  }
+
+  .tagline {
+    font-size: 1.1rem;
+  }
+
+  .content-section h2 {
+    font-size: 1.3rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .techxpo-announcement {
+    background: white;
+  }
+
+  .hero-section,
+  .content-section {
+    box-shadow: none;
+    break-inside: avoid;
+  }
+} 

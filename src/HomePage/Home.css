@@ -1,0 +1,226 @@
+.homePage {
+  min-height: 100vh;
+  background: transparent;
+  position: relative;
+  z-index: 0;
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+.hero-section .animation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 800px;
+  width: 90%;
+  padding: 2.5rem 2rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.hero-title {
+  font-size: 3.5rem !important;
+  margin-bottom: 1.5rem !important;
+  background: linear-gradient(45deg, #4285F4, #DB4437, #F4B400, #0F9D58);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+  line-height: 1.2 !important;
+}
+
+.highlight {
+  color: #4285F4 !important;
+  font-size: 0.8em;
+}
+
+.hero-description {
+  font-size: 1.25rem !important;
+  margin-bottom: 2rem !important;
+  color: rgba(0, 0, 0, 0.75);
+  line-height: 1.6 !important;
+}
+
+.hero-button {
+  font-size: 1.1rem !important;
+  height: auto !important;
+  padding: 0.75rem 2rem !important;
+  border-radius: 8px !important;
+}
+
+/* Content Section */
+.content-section {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 95%;
+}
+
+.section {
+  margin-bottom: 4rem;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 3rem !important;
+  position: relative;
+  font-size: 2.5rem !important;
+  color: #4285F4 !important;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: #4285F4;
+  border-radius: 2px;
+}
+
+/* Belief Cards */
+.belief-card {
+  text-align: center;
+  height: 100%;
+  transition: transform 0.3s ease;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.belief-card:hover {
+  transform: translateY(-5px);
+}
+
+.google-colors {
+  margin-bottom: 1.5rem !important;
+  font-size: 2.5rem !important;
+}
+
+.g { color: #4285F4; }
+.r { color: #DB4437; }
+.y { color: #F4B400; }
+.o { color: #0F9D58; }
+
+/* Program Cards */
+.program-card {
+  height: 100%;
+  transition: transform 0.3s ease;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.program-card:hover {
+  transform: translateY(-5px);
+}
+
+.program-card .ant-card-body {
+  padding: 1.5rem;
+}
+
+.program-card h4 {
+  color: #4285F4;
+  margin-bottom: 1rem !important;
+}
+
+.section-divider {
+  margin: 4rem 0 !important;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .content-section {
+    padding: 3rem 1.5rem;
+  }
+
+  .section-title {
+    font-size: 2.25rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 1rem;
+  }
+
+  .hero-content {
+    padding: 2rem 1.5rem;
+    width: 95%;
+  }
+
+  .hero-title {
+    font-size: 2.5rem !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  .hero-description {
+    font-size: 1.1rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .content-section {
+    padding: 2rem 1rem;
+  }
+
+  .section {
+    margin-bottom: 3rem;
+  }
+
+  .section-title {
+    font-size: 2rem !important;
+    margin-bottom: 2.5rem !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-content {
+    padding: 1.5rem 1rem;
+    width: 100%;
+  }
+
+  .hero-title {
+    font-size: 2rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .hero-description {
+    font-size: 1rem !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  .hero-button {
+    font-size: 1rem !important;
+    padding: 0.5rem 1.5rem !important;
+  }
+
+  .section-title {
+    font-size: 1.75rem !important;
+    margin-bottom: 2rem !important;
+  }
+
+  .section-title::after {
+    width: 40px;
+    height: 3px;
+  }
+}

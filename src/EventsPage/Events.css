@@ -1,0 +1,203 @@
+.events-page {
+  position: relative;
+  width: 90%;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem 0;
+  background: transparent;
+}
+
+.eventGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.eventCard {
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.98) !important;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.eventCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.eventCard .ant-card-head {
+  min-height: 0;
+  padding: 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.eventCard .ant-card-extra {
+  margin: 0;
+  padding: 0;
+}
+
+.eventCard .ant-card-meta-title {
+  font-size: 1.25rem;
+  margin-bottom: 1rem !important;
+  color: #4285F4;
+  padding-right: 24px;
+}
+
+.event-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 150px;
+}
+
+.eventDescription {
+  display: block;
+  margin-bottom: 1rem;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 1.5;
+}
+
+.event-date {
+  display: block;
+  margin-bottom: 1rem;
+  color: #0F9D58;
+  font-weight: 500;
+}
+
+.viewEventButton {
+  width: 100%;
+  margin-top: auto;
+}
+
+.eventCard .viewEventButton {
+  position: relative;
+  z-index: 2;
+}
+
+.eventCard .delete-button {
+  position: relative;
+  z-index: 3;
+}
+
+/* Past Event Styles */
+.past-event {
+  background-color: rgba(245, 245, 245, 0.98) !important;
+}
+
+.past-event .ant-card-meta-title {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.past-event .eventDescription {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+/* Delete Button */
+.delete-button {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.eventCard:hover .delete-button {
+  opacity: 1;
+}
+
+/* Section Styling */
+.section-title {
+  position: relative;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem !important;
+  text-align: center;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+/* Upcoming Events Title */
+.upcoming-title {
+  color: #0F9D58 !important;  /* Google Green */
+}
+
+.upcoming-title::after {
+  background: #0F9D58;
+}
+
+/* Past Events Title */
+.past-title {
+  color: #DB4437 !important;  /* Google Red */
+}
+
+.past-title::after {
+  background: #DB4437;
+}
+
+.section-divider {
+  margin: 3rem 0 !important;
+}
+
+.no-events {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 8px;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+/* Loading State */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+/* Modal Styles */
+.ant-modal-content {
+  border-radius: 8px;
+}
+
+.ant-modal-header {
+  border-radius: 8px 8px 0 0;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .events-page {
+    width: 95%;
+    margin: 1rem auto;
+    padding: 1rem 0;
+  }
+
+  .eventGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem !important;
+  }
+
+  .delete-button {
+    opacity: 1;
+  }
+}
+
+/* Admin Button Animation */
+.ant-float-button {
+  transition: transform 0.3s ease;
+}
+
+.ant-float-button:hover {
+  transform: scale(1.1);
+}

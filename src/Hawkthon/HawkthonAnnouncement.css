@@ -1,0 +1,189 @@
+.hawkthon-announcement {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 12px;
+  font-family: 'Google Sans', 'Roboto', sans-serif;
+  color: #202124;
+}
+
+/* Hero Section */
+.hero-section {
+  text-align: center;
+  background: white;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hawk-logo {
+  width: 120px;
+  height: auto;
+  margin-bottom: 6px;
+  object-fit: contain;
+}
+
+.hero-section h1 {
+  font-size: 1.6rem;
+  color: #1a73e8;
+  margin: 0 0 6px 0;
+  line-height: 1.2;
+}
+
+.hero-section p {
+  font-size: 0.9rem;
+  line-height: 1.3;
+  color: #5f6368;
+  max-width: 600px;
+  margin: 0;
+}
+
+/* Content Section */
+.content-section {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+}
+
+.content-section h2 {
+  color: #1a73e8;
+  font-size: 1.4rem;
+  margin-bottom: 16px;
+  border-bottom: 2px solid #e8f0fe;
+  padding-bottom: 8px;
+}
+
+.content-section h3 {
+  color: #202124;
+  font-size: 1.2rem;
+  margin: 16px 0 12px;
+}
+
+/* Event Overview Grid */
+.event-details {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.event-details dt {
+  font-weight: 500;
+  color: #1a73e8;
+}
+
+.event-details dd {
+  margin: 0;
+}
+
+/* List Styles */
+.content-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.content-section ul:not(.schedule-list):not(.venue-list) li {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.content-section ul li strong {
+  color: #1a73e8;
+  font-size: 1.1rem;
+  display: block;
+}
+
+/* Schedule Section */
+.schedule-list li {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+  align-items: center;
+}
+
+.schedule-list li strong {
+  color: #1a73e8;
+  font-weight: 500;
+}
+
+/* Venue List */
+.venue-list {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.venue-list li {
+  margin-bottom: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hawkthon-announcement {
+    padding: 20px;
+  }
+
+  .hero-section {
+    padding: 24px;
+  }
+
+  .hero-section h1 {
+    font-size: 2rem;
+  }
+
+  .event-details {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .event-details dt {
+    margin-top: 16px;
+  }
+
+  .schedule-list li {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .content-section {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-section p {
+    font-size: 1rem;
+  }
+
+  .content-section h2 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .hawkthon-announcement {
+    background: white;
+  }
+
+  .hero-section,
+  .content-section {
+    box-shadow: none;
+    break-inside: avoid;
+  }
+}

@@ -1,0 +1,11 @@
+.scrollPage {
+  min-height: 100vh;
+  padding: 2rem;
+  background: #fff;
+}
+
+@media (max-width: 768px) {
+  .scrollPage {
+    padding: 1rem;
+  }
+} 
