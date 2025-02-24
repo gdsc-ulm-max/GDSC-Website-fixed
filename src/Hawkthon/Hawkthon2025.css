@@ -1,176 +1,365 @@
-.hawkthon-announcement {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 12px;
-  font-family: 'Google Sans', 'Roboto', sans-serif;
-  color: #202124;
+:root {
+  --google-blue: #4285f4;
+  --google-red: #db4437;
+  --google-yellow: #f4b400;
+  --google-green: #0f9d58;
+  --bg-primary: #fafbfc;
+  --text-primary: #202124;
+  --text-secondary: #5f6368;
 }
 
-/* Hero Section */
-.hero-section {
-  text-align: center;
-  background: white;
-  padding: 12px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 16px;
+.hawkathon-page {
+  color: var(--text-primary);
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  margin: 6rem 0rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
-.hawk-logo {
-  width: 120px;
-  height: auto;
-  margin-bottom: 6px;
+.hero-section {
+  position: relative;
+  min-height: calc(100vh - 4rem); /* Account for padding */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  z-index: 1;
+  width: 100%;
+}
+
+.hero-content {
+  width: 80%;
+  max-width: 1200px;
+  min-height: 80vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.gdsc-badge {
+  margin-bottom: 2rem;
+  background: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.gdsc-badge span {
+  font-size: 1.1rem;
+}
+
+.gdsc-badge span:nth-child(2) {
+  color: var(--text-secondary);
+}
+
+.hero-text {
+  margin-bottom: 3rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.hero-text h1 {
+  font-size: clamp(3rem, 8vw, 5rem);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.google-gradient {
+  background: linear-gradient(45deg, var(--google-blue), var(--google-red));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 700;
+  background: linear-gradient(45deg, #4285f4, #db4437, #f4b400, #0f9d58);
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: 1.2rem;
+}
+
+.title {
+  display: block;
+  font-weight: 800;
+  letter-spacing: -2px;
+  color: #202124;
+}
+
+.year {
+  color: var(--google-green);
+  font-weight: 700;
+}
+
+.theme,
+.subtitle {
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  margin: 0.5rem 0;
+}
+
+.subtitle {
+  color: var(--google-blue);
+  font-weight: 600;
+}
+
+.registration-card {
+  background: white;
+  border-radius: 24px;
+  padding: 2rem;
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.status-badge {
+  background: linear-gradient(45deg, var(--google-green), var(--google-blue));
+  font-weight: 500;
+  width: max-content;
+  background: rgba(15, 157, 88, 0.1);
+  padding: 2px;
+  border-radius: 20px;
+  width: fit-content;
+  margin-bottom: 1.5rem;
+}
+
+.pulse {
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  position: relative;
+  width: 8px;
+  height: 8px;
+  background: #0f9d58;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.pulse::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: white;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.dates {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.register-btn {
+  flex: 1;
+  min-width: 200px;
+  padding: 1rem 1.5rem;
+  border-radius: 100px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.register-btn.primary {
+  background: linear-gradient(45deg, var(--google-blue), var(--google-green));
+  color: white;
+  box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);
+  background: #4285f4;
+  color: white;
+}
+
+.register-btn.secondary {
+  background: white;
+  color: var(--google-blue);
+  border: 2px solid var(--google-blue);
+  background: rgba(66, 133, 244, 0.1);
+  color: #4285f4;
+}
+
+.register-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.hawkathon-logo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.hawkathon-logo img {
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 
-.hero-section h1 {
-  font-size: 1.6rem;
-  color: #1a73e8;
-  margin: 0 0 6px 0;
-  line-height: 1.2;
+.material-icons {
+  vertical-align: middle;
+  margin-right: 8px;
+  font-size: 20px;
 }
 
-.hero-section p {
-  font-size: 0.9rem;
-  line-height: 1.3;
-  color: #5f6368;
-  max-width: 600px;
-  margin: 0;
+.status-badge .material-icons {
+  color: #0f9d58;
 }
 
-/* Content Section */
-.content-section {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 16px;
-}
-
-.content-section h2 {
-  color: #1a73e8;
-  font-size: 1.4rem;
-  margin-bottom: 16px;
-  border-bottom: 2px solid #e8f0fe;
-  padding-bottom: 8px;
-}
-
-.content-section h3 {
-  color: #202124;
-  font-size: 1.2rem;
-  margin: 16px 0 12px;
-}
-
-/* Event Overview Grid */
-.event-details {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 16px;
-  align-items: start;
-}
-
-.event-details dt {
-  font-weight: 500;
-  color: #1a73e8;
-}
-
-.event-details dd {
-  margin: 0;
-}
-
-/* List Styles */
-.content-section ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.content-section ul:not(.schedule-list):not(.venue-list) li {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 8px;
-  margin-bottom: 20px;
-  padding: 16px;
-  background: #f8f9fa;
-  border-radius: 8px;
-}
-
-.content-section ul li strong {
-  color: #1a73e8;
-  font-size: 1.1rem;
-  display: block;
-}
-
-/* Schedule Section */
-.schedule-list li {
-  display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 16px;
-  margin-bottom: 16px;
+.register-btn {
+  display: flex;
   align-items: center;
-}
-
-.schedule-list li strong {
-  color: #1a73e8;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 8px;
   font-weight: 500;
+  transition: all 0.3s ease;
 }
 
-/* Venue List */
-.venue-list {
-  margin: 0;
-  padding-left: 20px;
+.register-btn.primary {
+  background: #4285f4;
+  color: white;
 }
 
-.venue-list li {
-  margin-bottom: 8px;
+.register-btn.secondary {
+  background: rgba(66, 133, 244, 0.1);
+  color: #4285f4;
 }
 
-/* Responsive Design */
+.dates,
+.details {
+  align-items: center;
+  gap: 8px;
+}
+
 @media (max-width: 768px) {
-  .hawkthon-announcement {
-    padding: 20px;
-  }
-
   .hero-section {
-    padding: 24px;
+    padding: 1rem;
+    min-height: calc(100vh - 2rem);
   }
 
-  .hero-section h1 {
+  .registration-card {
+    padding: 1.5rem;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+  }
+
+  .register-btn {
+    width: 100%;
+  }
+  .hero-content {
+    padding: 1rem;
+  }
+
+  .hero-text h1 {
     font-size: 2rem;
   }
 
-  .event-details {
-    grid-template-columns: 1fr;
-    gap: 8px;
+  .hawkathon-page {
+    padding: 1rem;
   }
 
-  .event-details dt {
-    margin-top: 16px;
-  }
-
-  .schedule-list li {
-    grid-template-columns: 1fr;
-    gap: 4px;
-  }
-
-  .content-section {
-    padding: 24px;
+  .hawkathon-logo {
+    width: 120px;
+    height: 120px;
   }
 }
 
-@media (max-width: 480px) {
-  .hero-section h1 {
-    font-size: 1.8rem;
+/* Add responsive breakpoints */
+@media screen and (max-width: 1200px) {
+  .hero-content {
+    width: 90%;
+    min-height: 85vh;
   }
+}
 
-  .hero-section p {
-    font-size: 1rem;
+@media screen and (max-width: 768px) {
+  .hero-content {
+    width: 95%;
+    min-height: 90vh;
+    padding: 1rem;
+    gap: 1.5rem;
   }
-
-  .content-section h2 {
-    font-size: 1.5rem;
-  }
-} 
+}

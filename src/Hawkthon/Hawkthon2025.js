@@ -1,194 +1,136 @@
 import React from "react";
+import hawkathonLogo from "../assets/hawkathon.jpeg"; // Add this import
 import "./Hawkthon2025.css";
 
-const Hawkthon2025 = () => {
+const hawkathonData = {
+  edition: "2nd Annual",
+  year: "2025",
+  theme: {
+    title: "Theme:TBD",
+    subtitle: "Build with AI",
+    description: "Join us in leveraging AI to create solutions that matter",
+  },
+  status: {
+    phase: "REGISTRATION",
+    dates: {
+      registration: {
+        start: "February 26, 2025",
+        end: "March 26, 2025",
+      },
+    },
+    fee: "$10 per team",
+  },
+  tracks: [
+    {
+      name: "Education",
+      icon: "school",
+      color: "#4285F4",
+      description: "Reimagine learning with AI",
+    },
+    {
+      name: "Healthcare",
+      icon: "health_and_safety",
+      color: "#DB4437",
+      description: "Transform healthcare accessibility",
+    },
+    {
+      name: "Sustainability",
+      icon: "eco",
+      color: "#0F9D58",
+      description: "Build for a sustainable future",
+    },
+    {
+      name: "Community",
+      icon: "diversity_3",
+      color: "#F4B400",
+      description: "Create inclusive solutions",
+    },
+  ],
+  contact: {
+    email: "gdsculm@gmail.com",
+    social: {
+      instagram: "https://instagram.com/gdsc_ulm",
+      linkedin: "https://linkedin.com/company/gdsc-ulm",
+      github: "https://github.com/gdsc-ulm",
+    },
+  },
+  links: {
+    register:
+      "https://webservices.ulm.edu/webforms/form/hawkathon-registration",
+    findTeam: "https://gdsc-ulm.github.io/Pair_request_form/",
+    sponsor: "https://forms.gle/sponsor",
+  },
+};
+
+function Hawkthon() {
   return (
-    <div className="hawkthon-announcement">
+    <div className="hawkathon-page">
+      {/* Hero Section */}
       <section className="hero-section">
-        <img
-          className="hawk-logo"
-          src={require("../logo/hawkathon logo.png")}
-          alt="Hawkthon Banner"
-        />
-        <h1>Hawkthon 2025</h1>
-        <p>
-          Welcome to ULM's 2nd Annual Hawkthon! Organized by the Google Developer 
-          Student Club (GDSC) at the University of Louisiana Monroe, Hawkthon is 
-          an exciting hackathon focused on creating innovative tech solutions for 
-          university enhancement. Join us for two days of coding, collaboration, and creativity!
-        </p>
-      </section>
+        <div className="hero-content">
+          {/* Add Logo Section */}
+          <div className="hawkathon-logo">
+            <img src={hawkathonLogo} alt="Hawkathon Logo" />
+          </div>
 
-      <section className="content-section">
-        <h2>Event Overview</h2>
-        <dl className="event-details">
-          <dt>Event Name</dt>
-          <dd>Hawkthon 2025</dd>
+          <div className="hero-text">
+            <div className="gdsc-badge">
+              <span>GDSC</span>
+              <span>×</span>
+              <span>ACM</span>
+            </div>
+            <h1>
+              <span className="google-gradient">{hawkathonData.edition}</span>
+              <span className="title">Hawkathon</span>
+              <span className="year">{hawkathonData.year}</span>
+            </h1>
+            <p className="theme">{hawkathonData.theme.title}</p>
+            <p className="subtitle">{hawkathonData.theme.subtitle}</p>
+          </div>
 
-          <dt>Date</dt>
-          <dd>April 10 – April 11, 2025</dd>
-
-          <dt>Time</dt>
-          <dd>10:00 AM – 3:00 PM (both days)</dd>
-
-          <dt>Venues</dt>
-          <dd>
-            <ul className="venue-list">
-              <li>Day 1: Hemphill Hall - Kickoff and Workshops</li>
-              <li>Day 2: The Hangar Hall - Project Presentations</li>
-            </ul>
-          </dd>
-
-          <dt>Theme</dt>
-          <dd>Innovating Campus Life Through Technology</dd>
-        </dl>
-      </section>
-
-      <section className="content-section">
-        <h2>About Hawkthon</h2>
-        <p>
-          Hawkthon is more than just a hackathon - it's a platform where innovation
-          meets campus life. This year, we're focusing on developing technology
-          solutions that enhance the university experience. Whether you're a coding expert 
-          or just starting out, Hawkthon provides the perfect opportunity to learn, create, 
-          and make a real difference in our university community.
-        </p>
-      </section>
-
-      <section className="content-section">
-        <h2>What You'll Build</h2>
-        <ul>
-          <li>
-            <strong>Student Life Solutions</strong>
-            Campus navigation, event planning, and student organization tools
-          </li>
-          <li>
-            <strong>Academic Tools</strong>
-            Study aids, course management, and learning resources
-          </li>
-          <li>
-            <strong>Campus Services</strong>
-            Dining, transportation, and facility management solutions
-          </li>
-          <li>
-            <strong>Community Engagement</strong>
-            Student networking and campus event platforms
-          </li>
-          <li>
-            <strong>University Operations</strong>
-            Resource scheduling and campus communication systems
-          </li>
-        </ul>
-      </section>
-
-      <section className="content-section">
-        <h2>Event Schedule</h2>
-        <h3>Day 1: Learning & Development</h3>
-        <ul className="schedule-list">
-          <li>
-            <strong>10:00 AM</strong>
-            Registration & Team Formation
-          </li>
-          <li>
-            <strong>10:30 AM</strong>
-            Opening Ceremony & Theme Announcement
-          </li>
-          <li>
-            <strong>11:00 AM</strong>
-            Technical Workshops & Mentorship Sessions
-          </li>
-          <li>
-            <strong>12:30 PM</strong>
-            Networking Lunch
-          </li>
-          <li>
-            <strong>1:30 PM</strong>
-            Project Development Begins
-          </li>
-          <li>
-            <strong>3:00 PM</strong>
-            Day 1 Wrap-up
-          </li>
-        </ul>
-
-        <h3>Day 2: Project Completion & Showcase</h3>
-        <ul className="schedule-list">
-          <li>
-            <strong>10:00 AM</strong>
-            Project Development Continues
-          </li>
-          <li>
-            <strong>12:00 PM</strong>
-            Lunch Break
-          </li>
-          <li>
-            <strong>1:00 PM</strong>
-            Project Submissions
-          </li>
-          <li>
-            <strong>1:30 PM</strong>
-            Project Presentations
-          </li>
-          <li>
-            <strong>2:30 PM</strong>
-            Judging & Awards Ceremony
-          </li>
-          <li>
-            <strong>3:00 PM</strong>
-            Closing Ceremony
-          </li>
-        </ul>
-      </section>
-
-      <section className="content-section">
-        <h2>Prizes & Recognition</h2>
-        <ul>
-          <li>
-            <strong>1st Place</strong>
-            $500 + Professional Mentorship Opportunities
-          </li>
-          <li>
-            <strong>2nd Place</strong>
-            $300 + Tech Company Swag Packages
-          </li>
-          <li>
-            <strong>3rd Place</strong>
-            $200 + Digital Innovation Certificates
-          </li>
-          <li>
-            <strong>People's Choice</strong>
-            Special Recognition & Prizes
-          </li>
-        </ul>
-      </section>
-
-      <section className="content-section">
-        <h2>Rules & Guidelines</h2>
-        <ul>
-          <li>
-            <strong>Team Size</strong>
-            1-4 members per team
-          </li>
-          <li>
-            <strong>Project Requirements</strong>
-            All code must be written during the hackathon
-          </li>
-          <li>
-            <strong>Technology Stack</strong>
-            Any programming language or framework is allowed
-          </li>
-          <li>
-            <strong>Submission</strong>
-            Projects must be uploaded to GitHub with documentation
-          </li>
-          <li>
-            <strong>Judging Criteria</strong>
-            Innovation, Impact, Technical Complexity, and Presentation
-          </li>
-        </ul>
+          <div className="registration-card">
+            <div className="status-badge-registration">
+              <span className="pulse"></span>
+              <span className="material-icons">event_available</span>
+              Registration Open
+            </div>
+            <div className="dates">
+              <span className="material-icons">calendar_today</span>
+              {hawkathonData.status.dates.registration.start} -{" "}
+              {hawkathonData.status.dates.registration.end}
+            </div>
+            <div className="details">
+              <span className="team">
+                <span className="material-icons">groups</span>
+                Teams of 1-4
+              </span>
+              <span className="dot">•</span>
+              <span className="fee">
+                <span className="material-icons">paid</span>
+                {hawkathonData.status.fee}
+              </span>
+            </div>
+            <div className="cta-buttons">
+              <a
+                href={hawkathonData.links.register}
+                className="register-btn primary"
+              >
+                <span className="material-icons">how_to_reg</span>
+                Register Now
+              </a>
+              <a
+                href={hawkathonData.links.findTeam}
+                className="register-btn secondary"
+              >
+                <span className="material-icons">group_add</span>
+                Find Team
+              </a>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
   );
-};
+}
 
-export default Hawkthon2025; 
+export default Hawkthon;

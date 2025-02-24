@@ -1,0 +1,60 @@
+.announcement-container {
+  position: fixed;
+  top: 64px; /* Height of NavBar */
+  left: 0;
+  right: 0;
+  z-index: 999;
+}
+
+.announcement-bar {
+  background: linear-gradient(90deg, #4285f4, #0f9d58);
+  color: white;
+  width: 100%;
+  padding: 8px 0;
+  text-align: center;
+  position: relative;
+  z-index: 100;
+}
+
+.announcement-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 8px 20px;
+}
+
+.announcement-text {
+  font-weight: 500;
+}
+
+.announcement-date {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 0.9em;
+}
+
+.announcement-link {
+  color: white;
+  text-decoration: none;
+  padding: 4px 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.15);
+  transition: all 0.3s ease;
+}
+
+.announcement-link:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateX(2px);
+}
+
+@media (max-width: 768px) {
+  .announcement-content {
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px 20px;
+  }
+}

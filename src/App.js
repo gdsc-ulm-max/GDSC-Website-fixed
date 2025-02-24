@@ -12,8 +12,9 @@ import Events from "./EventsPage/Events";
 import HawkthonAnnouncement from "./Hawkthon/HawkthonAnnouncement";
 import Hawkthon2025 from "./Hawkthon/Hawkthon2025";
 import TechXpo from "./TechXpo/TechXpo";
-import CodeClash from './CodeClashPage/CodeClash';
+import CodeClash from "./CodeClashPage/CodeClash";
 import Gallery from "./GalleryPage/Gallery";
+import AnnouncementBar from "./components/AnnouncementBar";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
     >
       <div className="App">
         <NavBar />
+        <AnnouncementBar />
         <Animation className="animation" />
         <main className="content-wrapper">
           <Routes>
@@ -35,8 +37,11 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/join" element={<Join />} />
             <Route path="/events" element={<Events />} />
-            <Route path="/events/hawkthon" element={<HawkthonAnnouncement />} />
-            <Route path="/events/hawkthon-2025" element={<Hawkthon2025 />} />
+            <Route
+              path="/events/hawkathon"
+              element={<HawkthonAnnouncement />}
+            />
+            <Route path="/events/hawkathon-2025" element={<Hawkthon2025 />} />
             <Route path="/events/techxpo" element={<TechXpo />} />
             <Route path="/codeclash" element={<CodeClash />} />
             <Route path="/gallery" element={<Gallery />} />
