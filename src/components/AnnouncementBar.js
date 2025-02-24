@@ -11,7 +11,7 @@ function AnnouncementBar() {
             🚀 Hawkathon 2025 Registration Open
           </span>
           <span className="announcement-date">Feb 26 - March 26</span>
-          <Link to="/events/hawkathon" className="announcement-link">
+          <Link to="/events/hawkathon-2025" className="announcement-link">
             Register Now →
           </Link>
         </div>
