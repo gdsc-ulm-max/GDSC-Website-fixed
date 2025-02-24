@@ -14,8 +14,12 @@ import {
   Spin,
   Row,
   Col,
+  Upload,
+  Select,
+  Space,
+  Checkbox,
 } from "antd";
-import { LockOutlined, DeleteOutlined, PlusOutlined } from "@ant-design/icons";
+import { LockOutlined, DeleteOutlined, PlusOutlined, UploadOutlined, EditOutlined } from "@ant-design/icons";
 import {
   collection,
   addDoc,
@@ -24,17 +28,20 @@ import {
   doc,
   query,
   orderBy,
+  updateDoc,
 } from "firebase/firestore";
-import { db } from "../firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { db, storage, auth } from "../firebase";
 import dayjs from "dayjs";
 import "./Events.css";
 import { events as initialEvents } from "../logo/EventsData";
 import Animation from "../HomePage/Animation";
-import { useNavigate } from "react-router-dom";
-import FlagshipEvents from "../components/FlagshipEvents";
+import { useNavigate, Link } from "react-router-dom";
 
 const { Title, Text } = Typography;
 const { TextArea } = Input;
+const { Option } = Select;
 
 function Events() {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -43,7 +50,19 @@ function Events() {
   const [eventsList, setEventsList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [form] = Form.useForm();
+  const [imageUrl, setImageUrl] = useState("");
+  const [uploading, setUploading] = useState(false);
+  const [editingEvent, setEditingEvent] = useState(null);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [isTbdDate, setIsTbdDate] = useState(false);
   const navigate = useNavigate();
+
+  // Add state for managing tags
+  const [tags, setTags] = useState([]);
+  const [inputTag, setInputTag] = useState("");
+
+  // Add state for managing multiple buttons
+  const [buttons, setButtons] = useState([{ text: "", link: "" }]);
 
   // Fetch events from Firebase and seed initial data if empty
   useEffect(() => {
@@ -92,7 +111,10 @@ function Events() {
     const now = dayjs();
     return eventsList.reduce(
       (acc, event) => {
-        if (dayjs(event.endDate).isAfter(now)) {
+        // Always put TBD events in upcoming events
+        if (event.isTbdDate || event.endDate === "TBD") {
+          acc.upcomingEvents.push(event);
+        } else if (dayjs(event.endDate).isAfter(now)) {
           acc.upcomingEvents.push(event);
         } else {
           acc.pastEvents.push(event);
@@ -107,13 +129,32 @@ function Events() {
     setIsPasswordModalVisible(true);
   };
 
-  const handlePasswordSubmit = (values) => {
+  const handlePasswordSubmit = async (values) => {
     if (values.password === "gdsc123") {
-      setIsPasswordModalVisible(false);
-      setIsAdmin(true);
-      message.success("Admin access granted");
+      try {
+        // Sign in with Firebase Auth using a dedicated admin email
+        await signInWithEmailAndPassword(auth, "admin@gdsc-ulm.com", values.password);
+        setIsPasswordModalVisible(false);
+        setIsAdmin(true);
+        message.success("Admin access granted");
+      } catch (error) {
+        console.error("Authentication error:", error);
+        message.error("Failed to authenticate. Please try again.");
+      }
     } else {
       message.error("Incorrect password");
+    }
+  };
+
+  // Add sign out handler
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      setIsAdmin(false);
+      message.success("Signed out successfully");
+    } catch (error) {
+      console.error("Sign out error:", error);
+      message.error("Failed to sign out");
     }
   };
 
@@ -125,25 +166,140 @@ function Events() {
     }
   };
 
+  const handleAddButton = () => {
+    setButtons([...buttons, { text: "", link: "" }]);
+  };
+
+  const handleRemoveButton = (index) => {
+    const newButtons = buttons.filter((_, i) => i !== index);
+    setButtons(newButtons);
+  };
+
+  const handleButtonChange = (index, field, value) => {
+    const newButtons = [...buttons];
+    newButtons[index][field] = value;
+    setButtons(newButtons);
+  };
+
+  // Handle image upload
+  const handleUpload = async (file) => {
+    try {
+      // Check if user is authenticated
+      if (!auth.currentUser) {
+        message.error('You must be logged in as admin to upload images');
+        return null;
+      }
+
+      // Validate file type
+      const isImage = file.type.startsWith('image/');
+      if (!isImage) {
+        message.error('You can only upload image files!');
+        return null;
+      }
+
+      // Validate file size (less than 2MB)
+      const isLt2M = file.size / 1024 / 1024 < 2;
+      if (!isLt2M) {
+        message.error('Image must be smaller than 2MB!');
+        return null;
+      }
+
+      setUploading(true);
+      
+      // Create a unique filename to avoid conflicts
+      const fileName = `${Date.now()}_${file.name.replace(/\s+/g, '_')}`;
+      const storageRef = ref(storage, `logos/${fileName}`);
+
+      try {
+        // Upload the file
+        const uploadTask = await uploadBytes(storageRef, file);
+        console.log('File uploaded successfully:', uploadTask);
+
+        // Get the download URL
+        const downloadURL = await getDownloadURL(storageRef);
+        console.log('Download URL obtained:', downloadURL);
+
+        setImageUrl(downloadURL);
+        message.success('Image uploaded successfully!');
+        return downloadURL;
+      } catch (error) {
+        if (error.code === 'storage/unauthorized') {
+          message.error('Permission denied. Please make sure you are logged in as admin.');
+        } else {
+          message.error(`Upload failed: ${error.message}`);
+        }
+        console.error('Error during upload:', error);
+        return null;
+      }
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      message.error(`Failed to upload image: ${error.message}`);
+      return null;
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  // Handle edit event
+  const handleEdit = (event) => {
+    setEditingEvent(event);
+    setIsEditMode(true);
+    setImageUrl(event.logo || "");
+    setTags(event.tags || []);
+    setButtons(event.buttons || [{ text: "", link: "" }]);
+    setIsTbdDate(event.isTbdDate || false);
+    form.setFieldsValue({
+      name: event.name,
+      description: event.info,
+      color: event.color,
+      endDate: event.isTbdDate ? null : dayjs(event.endDate)
+    });
+    setIsModalVisible(true);
+  };
+
+  // Modified handleAddEvent to handle both add and edit
   const handleAddEvent = async (values) => {
     try {
       setLoading(true);
-      const newEvent = {
+      const eventData = {
         name: values.name,
         info: values.description,
-        link: values.link,
-        endDate: values.endDate.toISOString(),
+        logo: imageUrl,
+        tags: tags,
+        buttons: buttons.filter(btn => btn.text && btn.link),
+        color: values.color || "#4285F4", // Default to Google Blue
+        endDate: isTbdDate ? "TBD" : values.endDate.toISOString(),
         createdAt: new Date().toISOString(),
+        isTbdDate: isTbdDate
       };
 
-      const docRef = await addDoc(collection(db, "events"), newEvent);
-      setEventsList([{ id: docRef.id, ...newEvent }, ...eventsList]);
+      if (isEditMode && editingEvent) {
+        // Update existing event
+        const eventRef = doc(db, "events", editingEvent.id);
+        await updateDoc(eventRef, eventData);
+        setEventsList(eventsList.map(event => 
+          event.id === editingEvent.id ? { ...eventData, id: event.id } : event
+        ));
+        message.success("Event updated successfully!");
+      } else {
+        // Add new event
+        const docRef = await addDoc(collection(db, "events"), eventData);
+        setEventsList([{ ...eventData, id: docRef.id }, ...eventsList]);
+        message.success("Event added successfully!");
+      }
+
+      // Reset form and state
       setIsModalVisible(false);
       form.resetFields();
-      message.success("Event added successfully!");
+      setImageUrl("");
+      setTags([]);
+      setButtons([{ text: "", link: "" }]);
+      setEditingEvent(null);
+      setIsEditMode(false);
+      setIsTbdDate(false);
     } catch (error) {
-      console.error("Error adding event:", error);
-      message.error("Failed to add event");
+      console.error(isEditMode ? "Error updating event:" : "Error adding event:", error);
+      message.error(isEditMode ? "Failed to update event" : "Failed to add event");
     } finally {
       setLoading(false);
     }
@@ -164,77 +320,108 @@ function Events() {
   };
 
   const renderEventCard = (event, isPast) => (
-    <Card
-      key={event.id}
-      hoverable
-      className={`eventCard ${isPast ? "past-event" : ""}`}
-      onClick={() => {
-        if (event.name === "Hawkthon") {
-          navigate("/events/hawkthon");
-        } else if (event.link) {
-          window.open(event.link, "_blank");
-        }
-      }}
-      extra={
-        isAdmin && (
-          <Popconfirm
-            title="Delete Event"
-            description="Are you sure you want to delete this event?"
-            onConfirm={(e) => {
-              e.stopPropagation();
-              handleDeleteEvent(event.id);
-            }}
-            okText="Yes"
-            cancelText="No"
-          >
-            <Button
-              type="text"
-              danger
-              icon={<DeleteOutlined />}
-              className="delete-button"
-              onClick={(e) => e.stopPropagation()}
-            />
-          </Popconfirm>
-        )
-      }
-    >
-      <Card.Meta
-        title={event.name}
-        description={
-          <div className="event-content">
-            <Text className="eventDescription">{event.info}</Text>
-            {!isPast && (
-              <Text className="event-date">
-                Ends on: {dayjs(event.endDate).format("MMM D, YYYY")}
-              </Text>
-            )}
-            {!isPast && event.name !== "Hawkthon" && (
-              <Button
-                type="primary"
-                href={event.link}
-                target="_blank"
-                className="viewEventButton"
-                onClick={(e) => e.stopPropagation()}
-              >
-                View Event
-              </Button>
-            )}
-            {!isPast && event.name === "Hawkthon" && (
-              <Button
-                type="primary"
-                className="viewEventButton"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  navigate("/events/hawkthon");
-                }}
-              >
-                View Hawkthon
-              </Button>
+    <div className="event-card" key={event.id}>
+      <div
+        className="event-header"
+        style={{ backgroundColor: `${event.color}15` }}
+      >
+        <img src={event.logo} alt={event.name} className="event-logo" />
+        <h3 style={{ color: event.color }}>{event.name}</h3>
+      </div>
+      <div className="event-content">
+        <div className="event-tags">
+          {event.tags && event.tags.map((tag, idx) => (
+            <span
+              key={idx}
+              className="event-tag"
+              style={{
+                backgroundColor: `${event.color}15`,
+                color: event.color,
+              }}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+        <p className="event-description">{event.info}</p>
+        <div className="event-dates">
+          <div className="date-item">
+            <span className="date-label">Event Date</span>
+            <span className="date-value">
+              {event.isTbdDate ? "TBD" : dayjs(event.endDate).format("MMM D, YYYY")}
+            </span>
+          </div>
+        </div>
+        {event.buttons && event.buttons.length > 0 && (
+          <div className="event-buttons">
+            {event.buttons.map((button, idx) =>
+              button.link.startsWith("http") ? (
+                <a
+                  key={idx}
+                  href={button.link}
+                  className="event-button"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    backgroundColor: event.color,
+                    display: "inline-block",
+                    width: "fit-content",
+                    margin: "0 8px",
+                  }}
+                >
+                  {button.text}
+                </a>
+              ) : (
+                <Link
+                  key={idx}
+                  to={button.link}
+                  className="event-button"
+                  style={{
+                    backgroundColor: event.color,
+                    display: "inline-block",
+                    width: "fit-content",
+                    margin: "0 8px",
+                  }}
+                >
+                  {button.text}
+                </Link>
+              )
             )}
           </div>
-        }
-      />
-    </Card>
+        )}
+        {isAdmin && (
+          <div className="admin-buttons">
+            <Button
+              type="text"
+              icon={<EditOutlined />}
+              className="edit-button"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleEdit(event);
+              }}
+            />
+            <Popconfirm
+              title="Delete Event"
+              description="Are you sure you want to delete this event?"
+              onConfirm={(e) => {
+                e.stopPropagation();
+                handleDeleteEvent(event.id);
+              }}
+              okText="Yes"
+              cancelText="No"
+            >
+              <Button
+                type="text"
+                danger
+                icon={<DeleteOutlined />}
+                className="delete-button"
+                onClick={(e) => e.stopPropagation()}
+              />
+            </Popconfirm>
+          </div>
+        )}
+      </div>
+    </div>
   );
 
   const renderEventGrid = (events, title, isPast = false) => (
@@ -264,11 +451,6 @@ function Events() {
       <Title level={1} style={{ textAlign: "center", marginBottom: "2rem" }}>
         Events
       </Title>
-
-      {/* Flagship Events - always rendered */}
-      <div className="flagship-events-section">
-        <FlagshipEvents />
-      </div>
 
       {/* Dynamic Events Section */}
       {loading ? (
@@ -305,65 +487,196 @@ function Events() {
         </Form>
       </Modal>
 
-      {/* Add Event Modal */}
+      {/* Add/Edit Event Modal */}
       <Modal
-        title="Add New Event"
+        title={isEditMode ? "Edit Event" : "Add New Event"}
         open={isModalVisible}
-        onCancel={() => setIsModalVisible(false)}
+        onCancel={() => {
+          setIsModalVisible(false);
+          form.resetFields();
+          setImageUrl("");
+          setTags([]);
+          setButtons([{ text: "", link: "" }]);
+          setEditingEvent(null);
+          setIsEditMode(false);
+          setIsTbdDate(false);
+        }}
         footer={null}
+        width={800}
       >
-        <Form form={form} layout="vertical" onFinish={handleAddEvent}>
+        <Form form={form} onFinish={handleAddEvent} layout="vertical">
           <Form.Item
             name="name"
             label="Event Name"
-            rules={[
-              { required: true, message: "Please input the event name!" },
-            ]}
+            rules={[{ required: true, message: "Please input the event name!" }]}
           >
             <Input />
           </Form.Item>
 
           <Form.Item
             name="description"
-            label="Event Description"
-            rules={[
-              {
-                required: true,
-                message: "Please input the event description!",
-              },
-            ]}
+            label="Description"
+            rules={[{ required: true, message: "Please input the description!" }]}
           >
             <TextArea rows={4} />
           </Form.Item>
 
-          <Form.Item
-            name="link"
-            label="Event Link"
-            rules={[
-              { required: true, message: "Please input the event link!" },
-            ]}
-          >
-            <Input />
+          <Form.Item label="Event Logo">
+            <Upload
+              listType="picture-card"
+              showUploadList={false}
+              accept="image/*"
+              maxCount={1}
+              beforeUpload={async (file) => {
+                try {
+                  const url = await handleUpload(file);
+                  if (url) {
+                    setImageUrl(url);
+                  }
+                } catch (error) {
+                  console.error('Upload error:', error);
+                }
+                return false; // Prevent automatic upload
+              }}
+            >
+              {imageUrl ? (
+                <img 
+                  src={imageUrl} 
+                  alt="event" 
+                  style={{ 
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                  }} 
+                />
+              ) : (
+                <div>
+                  {uploading ? <Spin /> : <PlusOutlined />}
+                  <div style={{ marginTop: 8 }}>Upload</div>
+                </div>
+              )}
+            </Upload>
           </Form.Item>
 
           <Form.Item
-            name="endDate"
-            label="Event End Date"
-            rules={[
-              { required: true, message: "Please select the event end date!" },
-            ]}
+            name="color"
+            label="Theme Color"
+            rules={[{ required: true, message: "Please select a color!" }]}
           >
-            <DatePicker
-              style={{ width: "100%" }}
-              disabledDate={(current) =>
-                current && current < dayjs().startOf("day")
-              }
-            />
+            <Select>
+              <Option value="#4285F4">Google Blue</Option>
+              <Option value="#DB4437">Google Red</Option>
+              <Option value="#F4B400">Google Yellow</Option>
+              <Option value="#0F9D58">Google Green</Option>
+            </Select>
+          </Form.Item>
+
+          <Form.Item label="Tags">
+            <Space style={{ marginBottom: 8 }}>
+              <Input
+                value={inputTag}
+                onChange={(e) => setInputTag(e.target.value)}
+                placeholder="Enter a tag"
+              />
+              <Button
+                type="primary"
+                onClick={() => {
+                  if (inputTag && !tags.includes(inputTag)) {
+                    setTags([...tags, inputTag]);
+                    setInputTag("");
+                  }
+                }}
+              >
+                Add Tag
+              </Button>
+            </Space>
+            <div style={{ marginTop: 8 }}>
+              {tags.map((tag, index) => (
+                <span
+                  key={index}
+                  style={{
+                    background: "#f0f0f0",
+                    padding: "4px 8px",
+                    borderRadius: "4px",
+                    margin: "0 8px 8px 0",
+                    display: "inline-block",
+                  }}
+                >
+                  {tag}
+                  <DeleteOutlined
+                    onClick={() => setTags(tags.filter((_, i) => i !== index))}
+                    style={{ marginLeft: 8, cursor: "pointer" }}
+                  />
+                </span>
+              ))}
+            </div>
+          </Form.Item>
+
+          <Form.Item label="Buttons">
+            {buttons.map((button, index) => (
+              <div key={index} style={{ marginBottom: 16, display: 'flex', gap: 8 }}>
+                <Input
+                  placeholder="Button Text"
+                  value={button.text}
+                  onChange={(e) => handleButtonChange(index, "text", e.target.value)}
+                  style={{ width: '30%' }}
+                />
+                <Input
+                  placeholder="Button Link"
+                  value={button.link}
+                  onChange={(e) => handleButtonChange(index, "link", e.target.value)}
+                  style={{ width: '50%' }}
+                />
+                <Button
+                  type="text"
+                  danger
+                  icon={<DeleteOutlined />}
+                  onClick={() => handleRemoveButton(index)}
+                  disabled={buttons.length === 1}
+                />
+              </div>
+            ))}
+            <Button type="dashed" onClick={handleAddButton} block icon={<PlusOutlined />}>
+              Add Button
+            </Button>
+          </Form.Item>
+
+          <Form.Item label="Event Date">
+            <Space>
+              <Form.Item
+                name="endDate"
+                noStyle
+                rules={[
+                  { 
+                    required: !isTbdDate, 
+                    message: "Please select the event date or mark as TBD!" 
+                  }
+                ]}
+              >
+                <DatePicker 
+                  style={{ width: "200px" }} 
+                  disabled={isTbdDate}
+                />
+              </Form.Item>
+              <Form.Item noStyle>
+                <Checkbox
+                  checked={isTbdDate}
+                  onChange={(e) => {
+                    setIsTbdDate(e.target.checked);
+                    if (e.target.checked) {
+                      form.setFieldValue('endDate', null);
+                    }
+                  }}
+                >
+                  TBD
+                </Checkbox>
+              </Form.Item>
+            </Space>
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit">
-              Add Event
+            <Button type="primary" htmlType="submit" loading={loading} block>
+              {isEditMode ? "Update Event" : "Add Event"}
             </Button>
           </Form.Item>
         </Form>
@@ -376,11 +689,12 @@ function Events() {
             <FloatButton
               icon={<PlusOutlined />}
               tooltip="Add Event"
-              onClick={() => setIsModalVisible(true)}
+              onClick={handleAddEventClick}
             />
             <FloatButton
               icon={<LockOutlined />}
-              tooltip="Admin Mode Active"
+              tooltip="Sign Out"
+              onClick={handleSignOut}
               type="primary"
             />
           </>
@@ -388,7 +702,7 @@ function Events() {
           <FloatButton
             icon={<LockOutlined />}
             tooltip="Admin Login"
-            onClick={showPasswordModal}
+            onClick={() => setIsPasswordModalVisible(true)}
           />
         )}
       </FloatButton.Group>

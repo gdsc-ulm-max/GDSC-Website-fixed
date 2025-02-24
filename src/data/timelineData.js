@@ -6,6 +6,8 @@ import pic5 from "../logo/Bishwo.jpg";
 import pic6 from "../logo/Aavash.jpg";
 import dineshPic from "../assets/teams/dinesh.png";
 import abhishekPic from "../assets/teams/abhishek.jpeg";
+import lochanpic from "../assets/teams/lochan.png";
+import barnettpic from "../assets/teams/barnett.jpg";
 
 export const timelineData = [
   {
@@ -41,7 +43,8 @@ export const timelineData = [
       {
         name: "Lochan Acharya",
         role: "Technical Lead",
-        linkedin: "",
+        image: lochanpic,
+        linkedin: "https://www.linkedin.com/in/lochanacharya13/",
       },
       {
         name: "Nishu Shrestha",
@@ -82,6 +85,7 @@ export const timelineData = [
       {
         name: "William Barnett",
         role: "Faculty/Staff",
+        image: barnettpic,
         linkedin: "",
       },
     ],

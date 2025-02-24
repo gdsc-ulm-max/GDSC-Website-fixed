@@ -1,12 +1,12 @@
 import React from "react";
 import Card from "./Card";
 import "./ScrollPage.css";
-import FlagshipEvents from "../components/FlagshipEvents";
+import UpcomingEvents from "../components/UpcomingEvents";
 
 function ScrollPage() {
   return (
     <div className="scrollPage">
-      <FlagshipEvents />
+      <UpcomingEvents />
 
       <Card heading={"What We Believe In"} list={true} />
 

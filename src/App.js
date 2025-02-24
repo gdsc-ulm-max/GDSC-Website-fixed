@@ -43,7 +43,7 @@ function App() {
             />
             <Route path="/events/hawkathon-2025" element={<Hawkthon2025 />} />
             <Route path="/events/techxpo" element={<TechXpo />} />
-            <Route path="/codeclash" element={<CodeClash />} />
+            <Route path="/code-clash" element={<CodeClash />} />
             <Route path="/gallery" element={<Gallery />} />
           </Routes>
         </main>

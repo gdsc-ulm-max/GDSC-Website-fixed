@@ -22,7 +22,7 @@ import {
   TrophyOutlined,
   LaptopOutlined,
 } from "@ant-design/icons";
-import { collection, getDoc, setDoc, doc } from "firebase/firestore";
+import { collection, getDoc, setDoc, doc, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import Papa from "papaparse";
 import { motion } from "framer-motion";
@@ -37,6 +37,7 @@ const CodeClash = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isPasswordModalVisible, setIsPasswordModalVisible] = useState(false);
   const [isUploadModalVisible, setIsUploadModalVisible] = useState(false);
+  const [challenges, setChallenges] = useState([]);
 
   const features = [
     {
@@ -99,26 +100,79 @@ const CodeClash = () => {
   // Fetch leaderboard data on component mount
   useEffect(() => {
     fetchLeaderboardData();
+    fetchChallenges();
   }, []);
 
   const fetchLeaderboardData = async () => {
     try {
       setLoading(true);
 
-      const leaderboardDoc = await getDoc(doc(db, "codeclash", "leaderboard"));
-      if (leaderboardDoc.exists()) {
-        const data = leaderboardDoc.data().participants || [];
-        setLeaderboardData(data);
-      } else {
-        // Initialize the document if it doesn't exist
-        await setDoc(doc(db, "codeclash", "leaderboard"), {
-          participants: [],
-        });
-        setLeaderboardData([]);
+      // Check if Firebase is initialized properly
+      if (!db) {
+        throw new Error('Firebase DB is not initialized');
+      }
+
+      // Add persistence for offline capabilities
+      const leaderboardRef = doc(db, "codeclash", "leaderboard");
+      
+      try {
+        const leaderboardDoc = await getDoc(leaderboardRef);
+        if (leaderboardDoc.exists()) {
+          const data = leaderboardDoc.data().participants || [];
+          setLeaderboardData(data);
+        } else {
+          // Initialize the document if it doesn't exist
+          await setDoc(leaderboardRef, {
+            participants: [],
+          });
+          setLeaderboardData([]);
+        }
+      } catch (error) {
+        console.error("Firebase error:", error);
+        if (error.code === 'failed-precondition' || error.message.includes('offline')) {
+          message.warning("You appear to be offline. Some data may not be available.");
+          // Set empty data when offline
+          setLeaderboardData([]);
+        } else {
+          message.error("Failed to load leaderboard data");
+        }
       }
     } catch (error) {
       console.error("Error fetching leaderboard data:", error);
       message.error("Failed to load leaderboard data");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchChallenges = async () => {
+    try {
+      // Check if Firebase is initialized properly
+      if (!db) {
+        throw new Error('Firebase DB is not initialized');
+      }
+
+      const challengesCollection = collection(db, 'challenges');
+      try {
+        const challengesSnapshot = await getDocs(challengesCollection);
+        const challengesList = challengesSnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setChallenges(challengesList);
+      } catch (error) {
+        console.error("Firebase error:", error);
+        if (error.code === 'failed-precondition' || error.message.includes('offline')) {
+          message.warning("You appear to be offline. Challenge data may not be available.");
+          setChallenges([]);
+        } else {
+          message.error("Failed to load challenges");
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching challenges:", error);
+      message.error("Failed to load challenges");
+      setChallenges([]);
     } finally {
       setLoading(false);
     }
@@ -186,6 +240,10 @@ const CodeClash = () => {
       setLoading(false);
     }
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="codeclash-page">

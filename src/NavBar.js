@@ -49,7 +49,7 @@ function NavBar() {
         <Link to="/gallery" className={location.pathname === "/gallery" ? "items gallery active" : "items gallery"}>
           Gallery
         </Link>
-        <Link to="/codeclash" className={location.pathname === "/codeclash" ? "items codeclash active" : "items codeclash"}>
+        <Link to="/code-clash" className={location.pathname === "/code-clash" ? "items codeclash active" : "items codeclash"}>
           CodeClash
         </Link>
         <Link to="/join" className={location.pathname === "/join" ? "items join active" : "items join"}>
