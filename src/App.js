@@ -52,7 +52,7 @@ const seoConfig = {
   codeClash: {
     title: "Code Clash | GDSC ULM",
     description:
-      "Participate in ou biweekly competitive programming contest and showcase your coding skills.",
+      "Participate in ou biweeklycompetitive programming contest and showcase your coding skills.",
   },
   gallery: {
     title: "Gallery | GDSC ULM",
