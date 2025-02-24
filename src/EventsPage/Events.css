@@ -1,16 +1,18 @@
 .events-page {
   position: relative;
-  width: 90%;
-  max-width: 1200px;
+  width: 100%;
+  min-height: 100vh;
   margin: 2rem auto;
   padding: 2rem 0;
   background: transparent;
+  overflow: hidden;
 }
 
 .eventGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
+  margin-top: 2rem;
 }
 
 .eventCard {
@@ -41,7 +43,7 @@
 .eventCard .ant-card-meta-title {
   font-size: 1.25rem;
   margin-bottom: 1rem !important;
-  color: #4285F4;
+  color: #4285f4;
   padding-right: 24px;
 }
 
@@ -62,7 +64,7 @@
 .event-date {
   display: block;
   margin-bottom: 1rem;
-  color: #0F9D58;
+  color: #0f9d58;
   font-weight: 500;
 }
 
@@ -113,7 +115,7 @@
 }
 
 .section-title::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -125,20 +127,20 @@
 
 /* Upcoming Events Title */
 .upcoming-title {
-  color: #0F9D58 !important;  /* Google Green */
+  color: #0f9d58 !important; /* Google Green */
 }
 
 .upcoming-title::after {
-  background: #0F9D58;
+  background: #0f9d58;
 }
 
 /* Past Events Title */
 .past-title {
-  color: #DB4437 !important;  /* Google Red */
+  color: #db4437 !important; /* Google Red */
 }
 
 .past-title::after {
-  background: #DB4437;
+  background: #db4437;
 }
 
 .section-divider {
@@ -159,7 +161,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 60vh;
+  min-height: 200px;
+  width: 100%;
 }
 
 /* Modal Styles */
@@ -190,6 +193,19 @@
 
   .delete-button {
     opacity: 1;
+  }
+}
+
+.flagship-events-section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 4rem;
+  padding: 0 1rem;
+}
+
+@media (max-width: 768px) {
+  .flagship-events-section {
+    margin-bottom: 2rem;
   }
 }
 

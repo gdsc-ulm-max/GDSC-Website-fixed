@@ -1,13 +1,37 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { Card, Typography, Button, Modal, Form, Input, message, FloatButton, DatePicker, Divider, Popconfirm, Spin, Row, Col } from "antd";
+import {
+  Card,
+  Typography,
+  Button,
+  Modal,
+  Form,
+  Input,
+  message,
+  FloatButton,
+  DatePicker,
+  Divider,
+  Popconfirm,
+  Spin,
+  Row,
+  Col,
+} from "antd";
 import { LockOutlined, DeleteOutlined, PlusOutlined } from "@ant-design/icons";
-import { collection, addDoc, deleteDoc, getDocs, doc, query, orderBy } from 'firebase/firestore';
-import { db } from '../firebase';
-import dayjs from 'dayjs';
+import {
+  collection,
+  addDoc,
+  deleteDoc,
+  getDocs,
+  doc,
+  query,
+  orderBy,
+} from "firebase/firestore";
+import { db } from "../firebase";
+import dayjs from "dayjs";
 import "./Events.css";
 import { events as initialEvents } from "../logo/EventsData";
 import Animation from "../HomePage/Animation";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import FlagshipEvents from "../components/FlagshipEvents";
 
 const { Title, Text } = Typography;
 const { TextArea } = Input;
@@ -25,9 +49,12 @@ function Events() {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const eventsQuery = query(collection(db, "events"), orderBy("endDate", "desc"));
+        const eventsQuery = query(
+          collection(db, "events"),
+          orderBy("endDate", "desc")
+        );
         const querySnapshot = await getDocs(eventsQuery);
-        const events = querySnapshot.docs.map(doc => ({
+        const events = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
@@ -39,20 +66,20 @@ function Events() {
               const newEvent = {
                 ...event,
                 endDate: new Date(2023, 11, 1).toISOString(), // Default to Dec 1, 2023
-                createdAt: new Date().toISOString()
+                createdAt: new Date().toISOString(),
               };
               const docRef = await addDoc(collection(db, "events"), newEvent);
               return { id: docRef.id, ...newEvent };
             })
           );
           setEventsList(seededEvents);
-          message.success('Initial events added successfully!');
+          message.success("Initial events added successfully!");
         } else {
           setEventsList(events);
         }
       } catch (error) {
         console.error("Error fetching events:", error);
-        message.error('Failed to load events');
+        message.error("Failed to load events");
       } finally {
         setLoading(false);
       }
@@ -63,14 +90,17 @@ function Events() {
 
   const { upcomingEvents, pastEvents } = useMemo(() => {
     const now = dayjs();
-    return eventsList.reduce((acc, event) => {
-      if (dayjs(event.endDate).isAfter(now)) {
-        acc.upcomingEvents.push(event);
-      } else {
-        acc.pastEvents.push(event);
-      }
-      return acc;
-    }, { upcomingEvents: [], pastEvents: [] });
+    return eventsList.reduce(
+      (acc, event) => {
+        if (dayjs(event.endDate).isAfter(now)) {
+          acc.upcomingEvents.push(event);
+        } else {
+          acc.pastEvents.push(event);
+        }
+        return acc;
+      },
+      { upcomingEvents: [], pastEvents: [] }
+    );
   }, [eventsList]);
 
   const showPasswordModal = () => {
@@ -78,12 +108,12 @@ function Events() {
   };
 
   const handlePasswordSubmit = (values) => {
-    if (values.password === 'gdsc123') {
+    if (values.password === "gdsc123") {
       setIsPasswordModalVisible(false);
       setIsAdmin(true);
-      message.success('Admin access granted');
+      message.success("Admin access granted");
     } else {
-      message.error('Incorrect password');
+      message.error("Incorrect password");
     }
   };
 
@@ -110,10 +140,10 @@ function Events() {
       setEventsList([{ id: docRef.id, ...newEvent }, ...eventsList]);
       setIsModalVisible(false);
       form.resetFields();
-      message.success('Event added successfully!');
+      message.success("Event added successfully!");
     } catch (error) {
       console.error("Error adding event:", error);
-      message.error('Failed to add event');
+      message.error("Failed to add event");
     } finally {
       setLoading(false);
     }
@@ -123,11 +153,11 @@ function Events() {
     try {
       setLoading(true);
       await deleteDoc(doc(db, "events", eventId));
-      setEventsList(eventsList.filter(event => event.id !== eventId));
-      message.success('Event deleted successfully!');
+      setEventsList(eventsList.filter((event) => event.id !== eventId));
+      message.success("Event deleted successfully!");
     } catch (error) {
       console.error("Error deleting event:", error);
-      message.error('Failed to delete event');
+      message.error("Failed to delete event");
     } finally {
       setLoading(false);
     }
@@ -137,16 +167,12 @@ function Events() {
     <Card
       key={event.id}
       hoverable
-      className={`eventCard ${isPast ? 'past-event' : ''}`}
+      className={`eventCard ${isPast ? "past-event" : ""}`}
       onClick={() => {
-        if (event.name === "Hawkthon 2024") {
-          navigate('/events/hawkthon');
-        } else if (event.name === "Hawkthon 2025") {
-          navigate('/events/hawkthon-2025');
-        } else if (event.name === "TechXPo 2024") {
-          navigate('/events/techxpo');
+        if (event.name === "Hawkthon") {
+          navigate("/events/hawkthon");
         } else if (event.link) {
-          window.open(event.link, '_blank');
+          window.open(event.link, "_blank");
         }
       }}
       extra={
@@ -161,9 +187,9 @@ function Events() {
             okText="Yes"
             cancelText="No"
           >
-            <Button 
-              type="text" 
-              danger 
+            <Button
+              type="text"
+              danger
               icon={<DeleteOutlined />}
               className="delete-button"
               onClick={(e) => e.stopPropagation()}
@@ -179,13 +205,13 @@ function Events() {
             <Text className="eventDescription">{event.info}</Text>
             {!isPast && (
               <Text className="event-date">
-                Ends on: {dayjs(event.endDate).format('MMM D, YYYY')}
+                Ends on: {dayjs(event.endDate).format("MMM D, YYYY")}
               </Text>
             )}
-            {!isPast && event.name !== "Hawkthon 2024" && event.name !== "TechXpo 2024" && (
-              <Button 
-                type="primary" 
-                href={event.link} 
+            {!isPast && event.name !== "Hawkthon" && (
+              <Button
+                type="primary"
+                href={event.link}
                 target="_blank"
                 className="viewEventButton"
                 onClick={(e) => e.stopPropagation()}
@@ -193,40 +219,16 @@ function Events() {
                 View Event
               </Button>
             )}
-            {!isPast && event.name === "Hawkthon 2024" && (
-              <Button 
-                type="primary" 
+            {!isPast && event.name === "Hawkthon" && (
+              <Button
+                type="primary"
                 className="viewEventButton"
                 onClick={(e) => {
                   e.stopPropagation();
-                  navigate('/events/hawkthon');
+                  navigate("/events/hawkthon");
                 }}
               >
-                View Hawkthon 2024
-              </Button>
-            )}
-            {!isPast && event.name === "Hawkthon 2025" && (
-              <Button 
-                type="primary" 
-                className="viewEventButton"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  navigate('/events/hawkthon-2025');
-                }}
-              >
-                View Hawkthon 2025
-              </Button>
-            )}
-            {!isPast && event.name === "TechXpo 2024" && (
-              <Button 
-                type="primary" 
-                className="viewEventButton"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  navigate('/events/techxpo');
-                }}
-              >
-                View TechXpo
+                View Hawkthon
               </Button>
             )}
           </div>
@@ -236,8 +238,13 @@ function Events() {
   );
 
   const renderEventGrid = (events, title, isPast = false) => (
-    <div className={`event-section ${isPast ? 'past-events' : 'upcoming-events'}`}>
-      <Title level={2} className={`section-title ${isPast ? 'past-title' : 'upcoming-title'}`}>
+    <div
+      className={`event-section ${isPast ? "past-events" : "upcoming-events"}`}
+    >
+      <Title
+        level={2}
+        className={`section-title ${isPast ? "past-title" : "upcoming-title"}`}
+      >
         {title}
       </Title>
       <div className="eventGrid">
@@ -251,22 +258,30 @@ function Events() {
     </div>
   );
 
-  if (loading) {
-    return (
-      <div className="loading-container">
-        <Spin size="large" />
-      </div>
-    );
-  }
-
   return (
     <div className="events-page">
       <Animation />
-      <Title level={1} style={{ textAlign: 'center', marginBottom: '2rem' }}>Events</Title>
-      
-      {renderEventGrid(upcomingEvents, "Upcoming Events")}
-      <Divider className="section-divider" />
-      {renderEventGrid(pastEvents, "Past Events", true)}
+      <Title level={1} style={{ textAlign: "center", marginBottom: "2rem" }}>
+        Events
+      </Title>
+
+      {/* Flagship Events - always rendered */}
+      <div className="flagship-events-section">
+        <FlagshipEvents />
+      </div>
+
+      {/* Dynamic Events Section */}
+      {loading ? (
+        <div className="loading-container">
+          <Spin size="large" />
+        </div>
+      ) : (
+        <>
+          {renderEventGrid(upcomingEvents, "Upcoming Events")}
+          <Divider className="section-divider" />
+          {renderEventGrid(pastEvents, "Past Events", true)}
+        </>
+      )}
 
       {/* Password Modal */}
       <Modal
@@ -278,7 +293,7 @@ function Events() {
         <Form onFinish={handlePasswordSubmit}>
           <Form.Item
             name="password"
-            rules={[{ required: true, message: 'Please input the password!' }]}
+            rules={[{ required: true, message: "Please input the password!" }]}
           >
             <Input.Password placeholder="Enter password" />
           </Form.Item>
@@ -297,31 +312,36 @@ function Events() {
         onCancel={() => setIsModalVisible(false)}
         footer={null}
       >
-        <Form
-          form={form}
-          layout="vertical"
-          onFinish={handleAddEvent}
-        >
+        <Form form={form} layout="vertical" onFinish={handleAddEvent}>
           <Form.Item
             name="name"
             label="Event Name"
-            rules={[{ required: true, message: 'Please input the event name!' }]}
+            rules={[
+              { required: true, message: "Please input the event name!" },
+            ]}
           >
             <Input />
           </Form.Item>
-          
+
           <Form.Item
             name="description"
             label="Event Description"
-            rules={[{ required: true, message: 'Please input the event description!' }]}
+            rules={[
+              {
+                required: true,
+                message: "Please input the event description!",
+              },
+            ]}
           >
             <TextArea rows={4} />
           </Form.Item>
-          
+
           <Form.Item
             name="link"
             label="Event Link"
-            rules={[{ required: true, message: 'Please input the event link!' }]}
+            rules={[
+              { required: true, message: "Please input the event link!" },
+            ]}
           >
             <Input />
           </Form.Item>
@@ -329,14 +349,18 @@ function Events() {
           <Form.Item
             name="endDate"
             label="Event End Date"
-            rules={[{ required: true, message: 'Please select the event end date!' }]}
+            rules={[
+              { required: true, message: "Please select the event end date!" },
+            ]}
           >
-            <DatePicker 
-              style={{ width: '100%' }}
-              disabledDate={(current) => current && current < dayjs().startOf('day')}
+            <DatePicker
+              style={{ width: "100%" }}
+              disabledDate={(current) =>
+                current && current < dayjs().startOf("day")
+              }
             />
           </Form.Item>
-          
+
           <Form.Item>
             <Button type="primary" htmlType="submit">
               Add Event
@@ -346,10 +370,7 @@ function Events() {
       </Modal>
 
       {/* Admin Buttons */}
-      <FloatButton.Group
-        trigger="hover"
-        style={{ right: 24, bottom: 24 }}
-      >
+      <FloatButton.Group trigger="hover" style={{ right: 24, bottom: 24 }}>
         {isAdmin ? (
           <>
             <FloatButton
