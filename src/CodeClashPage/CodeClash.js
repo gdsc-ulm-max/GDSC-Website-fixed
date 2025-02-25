@@ -27,11 +27,12 @@ import { db } from "../firebase";
 import Papa from "papaparse";
 import { motion } from "framer-motion";
 import "./CodeClash.css";
+import SEO from "../components/SEO";
 
 const { Title, Text } = Typography;
 const { Dragger } = Upload;
 
-const CodeClash = () => {
+const CodeClash = ({ seo }) => {
   const [leaderboardData, setLeaderboardData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -109,12 +110,12 @@ const CodeClash = () => {
 
       // Check if Firebase is initialized properly
       if (!db) {
-        throw new Error('Firebase DB is not initialized');
+        throw new Error("Firebase DB is not initialized");
       }
 
       // Add persistence for offline capabilities
       const leaderboardRef = doc(db, "codeclash", "leaderboard");
-      
+
       try {
         const leaderboardDoc = await getDoc(leaderboardRef);
         if (leaderboardDoc.exists()) {
@@ -129,8 +130,13 @@ const CodeClash = () => {
         }
       } catch (error) {
         console.error("Firebase error:", error);
-        if (error.code === 'failed-precondition' || error.message.includes('offline')) {
-          message.warning("You appear to be offline. Some data may not be available.");
+        if (
+          error.code === "failed-precondition" ||
+          error.message.includes("offline")
+        ) {
+          message.warning(
+            "You appear to be offline. Some data may not be available."
+          );
           // Set empty data when offline
           setLeaderboardData([]);
         } else {
@@ -149,21 +155,26 @@ const CodeClash = () => {
     try {
       // Check if Firebase is initialized properly
       if (!db) {
-        throw new Error('Firebase DB is not initialized');
+        throw new Error("Firebase DB is not initialized");
       }
 
-      const challengesCollection = collection(db, 'challenges');
+      const challengesCollection = collection(db, "challenges");
       try {
         const challengesSnapshot = await getDocs(challengesCollection);
-        const challengesList = challengesSnapshot.docs.map(doc => ({
+        const challengesList = challengesSnapshot.docs.map((doc) => ({
           id: doc.id,
-          ...doc.data()
+          ...doc.data(),
         }));
         setChallenges(challengesList);
       } catch (error) {
         console.error("Firebase error:", error);
-        if (error.code === 'failed-precondition' || error.message.includes('offline')) {
-          message.warning("You appear to be offline. Challenge data may not be available.");
+        if (
+          error.code === "failed-precondition" ||
+          error.message.includes("offline")
+        ) {
+          message.warning(
+            "You appear to be offline. Challenge data may not be available."
+          );
           setChallenges([]);
         } else {
           message.error("Failed to load challenges");
@@ -246,205 +257,208 @@ const CodeClash = () => {
   }
 
   return (
-    <div className="codeclash-page">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <Title
-          className="neon-text"
-          style={{ textAlign: "center", marginBottom: "2rem" }}
+    <>
+      <SEO seo={seo} />
+      <div className="codeclash-page">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
         >
-          CODE CLASH
-        </Title>
-
-        <Text
-          className="gradient-text"
-          style={{
-            display: "block",
-            textAlign: "center",
-            fontSize: "1.5rem",
-            marginBottom: "3rem",
-          }}
-        >
-          Solve LeetCode-style programming challenges, sharpen your skills,
-          compete with peers, and have a blast while prepping for your dream
-          job!
-        </Text>
-
-        <Row gutter={[24, 24]} className="features-grid">
-          {features.map((feature, index) => (
-            <Col xs={24} sm={12} lg={6} key={index}>
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.2 }}
-              >
-                <Card className="feature-card">
-                  {feature.icon}
-                  <Title level={4} className="gradient-text">
-                    {feature.title}
-                  </Title>
-                  <Text style={{ color: "rgba(255, 255, 255, 0.8)" }}>
-                    {feature.description}
-                  </Text>
-                </Card>
-              </motion.div>
-            </Col>
-          ))}
-        </Row>
-
-        <div className="event-info">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-          >
-            <Title
-              level={3}
-              className="gradient-text"
-              style={{ textAlign: "center", marginBottom: "1rem" }}
-            >
-              BI-WEEKLY EVENT
-            </Title>
-            <Title
-              level={1}
-              className="neon-text"
-              style={{ textAlign: "center", marginBottom: "1rem" }}
-            >
-              March 7
-            </Title>
-            <Title
-              level={3}
-              style={{
-                textAlign: "center",
-                color: "white",
-                marginBottom: "0.5rem",
-              }}
-            >
-              TBD
-            </Title>
-            <Title
-              level={4}
-              style={{
-                textAlign: "center",
-                color: "white",
-                marginBottom: "2rem",
-              }}
-            >
-              Hemphill Hall 203
-            </Title>
-
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <Button size="large" className="neon-button">
-                Register Now
-              </Button>
-            </div>
-          </motion.div>
-        </div>
-
-        <div className="leaderboard-container">
           <Title
-            level={2}
-            className="gradient-text"
+            className="neon-text"
             style={{ textAlign: "center", marginBottom: "2rem" }}
           >
-            Leaderboard
+            CODE CLASH
           </Title>
 
-          {loading ? (
-            <div className="loading-container">
-              <Spin size="large" />
-            </div>
+          <Text
+            className="gradient-text"
+            style={{
+              display: "block",
+              textAlign: "center",
+              fontSize: "1.5rem",
+              marginBottom: "3rem",
+            }}
+          >
+            Solve LeetCode-style programming challenges, sharpen your skills,
+            compete with peers, and have a blast while prepping for your dream
+            job!
+          </Text>
+
+          <Row gutter={[24, 24]} className="features-grid">
+            {features.map((feature, index) => (
+              <Col xs={24} sm={12} lg={6} key={index}>
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Card className="feature-card">
+                    {feature.icon}
+                    <Title level={4} className="gradient-text">
+                      {feature.title}
+                    </Title>
+                    <Text style={{ color: "rgba(255, 255, 255, 0.8)" }}>
+                      {feature.description}
+                    </Text>
+                  </Card>
+                </motion.div>
+              </Col>
+            ))}
+          </Row>
+
+          <div className="event-info">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+            >
+              <Title
+                level={3}
+                className="gradient-text"
+                style={{ textAlign: "center", marginBottom: "1rem" }}
+              >
+                BI-WEEKLY EVENT
+              </Title>
+              <Title
+                level={1}
+                className="neon-text"
+                style={{ textAlign: "center", marginBottom: "1rem" }}
+              >
+                March 7
+              </Title>
+              <Title
+                level={3}
+                style={{
+                  textAlign: "center",
+                  color: "white",
+                  marginBottom: "0.5rem",
+                }}
+              >
+                TBD
+              </Title>
+              <Title
+                level={4}
+                style={{
+                  textAlign: "center",
+                  color: "white",
+                  marginBottom: "2rem",
+                }}
+              >
+                Hemphill Hall 203
+              </Title>
+
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <Button size="large" className="neon-button">
+                  Register Now
+                </Button>
+              </div>
+            </motion.div>
+          </div>
+
+          <div className="leaderboard-container">
+            <Title
+              level={2}
+              className="gradient-text"
+              style={{ textAlign: "center", marginBottom: "2rem" }}
+            >
+              Leaderboard
+            </Title>
+
+            {loading ? (
+              <div className="loading-container">
+                <Spin size="large" />
+              </div>
+            ) : (
+              <Table
+                dataSource={leaderboardData}
+                columns={columns}
+                rowKey="sn"
+                pagination={false}
+                className="leaderboard-table"
+              />
+            )}
+          </div>
+
+          <Text
+            style={{
+              textAlign: "center",
+              color: "white",
+              marginTop: "2rem",
+              display: "block",
+            }}
+          >
+            Top performers and the participants with the most attendance will be
+            awarded at our grand Hawkathon 2025!
+          </Text>
+        </motion.div>
+
+        {/* Password Modal */}
+        <Modal
+          title="Enter Admin Password"
+          open={isPasswordModalVisible}
+          onCancel={() => setIsPasswordModalVisible(false)}
+          footer={null}
+        >
+          <Input.Password
+            placeholder="Enter password"
+            onPressEnter={(e) => handlePasswordSubmit(e.target.value)}
+          />
+        </Modal>
+
+        {/* Upload Modal */}
+        <Modal
+          title="Upload CSV File"
+          open={isUploadModalVisible}
+          onCancel={() => setIsUploadModalVisible(false)}
+          footer={null}
+        >
+          <Dragger
+            name="file"
+            multiple={false}
+            accept=".csv"
+            customRequest={({ file, onSuccess }) => {
+              handleCSVUpload({ file });
+              onSuccess("ok");
+            }}
+            showUploadList={false}
+          >
+            <p className="ant-upload-drag-icon">
+              <InboxOutlined />
+            </p>
+            <p className="ant-upload-text">Click or drag CSV file to upload</p>
+            <p className="ant-upload-hint">
+              The CSV should contain columns: S.N., Name of Participant,
+              Hackerrank User ID, Score, TimeStamp
+            </p>
+          </Dragger>
+        </Modal>
+
+        {/* Admin Button */}
+        <FloatButton.Group trigger="hover" style={{ right: 24, bottom: 24 }}>
+          {isAdmin ? (
+            <>
+              <FloatButton
+                icon={<UploadOutlined />}
+                tooltip="Upload CSV"
+                onClick={() => setIsUploadModalVisible(true)}
+              />
+              <FloatButton
+                icon={<LockOutlined />}
+                tooltip="Admin Mode Active"
+                type="primary"
+              />
+            </>
           ) : (
-            <Table
-              dataSource={leaderboardData}
-              columns={columns}
-              rowKey="sn"
-              pagination={false}
-              className="leaderboard-table"
-            />
-          )}
-        </div>
-
-        <Text
-          style={{
-            textAlign: "center",
-            color: "white",
-            marginTop: "2rem",
-            display: "block",
-          }}
-        >
-          Top performers and the participants with the most attendance will be
-          awarded at our grand Hawkathon 2025!
-        </Text>
-      </motion.div>
-
-      {/* Password Modal */}
-      <Modal
-        title="Enter Admin Password"
-        open={isPasswordModalVisible}
-        onCancel={() => setIsPasswordModalVisible(false)}
-        footer={null}
-      >
-        <Input.Password
-          placeholder="Enter password"
-          onPressEnter={(e) => handlePasswordSubmit(e.target.value)}
-        />
-      </Modal>
-
-      {/* Upload Modal */}
-      <Modal
-        title="Upload CSV File"
-        open={isUploadModalVisible}
-        onCancel={() => setIsUploadModalVisible(false)}
-        footer={null}
-      >
-        <Dragger
-          name="file"
-          multiple={false}
-          accept=".csv"
-          customRequest={({ file, onSuccess }) => {
-            handleCSVUpload({ file });
-            onSuccess("ok");
-          }}
-          showUploadList={false}
-        >
-          <p className="ant-upload-drag-icon">
-            <InboxOutlined />
-          </p>
-          <p className="ant-upload-text">Click or drag CSV file to upload</p>
-          <p className="ant-upload-hint">
-            The CSV should contain columns: S.N., Name of Participant,
-            Hackerrank User ID, Score, TimeStamp
-          </p>
-        </Dragger>
-      </Modal>
-
-      {/* Admin Button */}
-      <FloatButton.Group trigger="hover" style={{ right: 24, bottom: 24 }}>
-        {isAdmin ? (
-          <>
-            <FloatButton
-              icon={<UploadOutlined />}
-              tooltip="Upload CSV"
-              onClick={() => setIsUploadModalVisible(true)}
-            />
             <FloatButton
               icon={<LockOutlined />}
-              tooltip="Admin Mode Active"
-              type="primary"
+              tooltip="Admin Login"
+              onClick={() => setIsPasswordModalVisible(true)}
             />
-          </>
-        ) : (
-          <FloatButton
-            icon={<LockOutlined />}
-            tooltip="Admin Login"
-            onClick={() => setIsPasswordModalVisible(true)}
-          />
-        )}
-      </FloatButton.Group>
-    </div>
+          )}
+        </FloatButton.Group>
+      </div>
+    </>
   );
 };
 

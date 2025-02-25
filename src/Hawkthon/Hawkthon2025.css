@@ -312,6 +312,107 @@
   gap: 8px;
 }
 
+.registration-info {
+  padding: 4rem 2rem;
+  background: #f8f9fa;
+}
+
+.registration-info .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.registration-info h2 {
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #202124;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.info-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.info-card .material-icons {
+  font-size: 2.5rem;
+  color: #4285f4;
+  margin-bottom: 1rem;
+}
+
+.info-card h3 {
+  margin: 0.5rem 0;
+  color: #202124;
+}
+
+.info-card p {
+  margin: 0.5rem 0;
+  color: #5f6368;
+}
+
+.info-card small {
+  color: #8f9295;
+}
+
+.important-notice {
+  background: #fce8e6;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-top: 3rem;
+}
+
+.important-notice h3 {
+  display: flex;
+  align-items: center;
+  color: #d93025;
+  margin-bottom: 1rem;
+}
+
+.important-notice h3 .material-icons {
+  margin-right: 0.5rem;
+}
+
+.team-finding {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.find-team-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #4285f4;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.find-team-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .team-finding {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
 @media (max-width: 768px) {
   .hero-section {
     padding: 1rem;

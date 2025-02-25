@@ -1,35 +1,36 @@
 import React, { useState, useEffect } from "react";
-import { 
-  Row, 
-  Col, 
-  Card, 
-  Modal, 
-  Button, 
-  Input, 
-  message, 
-  Upload, 
+import {
+  Row,
+  Col,
+  Card,
+  Modal,
+  Button,
+  Input,
+  message,
+  Upload,
   Spin,
   FloatButton,
-  Popconfirm 
+  Popconfirm,
 } from "antd";
-import { 
-  LockOutlined, 
-  DeleteOutlined, 
+import {
+  LockOutlined,
+  DeleteOutlined,
   PlusOutlined,
-  UploadOutlined 
+  UploadOutlined,
 } from "@ant-design/icons";
-import { 
-  ref, 
-  uploadBytes, 
-  listAll, 
-  getDownloadURL, 
+import {
+  ref,
+  uploadBytes,
+  listAll,
+  getDownloadURL,
   deleteObject,
-  getMetadata 
+  getMetadata,
 } from "firebase/storage";
 import { storage } from "../firebase";
 import "./Gallery.css";
+import SEO from "../components/SEO";
 
-const Gallery = () => {
+const Gallery = ({ seo }) => {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -47,7 +48,7 @@ const Gallery = () => {
       setLoading(true);
       const imagesRef = ref(storage, "gallery");
       const imagesList = await listAll(imagesRef);
-      
+
       // Get URLs and metadata for all images
       const imagesData = await Promise.all(
         imagesList.items.map(async (item) => {
@@ -62,8 +63,8 @@ const Gallery = () => {
       );
 
       // Sort by timestamp, newest first
-      const sortedImages = imagesData.sort((a, b) => 
-        new Date(b.timestamp) - new Date(a.timestamp)
+      const sortedImages = imagesData.sort(
+        (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
       );
 
       setImages(sortedImages);
@@ -130,106 +131,106 @@ const Gallery = () => {
   };
 
   return (
-    <div className="gallery-page">
-      <h1>GDSC ULM Gallery</h1>
+    <>
+      <SEO seo={seo} />
+      <div className="gallery-page">
+        <h1>GDSC ULM Gallery</h1>
 
-      {loading ? (
-        <div className="loading-container">
-          <Spin size="large" />
-        </div>
-      ) : (
-        <Row gutter={[16, 16]} className="gallery-grid">
-          {images.map((image, index) => (
-            <Col xs={24} sm={12} md={8} lg={6} key={index}>
-              <Card
-                hoverable
-                cover={<img alt="gallery" src={image.url} />}
-                className="gallery-card"
-                actions={
-                  isAdmin
-                    ? [
-                        <Popconfirm
-                          title="Delete Image"
-                          description="Are you sure you want to delete this image?"
-                          onConfirm={() => handleDelete(image.name)}
-                          okText="Yes"
-                          cancelText="No"
-                        >
-                          <DeleteOutlined key="delete" />
-                        </Popconfirm>,
-                      ]
-                    : undefined
-                }
-              />
-            </Col>
-          ))}
-        </Row>
-      )}
+        {loading ? (
+          <div className="loading-container">
+            <Spin size="large" />
+          </div>
+        ) : (
+          <Row gutter={[16, 16]} className="gallery-grid">
+            {images.map((image, index) => (
+              <Col xs={24} sm={12} md={8} lg={6} key={index}>
+                <Card
+                  hoverable
+                  cover={<img alt="gallery" src={image.url} />}
+                  className="gallery-card"
+                  actions={
+                    isAdmin
+                      ? [
+                          <Popconfirm
+                            title="Delete Image"
+                            description="Are you sure you want to delete this image?"
+                            onConfirm={() => handleDelete(image.name)}
+                            okText="Yes"
+                            cancelText="No"
+                          >
+                            <DeleteOutlined key="delete" />
+                          </Popconfirm>,
+                        ]
+                      : undefined
+                  }
+                />
+              </Col>
+            ))}
+          </Row>
+        )}
 
-      {/* Password Modal */}
-      <Modal
-        title="Enter Admin Password"
-        open={isPasswordModalVisible}
-        onCancel={() => setIsPasswordModalVisible(false)}
-        footer={null}
-      >
-        <Input.Password
-          placeholder="Enter password"
-          onPressEnter={(e) => handlePasswordSubmit(e.target.value)}
-        />
-      </Modal>
-
-      {/* Upload Modal */}
-      <Modal
-        title="Upload Images"
-        open={isUploadModalVisible}
-        onCancel={() => setIsUploadModalVisible(false)}
-        footer={null}
-      >
-        <Upload.Dragger
-          name="file"
-          multiple
-          customRequest={handleUpload}
-          accept="image/*"
-          showUploadList={true}
-          disabled={uploadLoading}
+        {/* Password Modal */}
+        <Modal
+          title="Enter Admin Password"
+          open={isPasswordModalVisible}
+          onCancel={() => setIsPasswordModalVisible(false)}
+          footer={null}
         >
-          <p className="ant-upload-drag-icon">
-            <UploadOutlined />
-          </p>
-          <p className="ant-upload-text">Click or drag images to upload</p>
-          {uploadLoading && <Spin />}
-        </Upload.Dragger>
-      </Modal>
+          <Input.Password
+            placeholder="Enter password"
+            onPressEnter={(e) => handlePasswordSubmit(e.target.value)}
+          />
+        </Modal>
 
-      {/* Admin Buttons */}
-      <FloatButton.Group
-        trigger="hover"
-        style={{ right: 24, bottom: 24 }}
-      >
-        {isAdmin ? (
-          <>
-            <FloatButton
-              icon={<PlusOutlined />}
-              tooltip="Upload Images"
-              onClick={() => setIsUploadModalVisible(true)}
-            />
+        {/* Upload Modal */}
+        <Modal
+          title="Upload Images"
+          open={isUploadModalVisible}
+          onCancel={() => setIsUploadModalVisible(false)}
+          footer={null}
+        >
+          <Upload.Dragger
+            name="file"
+            multiple
+            customRequest={handleUpload}
+            accept="image/*"
+            showUploadList={true}
+            disabled={uploadLoading}
+          >
+            <p className="ant-upload-drag-icon">
+              <UploadOutlined />
+            </p>
+            <p className="ant-upload-text">Click or drag images to upload</p>
+            {uploadLoading && <Spin />}
+          </Upload.Dragger>
+        </Modal>
+
+        {/* Admin Buttons */}
+        <FloatButton.Group trigger="hover" style={{ right: 24, bottom: 24 }}>
+          {isAdmin ? (
+            <>
+              <FloatButton
+                icon={<PlusOutlined />}
+                tooltip="Upload Images"
+                onClick={() => setIsUploadModalVisible(true)}
+              />
+              <FloatButton
+                icon={<LockOutlined />}
+                tooltip="Admin Mode Active"
+                type="primary"
+              />
+            </>
+          ) : (
             <FloatButton
               icon={<LockOutlined />}
-              tooltip="Admin Mode Active"
-              type="primary"
+              tooltip="Admin Login"
+              onClick={() => setIsPasswordModalVisible(true)}
             />
-          </>
-        ) : (
-          <FloatButton
-            icon={<LockOutlined />}
-            tooltip="Admin Login"
-            onClick={() => setIsPasswordModalVisible(true)}
-          />
-        )}
-      </FloatButton.Group>
-    </div>
+          )}
+        </FloatButton.Group>
+      </div>
+    </>
   );
 };
 
-export default Gallery; 
+export default Gallery;

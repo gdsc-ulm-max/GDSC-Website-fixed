@@ -19,7 +19,13 @@ import {
   Space,
   Checkbox,
 } from "antd";
-import { LockOutlined, DeleteOutlined, PlusOutlined, UploadOutlined, EditOutlined } from "@ant-design/icons";
+import {
+  LockOutlined,
+  DeleteOutlined,
+  PlusOutlined,
+  UploadOutlined,
+  EditOutlined,
+} from "@ant-design/icons";
 import {
   collection,
   addDoc,
@@ -38,12 +44,13 @@ import "./Events.css";
 import { events as initialEvents } from "../logo/EventsData";
 import Animation from "../HomePage/Animation";
 import { useNavigate, Link } from "react-router-dom";
+import SEO from "../components/SEO";
 
 const { Title, Text } = Typography;
 const { TextArea } = Input;
 const { Option } = Select;
 
-function Events() {
+function Events({ seo }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isPasswordModalVisible, setIsPasswordModalVisible] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -133,7 +140,11 @@ function Events() {
     if (values.password === "gdsc123") {
       try {
         // Sign in with Firebase Auth using a dedicated admin email
-        await signInWithEmailAndPassword(auth, "admin@gdsc-ulm.com", values.password);
+        await signInWithEmailAndPassword(
+          auth,
+          "admin@gdsc-ulm.com",
+          values.password
+        );
         setIsPasswordModalVisible(false);
         setIsAdmin(true);
         message.success("Admin access granted");
@@ -186,53 +197,55 @@ function Events() {
     try {
       // Check if user is authenticated
       if (!auth.currentUser) {
-        message.error('You must be logged in as admin to upload images');
+        message.error("You must be logged in as admin to upload images");
         return null;
       }
 
       // Validate file type
-      const isImage = file.type.startsWith('image/');
+      const isImage = file.type.startsWith("image/");
       if (!isImage) {
-        message.error('You can only upload image files!');
+        message.error("You can only upload image files!");
         return null;
       }
 
       // Validate file size (less than 2MB)
       const isLt2M = file.size / 1024 / 1024 < 2;
       if (!isLt2M) {
-        message.error('Image must be smaller than 2MB!');
+        message.error("Image must be smaller than 2MB!");
         return null;
       }
 
       setUploading(true);
-      
+
       // Create a unique filename to avoid conflicts
-      const fileName = `${Date.now()}_${file.name.replace(/\s+/g, '_')}`;
+      const fileName = `${Date.now()}_${file.name.replace(/\s+/g, "_")}`;
       const storageRef = ref(storage, `logos/${fileName}`);
 
       try {
         // Upload the file
         const uploadTask = await uploadBytes(storageRef, file);
-        console.log('File uploaded successfully:', uploadTask);
+        console.log("File uploaded successfully:", uploadTask);
 
         // Get the download URL
         const downloadURL = await getDownloadURL(storageRef);
-        console.log('Download URL obtained:', downloadURL);
+        console.log("Download URL obtained:", downloadURL);
 
         setImageUrl(downloadURL);
-        message.success('Image uploaded successfully!');
+        message.success("Image uploaded successfully!");
         return downloadURL;
       } catch (error) {
-        if (error.code === 'storage/unauthorized') {
-          message.error('Permission denied. Please make sure you are logged in as admin.');
+        if (error.code === "storage/unauthorized") {
+          message.error(
+            "Permission denied. Please make sure you are logged in as admin."
+          );
         } else {
           message.error(`Upload failed: ${error.message}`);
         }
-        console.error('Error during upload:', error);
+        console.error("Error during upload:", error);
         return null;
       }
     } catch (error) {
-      console.error('Error uploading image:', error);
+      console.error("Error uploading image:", error);
       message.error(`Failed to upload image: ${error.message}`);
       return null;
     } finally {
@@ -252,7 +265,7 @@ function Events() {
       name: event.name,
       description: event.info,
       color: event.color,
-      endDate: event.isTbdDate ? null : dayjs(event.endDate)
+      endDate: event.isTbdDate ? null : dayjs(event.endDate),
     });
     setIsModalVisible(true);
   };
@@ -266,20 +279,24 @@ function Events() {
         info: values.description,
         logo: imageUrl,
         tags: tags,
-        buttons: buttons.filter(btn => btn.text && btn.link),
+        buttons: buttons.filter((btn) => btn.text && btn.link),
         color: values.color || "#4285F4", // Default to Google Blue
         endDate: isTbdDate ? "TBD" : values.endDate.toISOString(),
         createdAt: new Date().toISOString(),
-        isTbdDate: isTbdDate
+        isTbdDate: isTbdDate,
       };
 
       if (isEditMode && editingEvent) {
         // Update existing event
         const eventRef = doc(db, "events", editingEvent.id);
         await updateDoc(eventRef, eventData);
-        setEventsList(eventsList.map(event => 
-          event.id === editingEvent.id ? { ...eventData, id: event.id } : event
-        ));
+        setEventsList(
+          eventsList.map((event) =>
+            event.id === editingEvent.id
+              ? { ...eventData, id: event.id }
+              : event
+          )
+        );
         message.success("Event updated successfully!");
       } else {
         // Add new event
@@ -298,8 +315,13 @@ function Events() {
       setIsEditMode(false);
       setIsTbdDate(false);
     } catch (error) {
-      console.error(isEditMode ? "Error updating event:" : "Error adding event:", error);
-      message.error(isEditMode ? "Failed to update event" : "Failed to add event");
+      console.error(
+        isEditMode ? "Error updating event:" : "Error adding event:",
+        error
+      );
+      message.error(
+        isEditMode ? "Failed to update event" : "Failed to add event"
+      );
     } finally {
       setLoading(false);
     }
@@ -330,25 +352,28 @@ function Events() {
       </div>
       <div className="event-content">
         <div className="event-tags">
-          {event.tags && event.tags.map((tag, idx) => (
-            <span
-              key={idx}
-              className="event-tag"
-              style={{
-                backgroundColor: `${event.color}15`,
-                color: event.color,
-              }}
-            >
-              {tag}
-            </span>
-          ))}
+          {event.tags &&
+            event.tags.map((tag, idx) => (
+              <span
+                key={idx}
+                className="event-tag"
+                style={{
+                  backgroundColor: `${event.color}15`,
+                  color: event.color,
+                }}
+              >
+                {tag}
+              </span>
+            ))}
         </div>
         <p className="event-description">{event.info}</p>
         <div className="event-dates">
           <div className="date-item">
             <span className="date-label">Event Date</span>
             <span className="date-value">
-              {event.isTbdDate ? "TBD" : dayjs(event.endDate).format("MMM D, YYYY")}
+              {event.isTbdDate
+                ? "TBD"
+                : dayjs(event.endDate).format("MMM D, YYYY")}
             </span>
           </div>
         </div>
@@ -446,267 +471,287 @@ function Events() {
   );
 
   return (
-    <div className="events-page">
-      <Animation />
-      <Title level={1} style={{ textAlign: "center", marginBottom: "2rem" }}>
-        Events
-      </Title>
+    <>
+      <SEO seo={seo} />
+      <div className="events-page">
+        <Animation />
+        <Title level={1} style={{ textAlign: "center", marginBottom: "2rem" }}>
+          Events
+        </Title>
 
-      {/* Dynamic Events Section */}
-      {loading ? (
-        <div className="loading-container">
-          <Spin size="large" />
-        </div>
-      ) : (
-        <>
-          {renderEventGrid(upcomingEvents, "Upcoming Events")}
-          <Divider className="section-divider" />
-          {renderEventGrid(pastEvents, "Past Events", true)}
-        </>
-      )}
+        {/* Dynamic Events Section */}
+        {loading ? (
+          <div className="loading-container">
+            <Spin size="large" />
+          </div>
+        ) : (
+          <>
+            {renderEventGrid(upcomingEvents, "Upcoming Events")}
+            <Divider className="section-divider" />
+            {renderEventGrid(pastEvents, "Past Events", true)}
+          </>
+        )}
 
-      {/* Password Modal */}
-      <Modal
-        title="Enter Admin Password"
-        open={isPasswordModalVisible}
-        onCancel={() => setIsPasswordModalVisible(false)}
-        footer={null}
-      >
-        <Form onFinish={handlePasswordSubmit}>
-          <Form.Item
-            name="password"
-            rules={[{ required: true, message: "Please input the password!" }]}
-          >
-            <Input.Password placeholder="Enter password" />
-          </Form.Item>
-          <Form.Item>
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
-          </Form.Item>
-        </Form>
-      </Modal>
-
-      {/* Add/Edit Event Modal */}
-      <Modal
-        title={isEditMode ? "Edit Event" : "Add New Event"}
-        open={isModalVisible}
-        onCancel={() => {
-          setIsModalVisible(false);
-          form.resetFields();
-          setImageUrl("");
-          setTags([]);
-          setButtons([{ text: "", link: "" }]);
-          setEditingEvent(null);
-          setIsEditMode(false);
-          setIsTbdDate(false);
-        }}
-        footer={null}
-        width={800}
-      >
-        <Form form={form} onFinish={handleAddEvent} layout="vertical">
-          <Form.Item
-            name="name"
-            label="Event Name"
-            rules={[{ required: true, message: "Please input the event name!" }]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            name="description"
-            label="Description"
-            rules={[{ required: true, message: "Please input the description!" }]}
-          >
-            <TextArea rows={4} />
-          </Form.Item>
-
-          <Form.Item label="Event Logo">
-            <Upload
-              listType="picture-card"
-              showUploadList={false}
-              accept="image/*"
-              maxCount={1}
-              beforeUpload={async (file) => {
-                try {
-                  const url = await handleUpload(file);
-                  if (url) {
-                    setImageUrl(url);
-                  }
-                } catch (error) {
-                  console.error('Upload error:', error);
-                }
-                return false; // Prevent automatic upload
-              }}
+        {/* Password Modal */}
+        <Modal
+          title="Enter Admin Password"
+          open={isPasswordModalVisible}
+          onCancel={() => setIsPasswordModalVisible(false)}
+          footer={null}
+        >
+          <Form onFinish={handlePasswordSubmit}>
+            <Form.Item
+              name="password"
+              rules={[
+                { required: true, message: "Please input the password!" },
+              ]}
             >
-              {imageUrl ? (
-                <img 
-                  src={imageUrl} 
-                  alt="event" 
-                  style={{ 
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                  }} 
-                />
-              ) : (
-                <div>
-                  {uploading ? <Spin /> : <PlusOutlined />}
-                  <div style={{ marginTop: 8 }}>Upload</div>
-                </div>
-              )}
-            </Upload>
-          </Form.Item>
+              <Input.Password placeholder="Enter password" />
+            </Form.Item>
+            <Form.Item>
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
+            </Form.Item>
+          </Form>
+        </Modal>
 
-          <Form.Item
-            name="color"
-            label="Theme Color"
-            rules={[{ required: true, message: "Please select a color!" }]}
-          >
-            <Select>
-              <Option value="#4285F4">Google Blue</Option>
-              <Option value="#DB4437">Google Red</Option>
-              <Option value="#F4B400">Google Yellow</Option>
-              <Option value="#0F9D58">Google Green</Option>
-            </Select>
-          </Form.Item>
+        {/* Add/Edit Event Modal */}
+        <Modal
+          title={isEditMode ? "Edit Event" : "Add New Event"}
+          open={isModalVisible}
+          onCancel={() => {
+            setIsModalVisible(false);
+            form.resetFields();
+            setImageUrl("");
+            setTags([]);
+            setButtons([{ text: "", link: "" }]);
+            setEditingEvent(null);
+            setIsEditMode(false);
+            setIsTbdDate(false);
+          }}
+          footer={null}
+          width={800}
+        >
+          <Form form={form} onFinish={handleAddEvent} layout="vertical">
+            <Form.Item
+              name="name"
+              label="Event Name"
+              rules={[
+                { required: true, message: "Please input the event name!" },
+              ]}
+            >
+              <Input />
+            </Form.Item>
 
-          <Form.Item label="Tags">
-            <Space style={{ marginBottom: 8 }}>
-              <Input
-                value={inputTag}
-                onChange={(e) => setInputTag(e.target.value)}
-                placeholder="Enter a tag"
-              />
-              <Button
-                type="primary"
-                onClick={() => {
-                  if (inputTag && !tags.includes(inputTag)) {
-                    setTags([...tags, inputTag]);
-                    setInputTag("");
+            <Form.Item
+              name="description"
+              label="Description"
+              rules={[
+                { required: true, message: "Please input the description!" },
+              ]}
+            >
+              <TextArea rows={4} />
+            </Form.Item>
+
+            <Form.Item label="Event Logo">
+              <Upload
+                listType="picture-card"
+                showUploadList={false}
+                accept="image/*"
+                maxCount={1}
+                beforeUpload={async (file) => {
+                  try {
+                    const url = await handleUpload(file);
+                    if (url) {
+                      setImageUrl(url);
+                    }
+                  } catch (error) {
+                    console.error("Upload error:", error);
                   }
+                  return false; // Prevent automatic upload
                 }}
               >
-                Add Tag
-              </Button>
-            </Space>
-            <div style={{ marginTop: 8 }}>
-              {tags.map((tag, index) => (
-                <span
-                  key={index}
-                  style={{
-                    background: "#f0f0f0",
-                    padding: "4px 8px",
-                    borderRadius: "4px",
-                    margin: "0 8px 8px 0",
-                    display: "inline-block",
-                  }}
-                >
-                  {tag}
-                  <DeleteOutlined
-                    onClick={() => setTags(tags.filter((_, i) => i !== index))}
-                    style={{ marginLeft: 8, cursor: "pointer" }}
+                {imageUrl ? (
+                  <img
+                    src={imageUrl}
+                    alt="event"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
                   />
-                </span>
-              ))}
-            </div>
-          </Form.Item>
+                ) : (
+                  <div>
+                    {uploading ? <Spin /> : <PlusOutlined />}
+                    <div style={{ marginTop: 8 }}>Upload</div>
+                  </div>
+                )}
+              </Upload>
+            </Form.Item>
 
-          <Form.Item label="Buttons">
-            {buttons.map((button, index) => (
-              <div key={index} style={{ marginBottom: 16, display: 'flex', gap: 8 }}>
+            <Form.Item
+              name="color"
+              label="Theme Color"
+              rules={[{ required: true, message: "Please select a color!" }]}
+            >
+              <Select>
+                <Option value="#4285F4">Google Blue</Option>
+                <Option value="#DB4437">Google Red</Option>
+                <Option value="#F4B400">Google Yellow</Option>
+                <Option value="#0F9D58">Google Green</Option>
+              </Select>
+            </Form.Item>
+
+            <Form.Item label="Tags">
+              <Space style={{ marginBottom: 8 }}>
                 <Input
-                  placeholder="Button Text"
-                  value={button.text}
-                  onChange={(e) => handleButtonChange(index, "text", e.target.value)}
-                  style={{ width: '30%' }}
-                />
-                <Input
-                  placeholder="Button Link"
-                  value={button.link}
-                  onChange={(e) => handleButtonChange(index, "link", e.target.value)}
-                  style={{ width: '50%' }}
+                  value={inputTag}
+                  onChange={(e) => setInputTag(e.target.value)}
+                  placeholder="Enter a tag"
                 />
                 <Button
-                  type="text"
-                  danger
-                  icon={<DeleteOutlined />}
-                  onClick={() => handleRemoveButton(index)}
-                  disabled={buttons.length === 1}
-                />
-              </div>
-            ))}
-            <Button type="dashed" onClick={handleAddButton} block icon={<PlusOutlined />}>
-              Add Button
-            </Button>
-          </Form.Item>
-
-          <Form.Item label="Event Date">
-            <Space>
-              <Form.Item
-                name="endDate"
-                noStyle
-                rules={[
-                  { 
-                    required: !isTbdDate, 
-                    message: "Please select the event date or mark as TBD!" 
-                  }
-                ]}
-              >
-                <DatePicker 
-                  style={{ width: "200px" }} 
-                  disabled={isTbdDate}
-                />
-              </Form.Item>
-              <Form.Item noStyle>
-                <Checkbox
-                  checked={isTbdDate}
-                  onChange={(e) => {
-                    setIsTbdDate(e.target.checked);
-                    if (e.target.checked) {
-                      form.setFieldValue('endDate', null);
+                  type="primary"
+                  onClick={() => {
+                    if (inputTag && !tags.includes(inputTag)) {
+                      setTags([...tags, inputTag]);
+                      setInputTag("");
                     }
                   }}
                 >
-                  TBD
-                </Checkbox>
-              </Form.Item>
-            </Space>
-          </Form.Item>
+                  Add Tag
+                </Button>
+              </Space>
+              <div style={{ marginTop: 8 }}>
+                {tags.map((tag, index) => (
+                  <span
+                    key={index}
+                    style={{
+                      background: "#f0f0f0",
+                      padding: "4px 8px",
+                      borderRadius: "4px",
+                      margin: "0 8px 8px 0",
+                      display: "inline-block",
+                    }}
+                  >
+                    {tag}
+                    <DeleteOutlined
+                      onClick={() =>
+                        setTags(tags.filter((_, i) => i !== index))
+                      }
+                      style={{ marginLeft: 8, cursor: "pointer" }}
+                    />
+                  </span>
+                ))}
+              </div>
+            </Form.Item>
 
-          <Form.Item>
-            <Button type="primary" htmlType="submit" loading={loading} block>
-              {isEditMode ? "Update Event" : "Add Event"}
-            </Button>
-          </Form.Item>
-        </Form>
-      </Modal>
+            <Form.Item label="Buttons">
+              {buttons.map((button, index) => (
+                <div
+                  key={index}
+                  style={{ marginBottom: 16, display: "flex", gap: 8 }}
+                >
+                  <Input
+                    placeholder="Button Text"
+                    value={button.text}
+                    onChange={(e) =>
+                      handleButtonChange(index, "text", e.target.value)
+                    }
+                    style={{ width: "30%" }}
+                  />
+                  <Input
+                    placeholder="Button Link"
+                    value={button.link}
+                    onChange={(e) =>
+                      handleButtonChange(index, "link", e.target.value)
+                    }
+                    style={{ width: "50%" }}
+                  />
+                  <Button
+                    type="text"
+                    danger
+                    icon={<DeleteOutlined />}
+                    onClick={() => handleRemoveButton(index)}
+                    disabled={buttons.length === 1}
+                  />
+                </div>
+              ))}
+              <Button
+                type="dashed"
+                onClick={handleAddButton}
+                block
+                icon={<PlusOutlined />}
+              >
+                Add Button
+              </Button>
+            </Form.Item>
 
-      {/* Admin Buttons */}
-      <FloatButton.Group trigger="hover" style={{ right: 24, bottom: 24 }}>
-        {isAdmin ? (
-          <>
-            <FloatButton
-              icon={<PlusOutlined />}
-              tooltip="Add Event"
-              onClick={handleAddEventClick}
-            />
+            <Form.Item label="Event Date">
+              <Space>
+                <Form.Item
+                  name="endDate"
+                  noStyle
+                  rules={[
+                    {
+                      required: !isTbdDate,
+                      message: "Please select the event date or mark as TBD!",
+                    },
+                  ]}
+                >
+                  <DatePicker style={{ width: "200px" }} disabled={isTbdDate} />
+                </Form.Item>
+                <Form.Item noStyle>
+                  <Checkbox
+                    checked={isTbdDate}
+                    onChange={(e) => {
+                      setIsTbdDate(e.target.checked);
+                      if (e.target.checked) {
+                        form.setFieldValue("endDate", null);
+                      }
+                    }}
+                  >
+                    TBD
+                  </Checkbox>
+                </Form.Item>
+              </Space>
+            </Form.Item>
+
+            <Form.Item>
+              <Button type="primary" htmlType="submit" loading={loading} block>
+                {isEditMode ? "Update Event" : "Add Event"}
+              </Button>
+            </Form.Item>
+          </Form>
+        </Modal>
+
+        {/* Admin Buttons */}
+        <FloatButton.Group trigger="hover" style={{ right: 24, bottom: 24 }}>
+          {isAdmin ? (
+            <>
+              <FloatButton
+                icon={<PlusOutlined />}
+                tooltip="Add Event"
+                onClick={handleAddEventClick}
+              />
+              <FloatButton
+                icon={<LockOutlined />}
+                tooltip="Sign Out"
+                onClick={handleSignOut}
+                type="primary"
+              />
+            </>
+          ) : (
             <FloatButton
               icon={<LockOutlined />}
-              tooltip="Sign Out"
-              onClick={handleSignOut}
-              type="primary"
+              tooltip="Admin Login"
+              onClick={() => setIsPasswordModalVisible(true)}
             />
-          </>
-        ) : (
-          <FloatButton
-            icon={<LockOutlined />}
-            tooltip="Admin Login"
-            onClick={() => setIsPasswordModalVisible(true)}
-          />
-        )}
-      </FloatButton.Group>
-    </div>
+          )}
+        </FloatButton.Group>
+      </div>
+    </>
   );
 }
 

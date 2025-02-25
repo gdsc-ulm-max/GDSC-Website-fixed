@@ -8,11 +8,12 @@ import {
 import "./About.css";
 import { timelineData } from "./data/timelineData";
 import Animation from "./HomePage/Animation";
+import SEO from "./components/SEO";
 
 const { Title, Paragraph } = Typography;
 const { TabPane } = Tabs;
 
-function About() {
+const About = ({ seo }) => {
   const [selectedYear, setSelectedYear] = useState("2023-2024");
 
   const renderMemberCard = (member) => (
@@ -48,64 +49,67 @@ function About() {
   );
 
   return (
-    <div className="about-page">
-      <div className="about-content">
-        {/* Mission Section */}
-        <section className="mission-section">
-          <Title level={1}>About GDSC ULM</Title>
-          <Paragraph className="mission-text">
-            Google Developer Student Clubs at the University of Louisiana Monroe
-            is a community of students passionate about technology and
-            development. We are part of Google's global program designed to help
-            students bridge the gap between theory and practice.
-          </Paragraph>
-        </section>
+    <>
+      <SEO seo={seo} />
+      <div className="about-page">
+        <div className="about-content">
+          {/* Mission Section */}
+          <section className="mission-section">
+            <Title level={1}>About GDSC ULM</Title>
+            <Paragraph className="mission-text">
+              Google Developer Student Clubs at the University of Louisiana
+              Monroe is a community of students passionate about technology and
+              development. We are part of Google's global program designed to
+              help students bridge the gap between theory and practice.
+            </Paragraph>
+          </section>
 
-        {/* Legacy Section */}
-        <section className="legacy-section">
-          <Title level={2} className="legacy-title">
-            Our Legacy
-          </Title>
-          <div className="legacy-timeline">
-            <Tabs
-              activeKey={selectedYear}
-              onChange={setSelectedYear}
-              centered
-              className="year-tabs"
-              tabBarGutter={40}
-            >
-              {timelineData.map(({ year, members, achievements }) => (
-                <TabPane
-                  tab={<span className="year-tab">{year}</span>}
-                  key={year}
-                >
-                  <div className="year-content">
-                    <div className="leadership-team">
-                      <Title level={4}>Leadership Team</Title>
-                      <Row gutter={[24, 24]}>
-                        {members.map((member, idx) => (
-                          <Col
-                            xs={24}
-                            sm={12}
-                            md={8}
-                            lg={6}
-                            key={idx}
-                            className="member-col"
-                          >
-                            {renderMemberCard(member)}
-                          </Col>
-                        ))}
-                      </Row>
+          {/* Legacy Section */}
+          <section className="legacy-section">
+            <Title level={2} className="legacy-title">
+              Our Legacy
+            </Title>
+            <div className="legacy-timeline">
+              <Tabs
+                activeKey={selectedYear}
+                onChange={setSelectedYear}
+                centered
+                className="year-tabs"
+                tabBarGutter={40}
+              >
+                {timelineData.map(({ year, members, achievements }) => (
+                  <TabPane
+                    tab={<span className="year-tab">{year}</span>}
+                    key={year}
+                  >
+                    <div className="year-content">
+                      <div className="leadership-team">
+                        <Title level={4}>Leadership Team</Title>
+                        <Row gutter={[24, 24]}>
+                          {members.map((member, idx) => (
+                            <Col
+                              xs={24}
+                              sm={12}
+                              md={8}
+                              lg={6}
+                              key={idx}
+                              className="member-col"
+                            >
+                              {renderMemberCard(member)}
+                            </Col>
+                          ))}
+                        </Row>
+                      </div>
                     </div>
-                  </div>
-                </TabPane>
-              ))}
-            </Tabs>
-          </div>
-        </section>
+                  </TabPane>
+                ))}
+              </Tabs>
+            </div>
+          </section>
+        </div>
       </div>
-    </div>
+    </>
   );
-}
+};
 
 export default About;

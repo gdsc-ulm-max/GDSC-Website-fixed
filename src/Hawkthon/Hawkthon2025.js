@@ -1,5 +1,6 @@
 import React from "react";
-import hawkathonLogo from "../assets/hawkathon.jpeg"; // Add this import
+import { Helmet } from "react-helmet-async";
+import hawkathonLogo from "../assets/hawkathon.jpeg";
 import "./Hawkthon2025.css";
 
 const hawkathonData = {
@@ -60,11 +61,26 @@ const hawkathonData = {
     findTeam: "https://gdsc-ulm.github.io/Pair_request_form/",
     sponsor: "https://forms.gle/sponsor",
   },
+  registration: {
+    fee: "$10 per team",
+    teamSize: "2-4 members",
+    deadline: "March 26, 2025",
+    selection: "First-come, first-served (limited slots)",
+    eligibility:
+      "Each team must include at least one freshman or sophomore member",
+  },
 };
 
-function Hawkthon() {
+function Hawkthon({ seo }) {
   return (
     <div className="hawkathon-page">
+      <Helmet>
+        <title>{seo.title}</title>
+        <meta name="description" content={seo.description} />
+        <meta property="og:title" content={seo.title} />
+        <meta property="og:description" content={seo.description} />
+      </Helmet>
+
       {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-content">
@@ -102,7 +118,7 @@ function Hawkthon() {
             <div className="details">
               <span className="team">
                 <span className="material-icons">groups</span>
-                Teams of 1-4
+                Teams of 2-4
               </span>
               <span className="dot">•</span>
               <span className="fee">
@@ -124,6 +140,57 @@ function Hawkthon() {
               >
                 <span className="material-icons">group_add</span>
                 Find Team
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Add Registration Info Section */}
+      <section className="registration-info">
+        <div className="container">
+          <h2>Registration Information</h2>
+          <div className="info-grid">
+            <div className="info-card">
+              <span className="material-icons">paid</span>
+              <h3>Team Fee</h3>
+              <p>{hawkathonData.registration.fee}</p>
+              <small>(non-refundable)</small>
+            </div>
+            <div className="info-card">
+              <span className="material-icons">groups</span>
+              <h3>Team Size</h3>
+              <p>{hawkathonData.registration.teamSize}</p>
+            </div>
+            <div className="info-card">
+              <span className="material-icons">event</span>
+              <h3>Deadline</h3>
+              <p>{hawkathonData.registration.deadline}</p>
+            </div>
+            <div className="info-card">
+              <span className="material-icons">how_to_reg</span>
+              <h3>Selection</h3>
+              <p>{hawkathonData.registration.selection}</p>
+            </div>
+          </div>
+
+          <div className="important-notice">
+            <h3>
+              <span className="material-icons">priority_high</span>
+              Important Information
+            </h3>
+            <p>
+              <strong>Eligibility Requirement:</strong>{" "}
+              {hawkathonData.registration.eligibility}
+            </p>
+            <div className="team-finding">
+              <p>
+                <strong>Looking for teammates?</strong> If you don't have a full
+                team yet,
+              </p>
+              <a href={hawkathonData.links.findTeam} className="find-team-link">
+                <span className="material-icons">group_add</span>
+                Find teammates here
               </a>
             </div>
           </div>
