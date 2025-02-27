@@ -7,7 +7,7 @@ const hawkathonData = {
   edition: "2nd Annual",
   year: "2025",
   theme: {
-    title: "Theme: Build with AI",
+    title: "Theme:",
     subtitle: "Build with AI",
     description: "Join us in leveraging AI to create solutions that matter",
   },
