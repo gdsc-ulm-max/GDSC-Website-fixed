@@ -172,7 +172,7 @@ const HawkthonAnnouncement = ({ seo }) => {
           <ul>
             <li>
               <strong>Team Size</strong>
-              1-4 members per team
+              2-4 members per team
             </li>
             <li>
               <strong>Project Requirements</strong>
@@ -192,6 +192,14 @@ const HawkthonAnnouncement = ({ seo }) => {
             </li>
           </ul>
         </section>
+
+        <div className="highlights">
+          <div className="highlight-item">
+            <span className="material-icons">emoji_events</span>
+            <h3>$1,500 Prize Pool</h3>
+            <p>Win amazing cash prizes and rewards!</p>
+          </div>
+        </div>
       </div>
     </>
   );

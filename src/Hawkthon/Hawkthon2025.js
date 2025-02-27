@@ -118,12 +118,17 @@ function Hawkthon({ seo }) {
             <div className="details">
               <span className="team">
                 <span className="material-icons">groups</span>
-                Teams of 2-4
+                {hawkathonData.registration.teamSize}
               </span>
               <span className="dot">•</span>
               <span className="fee">
                 <span className="material-icons">paid</span>
                 {hawkathonData.status.fee}
+              </span>
+              <span className="dot">•</span>
+              <span className="prize">
+                <span className="material-icons">emoji_events</span>
+                $1,500 Prize Pool
               </span>
             </div>
             <div className="cta-buttons">
@@ -171,6 +176,12 @@ function Hawkthon({ seo }) {
               <span className="material-icons">how_to_reg</span>
               <h3>Selection</h3>
               <p>{hawkathonData.registration.selection}</p>
+            </div>
+            <div className="info-card">
+              <span className="material-icons">emoji_events</span>
+              <h3>Prize Pool</h3>
+              <p>$1,500</p>
+              <small>(Cash + Prizes)</small>
             </div>
           </div>
 
