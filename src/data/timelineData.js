@@ -8,6 +8,7 @@ import dineshPic from "../assets/teams/dinesh.png";
 import abhishekPic from "../assets/teams/abhishek.jpeg";
 import lochanpic from "../assets/teams/lochan.png";
 import barnettpic from "../assets/teams/barnett.jpg";
+import georgePic from "../assets/teams/george.png"; 
 
 export const timelineData = [
   {
@@ -28,6 +29,7 @@ export const timelineData = [
       {
         name: "George Khawas",
         role: "Internal Vice President",
+        image: georgePic,
         linkedin: "",
       },
       {
