@@ -9,6 +9,7 @@ import abhishekPic from "../assets/teams/abhishek.jpeg";
 import lochanpic from "../assets/teams/lochan.png";
 import barnettpic from "../assets/teams/barnett.jpg";
 import georgePic from "../assets/teams/george.png"; 
+import srijanPic from "../assets/teams/srijan.jpg";
 
 export const timelineData = [
   {
@@ -71,6 +72,7 @@ export const timelineData = [
       {
         name: "Srijan Dahal",
         role: "Freshman Representative",
+        image: srijanPic,
         linkedin: "",
       },
       {

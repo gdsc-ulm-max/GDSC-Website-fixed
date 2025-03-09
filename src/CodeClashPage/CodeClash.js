@@ -85,16 +85,21 @@ const CodeClash = ({ seo }) => {
       key: "hackerrankId",
     },
     {
-      title: "Score",
-      dataIndex: "score",
-      key: "score",
-      sorter: (a, b) => a.score - b.score,
+      title: "Total Score",
+      dataIndex: "totalScore",
+      key: "totalScore",
+      sorter: (a, b) => a.totalScore - b.totalScore,
       defaultSortOrder: "descend",
     },
     {
-      title: "TimeStamp",
-      dataIndex: "timestamp",
-      key: "timestamp",
+      title: "Session-I",
+      dataIndex: "sessionOne",
+      key: "sessionOne",
+    },
+    {
+      title: "Session-II",
+      dataIndex: "sessionTwo",
+      key: "sessionTwo",
     },
   ];
 
@@ -210,8 +215,9 @@ const CodeClash = ({ seo }) => {
               sn: parseInt(row["S.N."]),
               name: row["Name of Participant"],
               hackerrankId: row["Hackerrank User ID"],
-              score: parseFloat(row["Score"]) || 0,
-              timestamp: row["TimeStamp"] || "",
+              totalScore: parseFloat(row["Total Score"]) || 0,
+              sessionOne: row["Session-I"] || "0",
+              sessionTwo: row["Session-II"] || "0",
             }));
           resolve(processedData);
         },
@@ -428,8 +434,7 @@ const CodeClash = ({ seo }) => {
             </p>
             <p className="ant-upload-text">Click or drag CSV file to upload</p>
             <p className="ant-upload-hint">
-              The CSV should contain columns: S.N., Name of Participant,
-              Hackerrank User ID, Score, TimeStamp
+              The CSV should contain columns: S.N., Name of Participant, Hackerrank User ID, Total Score, Session-I, Session-II
             </p>
           </Dragger>
         </Modal>
