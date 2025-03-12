@@ -18,6 +18,11 @@ const hawkathonData = {
         start: "February 26, 2025",
         end: "March 26, 2025",
       },
+      event: {
+        start: "April 11, 2025",
+        end: "April 13, 2025",
+        description: "11th - Theme Reveal + Coding; 12th - Coding; 13th - Presentation"
+      }
     },
     fee: "$10 per team",
   },
@@ -102,6 +107,10 @@ function Hawkthon({ seo }) {
             </h1>
             <p className="theme">{hawkathonData.theme.title}</p>
             <p className="subtitle">{hawkathonData.theme.subtitle}</p>
+            <p className="event-dates">
+              <span className="material-icons">event</span>
+              April 11th - April 13th
+            </p>
           </div>
 
           <div className="registration-card">
@@ -111,7 +120,7 @@ function Hawkthon({ seo }) {
               Registration Open
             </div>
             <div className="dates">
-              <span className="material-icons">calendar_today</span>
+              
               {hawkathonData.status.dates.registration.start} -{" "}
               {hawkathonData.status.dates.registration.end}
             </div>
@@ -119,11 +128,19 @@ function Hawkthon({ seo }) {
               <span className="team">
                 <span className="material-icons">groups</span>
                 {hawkathonData.registration.teamSize}
+                <br />
+                <small style={{ fontSize: '0.8rem', display: 'block', marginTop: '4px' }}>
+                  (One Sophomore or Freshman per team)
+                </small>
               </span>
               <span className="dot">•</span>
               <span className="fee">
                 <span className="material-icons">paid</span>
                 {hawkathonData.status.fee}
+                <br />
+                <small style={{ fontSize: '0.8rem', display: 'block', marginTop: '4px' }}>
+                  (Must be paid within 3 days of signup)
+                </small>
               </span>
               <span className="dot">•</span>
               <span className="prize">
@@ -151,7 +168,34 @@ function Hawkthon({ seo }) {
         </div>
       </section>
 
-      {/* Add Registration Info Section */}
+      {/* Event Schedule Section */}
+      <section className="event-dates-section">
+        <div className="container">
+          <h2>Event Schedule</h2>
+          <div className="schedule-grid">
+            <div className="schedule-card">
+              <span className="material-icons">event_available</span>
+              <h3>Day 1 - April 11</h3>
+              <p>Theme Reveal + Coding</p>
+              <small>10:00 AM - 3:00 PM</small>
+            </div>
+            <div className="schedule-card">
+              <span className="material-icons">code</span>
+              <h3>Day 2 - April 12</h3>
+              <p>Coding</p>
+              <small>10:00 AM - 3:00 PM</small>
+            </div>
+            <div className="schedule-card">
+              <span className="material-icons">slideshow</span>
+              <h3>Day 3 - April 13</h3>
+              <p>Project Presentations</p>
+              <small>10:00 AM - 3:00 PM</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Registration Info Section */}
       <section className="registration-info">
         <div className="container">
           <h2>Registration Information</h2>
@@ -160,12 +204,13 @@ function Hawkthon({ seo }) {
               <span className="material-icons">paid</span>
               <h3>Team Fee</h3>
               <p>{hawkathonData.registration.fee}</p>
-              <small>(non-refundable)</small>
+              <small>(non-refundable, must be paid within 3 days of signing up to confirm participation)</small>
             </div>
             <div className="info-card">
               <span className="material-icons">groups</span>
               <h3>Team Size</h3>
               <p>{hawkathonData.registration.teamSize}</p>
+              <small>(One Sophomore or Freshman per team)</small>
             </div>
             <div className="info-card">
               <span className="material-icons">event</span>
@@ -181,7 +226,12 @@ function Hawkthon({ seo }) {
               <span className="material-icons">emoji_events</span>
               <h3>Prize Pool</h3>
               <p>$1,500</p>
-              <small>(Cash + Prizes)</small>
+              <small>(Cash + Prizes, with potential for even more as additional sponsorships are secured!)</small>
+            </div>
+            <div className="info-card">
+              <span className="material-icons">restaurant</span>
+              <h3>Food</h3>
+              <p>Food will be present at the venue</p>
             </div>
           </div>
 

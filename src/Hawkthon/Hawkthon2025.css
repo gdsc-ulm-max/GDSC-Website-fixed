@@ -197,6 +197,84 @@
   font-weight: 600;
   margin: 1rem 0;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.event-description {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
+/* Event Dates Section */
+.event-dates-section {
+  padding: 4rem 2rem;
+  background: var(--bg-primary);
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+}
+
+.event-dates-section .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.event-dates-section h2 {
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--text-primary);
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+.schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin: 0 auto;
+  max-width: 1000px;
+}
+
+.schedule-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.schedule-card:hover {
+  transform: translateY(-5px);
+}
+
+.schedule-card .material-icons {
+  font-size: 2.5rem;
+  color: var(--google-blue);
+  margin-bottom: 1rem;
+}
+
+.schedule-card h3 {
+  color: var(--text-primary);
+  margin: 1rem 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.schedule-card p {
+  color: var(--text-secondary);
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.schedule-card small {
+  display: block;
+  color: var(--google-blue);
+  margin-top: 0.5rem;
+  font-weight: 500;
 }
 
 .details {
@@ -411,6 +489,19 @@
     flex-direction: column;
     align-items: flex-start;
   }
+
+  .event-dates-section {
+    padding: 2rem 1rem;
+  }
+
+  .schedule-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .schedule-card {
+    padding: 1.5rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -462,5 +553,34 @@
     min-height: 90vh;
     padding: 1rem;
     gap: 1.5rem;
+  }
+}
+
+.event-dates {
+  font-size: 1.3rem;
+  color: var(--text-secondary);
+  margin: 1.5rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(66, 133, 244, 0.1);
+  border-radius: 30px;
+  width: fit-content;
+  text-align: center;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.event-dates .material-icons {
+  color: var(--google-blue);
+}
+
+@media (max-width: 768px) {
+  .event-dates {
+    font-size: 1.1rem;
+    padding: 0.4rem 0.8rem;
   }
 }

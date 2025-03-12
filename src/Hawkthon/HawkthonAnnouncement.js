@@ -30,16 +30,17 @@ const HawkthonAnnouncement = ({ seo }) => {
             <dd>Hawkthon 2024</dd>
 
             <dt>Date</dt>
-            <dd>April 11 – April 12, 2024</dd>
+            <dd>April 11 – April 13, 2024</dd>
 
             <dt>Time</dt>
-            <dd>10:00 AM – 3:00 PM (both days)</dd>
+            <dd>10:00 AM – 3:00 PM (all days)</dd>
 
             <dt>Venues</dt>
             <dd>
               <ul className="venue-list">
-                <li>Day 1: Hemphill Hall - Kickoff and Workshops</li>
-                <li>Day 2: The Hangar Hall - Project Presentations</li>
+                <li>Day 1: Hemphill Hall - Theme Reveal + Coding</li>
+                <li>Day 2: Hemphill Hall - Coding</li>
+                <li>Day 3: The Hangar Hall - Project Presentations</li>
               </ul>
             </dd>
 
@@ -88,7 +89,7 @@ const HawkthonAnnouncement = ({ seo }) => {
 
         <section className="content-section">
           <h2>Event Schedule</h2>
-          <h3>Day 1: Learning & Development</h3>
+          <h3>Day 1: Theme Reveal & Coding</h3>
           <ul className="schedule-list">
             <li>
               <strong>10:00 AM</strong>
@@ -96,7 +97,7 @@ const HawkthonAnnouncement = ({ seo }) => {
             </li>
             <li>
               <strong>10:30 AM</strong>
-              Opening Ceremony & Theme Announcement
+              Opening Ceremony & Theme Reveal
             </li>
             <li>
               <strong>11:00 AM</strong>
@@ -116,7 +117,7 @@ const HawkthonAnnouncement = ({ seo }) => {
             </li>
           </ul>
 
-          <h3>Day 2: Project Completion & Showcase</h3>
+          <h3>Day 2: Project Development</h3>
           <ul className="schedule-list">
             <li>
               <strong>10:00 AM</strong>
@@ -128,10 +129,30 @@ const HawkthonAnnouncement = ({ seo }) => {
             </li>
             <li>
               <strong>1:00 PM</strong>
-              Project Submissions
+              Mentorship Sessions
             </li>
             <li>
-              <strong>1:30 PM</strong>
+              <strong>3:00 PM</strong>
+              Day 2 Wrap-up
+            </li>
+          </ul>
+
+          <h3>Day 3: Presentations & Awards</h3>
+          <ul className="schedule-list">
+            <li>
+              <strong>10:00 AM</strong>
+              Final Development & Preparation
+            </li>
+            <li>
+              <strong>11:30 AM</strong>
+              Project Submissions Due
+            </li>
+            <li>
+              <strong>12:00 PM</strong>
+              Lunch Break
+            </li>
+            <li>
+              <strong>1:00 PM</strong>
               Project Presentations
             </li>
             <li>
