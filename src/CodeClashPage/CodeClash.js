@@ -334,7 +334,7 @@ const CodeClash = ({ seo }) => {
                 className="neon-text"
                 style={{ textAlign: "center", marginBottom: "1rem" }}
               >
-                March 7
+                March 28
               </Title>
               <Title
                 level={3}
