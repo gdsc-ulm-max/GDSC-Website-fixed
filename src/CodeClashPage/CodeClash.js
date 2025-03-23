@@ -73,6 +73,14 @@ const CodeClash = ({ seo }) => {
       dataIndex: "sn",
       key: "sn",
       width: 80,
+      render: (sn) => (
+        <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          {sn === 1 && <span className="material-icons" style={{ color: '#FFD700' }}>emoji_events</span>}
+          {sn === 2 && <span className="material-icons" style={{ color: '#C0C0C0' }}>emoji_events</span>}
+          {sn === 3 && <span className="material-icons" style={{ color: '#CD7F32' }}>emoji_events</span>}
+          {sn}
+        </span>
+      ),
     },
     {
       title: "Name of Participant",
@@ -88,8 +96,6 @@ const CodeClash = ({ seo }) => {
       title: "Total Score",
       dataIndex: "totalScore",
       key: "totalScore",
-      sorter: (a, b) => a.totalScore - b.totalScore,
-      defaultSortOrder: "descend",
     },
     {
       title: "Session-I",
@@ -100,6 +106,11 @@ const CodeClash = ({ seo }) => {
       title: "Session-II",
       dataIndex: "sessionTwo",
       key: "sessionTwo",
+    },
+    {
+      title: "Session-III",
+      dataIndex: "sessionThree",
+      key: "sessionThree",
     },
   ];
 
@@ -113,12 +124,10 @@ const CodeClash = ({ seo }) => {
     try {
       setLoading(true);
 
-      // Check if Firebase is initialized properly
       if (!db) {
         throw new Error("Firebase DB is not initialized");
       }
 
-      // Add persistence for offline capabilities
       const leaderboardRef = doc(db, "codeclash", "leaderboard");
 
       try {
@@ -127,7 +136,6 @@ const CodeClash = ({ seo }) => {
           const data = leaderboardDoc.data().participants || [];
           setLeaderboardData(data);
         } else {
-          // Initialize the document if it doesn't exist
           await setDoc(leaderboardRef, {
             participants: [],
           });
@@ -135,14 +143,8 @@ const CodeClash = ({ seo }) => {
         }
       } catch (error) {
         console.error("Firebase error:", error);
-        if (
-          error.code === "failed-precondition" ||
-          error.message.includes("offline")
-        ) {
-          message.warning(
-            "You appear to be offline. Some data may not be available."
-          );
-          // Set empty data when offline
+        if (error.code === "failed-precondition" || error.message.includes("offline")) {
+          message.warning("You appear to be offline. Some data may not be available.");
           setLeaderboardData([]);
         } else {
           message.error("Failed to load leaderboard data");
@@ -210,7 +212,7 @@ const CodeClash = ({ seo }) => {
         header: true,
         complete: (results) => {
           const processedData = results.data
-            .filter((row) => row["S.N."] && row["Name of Participant"]) // Filter out empty rows
+            .filter((row) => row["S.N."] && row["Name of Participant"])
             .map((row) => ({
               sn: parseInt(row["S.N."]),
               name: row["Name of Participant"],
@@ -218,6 +220,7 @@ const CodeClash = ({ seo }) => {
               totalScore: parseFloat(row["Total Score"]) || 0,
               sessionOne: row["Session-I"] || "0",
               sessionTwo: row["Session-II"] || "0",
+              sessionThree: row["Session-III"] || "0",
             }));
           resolve(processedData);
         },
@@ -434,7 +437,7 @@ const CodeClash = ({ seo }) => {
             </p>
             <p className="ant-upload-text">Click or drag CSV file to upload</p>
             <p className="ant-upload-hint">
-              The CSV should contain columns: S.N., Name of Participant, Hackerrank User ID, Total Score, Session-I, Session-II
+              The CSV should contain columns: Name of Participant, Hackerrank User ID, Total Score, Session-I, Session-II, Session-III
             </p>
           </Dragger>
         </Modal>
