@@ -16,6 +16,7 @@ import TechXpo from "./TechXpo/TechXpo";
 import CodeClash from "./CodeClashPage/CodeClash";
 import Gallery from "./GalleryPage/Gallery";
 import AnnouncementBar from "./components/AnnouncementBar";
+import Hawkathon from "./HawkathonPage/Hawkathon";
 
 // Add SEO configuration object
 const seoConfig = {
@@ -105,6 +106,10 @@ function App() {
               <Route
                 path="/gallery"
                 element={<Gallery seo={seoConfig.gallery} />}
+              />
+              <Route
+                path="/hawkathon"
+                element={<Hawkathon seo={seoConfig.hawkathon} />}
               />
             </Routes>
           </main>

@@ -1,0 +1,399 @@
+.hawkathon-container {
+  padding: 2rem;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hawkathon-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 400px;
+  background: linear-gradient(45deg, #4285f4, #0f9d58);
+  transform: skewY(-5deg);
+  transform-origin: top left;
+  z-index: 0;
+}
+
+.hawkathon-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.main-title {
+  text-align: center;
+  color: white !important;
+  margin-bottom: 3rem !important;
+  font-size: 3.5rem !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.main-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(to right, #4285f4, #0f9d58, #f4b400, #db4437);
+  border-radius: 2px;
+}
+
+.date-card,
+.schedule-card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.date-card:hover,
+.schedule-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.date-card::before,
+.schedule-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(to right, #4285f4, #0f9d58);
+}
+
+.date-card h3,
+.schedule-card h3 {
+  color: #202124;
+  font-size: 1.8rem !important;
+  margin-bottom: 1.5rem !important;
+  position: relative;
+  display: inline-block;
+}
+
+.date-text,
+.schedule-text {
+  font-size: 2rem;
+  background: linear-gradient(45deg, #4285f4, #0f9d58);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: bold;
+  display: block;
+  margin-top: 1rem;
+  position: relative;
+  padding: 1rem 0;
+}
+
+.date-text::before,
+.schedule-text::before {
+  content: '';
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: #f4b400;
+  opacity: 0.1;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+.rules-card,
+.faq-card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+}
+
+.rules-card h4 {
+  color: #4285f4;
+  margin-top: 2rem;
+  font-size: 1.4rem !important;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 0.5rem;
+}
+
+.rules-card ul {
+  margin-left: 1.5rem;
+}
+
+.rules-card li {
+  margin-bottom: 0.8rem;
+  line-height: 1.6;
+}
+
+.faq-card .ant-collapse {
+  background: transparent;
+  border: none;
+}
+
+.faq-card .ant-collapse-item {
+  margin-bottom: 1rem;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
+.faq-card .ant-collapse-header {
+  font-weight: 500;
+  padding: 1rem !important;
+}
+
+.faq-card .ant-collapse-content {
+  border-top: 1px solid #e8e8e8;
+}
+
+.faq-card .ant-collapse-content-box {
+  padding: 1rem !important;
+}
+
+.header-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.logo-container {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  background: white;
+  padding: 10px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.hawkathon-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.logo-container:hover .hawkathon-logo {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .hawkathon-container {
+    padding: 1rem;
+  }
+
+  .main-title {
+    font-size: 2.5rem !important;
+  }
+
+  .date-text,
+  .schedule-text {
+    font-size: 1.5rem;
+  }
+
+  .date-card h3,
+  .schedule-card h3 {
+    font-size: 1.5rem !important;
+  }
+
+  .rules-card,
+  .faq-card {
+    padding: 1.5rem;
+  }
+
+  .hawkathon-container::before {
+    height: 200px;
+  }
+}
+
+/* About Card Styles */
+.about-card {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.about-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+/* Prize Pool Styles */
+.prize-pool-card {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.prize-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.prize-item {
+  text-align: center;
+  padding: 2rem;
+  border-radius: 16px;
+  transition: transform 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.prize-item:hover {
+  transform: translateY(-5px);
+}
+
+.prize-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, var(--google-blue), var(--google-green));
+}
+
+.first-prize {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05));
+}
+
+.second-prize {
+  background: linear-gradient(135deg, rgba(192, 192, 192, 0.1), rgba(192, 192, 192, 0.05));
+}
+
+.third-prize {
+  background: linear-gradient(135deg, rgba(205, 127, 50, 0.1), rgba(205, 127, 50, 0.05));
+}
+
+.prize-icon {
+  font-size: 3rem !important;
+  margin-bottom: 1rem;
+}
+
+.first-prize .prize-icon {
+  color: #FFD700;
+}
+
+.second-prize .prize-icon {
+  color: #C0C0C0;
+}
+
+.third-prize .prize-icon {
+  color: #CD7F32;
+}
+
+.prize-amount {
+  font-size: 2.5rem;
+  font-weight: bold;
+  background: linear-gradient(45deg, var(--google-blue), var(--google-green));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: block;
+  margin: 1rem 0;
+}
+
+.prize-extras {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  display: block;
+}
+
+.bonus-prizes {
+  margin-top: 3rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(66, 133, 244, 0.05), rgba(15, 157, 88, 0.05));
+  border-radius: 16px;
+}
+
+.bonus-prizes h4 {
+  color: var(--google-blue);
+  margin-bottom: 1rem;
+}
+
+.bonus-prizes ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+}
+
+.bonus-prizes li {
+  padding: 0.8rem 1.2rem;
+  background: white;
+  border-radius: 8px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 768px) {
+  .prize-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .prize-item {
+    padding: 1.5rem;
+  }
+
+  .bonus-prizes {
+    padding: 1.5rem;
+  }
+
+  .bonus-prizes ul {
+    grid-template-columns: 1fr;
+  }
+
+  .prize-amount {
+    font-size: 2rem;
+  }
+} 
