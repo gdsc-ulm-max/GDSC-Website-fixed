@@ -8,11 +8,11 @@ function AnnouncementBar() {
       <div className="announcement-bar">
         <div className="announcement-content">
           <span className="announcement-text">
-            🚀 Hawkathon 2025 Registration Open
+            🚀 Next Up! Hawkathon 2025
           </span>
-          <span className="announcement-date">Feb 26 - March 26</span>
-          <Link to="/events/hawkathon-2025" className="announcement-link">
-            Register Now →
+          <span className="announcement-date">April 11 - April 13</span>
+          <Link to="/hawkathon" className="announcement-link">
+            Learn More →
           </Link>
         </div>
       </div>
