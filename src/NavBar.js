@@ -36,6 +36,7 @@ function NavBar() {
         <Link to="/gallery" onClick={closeMenu}>Gallery</Link>
         <Link to="/code-clash" onClick={closeMenu}>CodeClash</Link>
         <Link to="/hawkathon" onClick={closeMenu}>Hawkathon</Link>
+        <Link to="/forms" onClick={closeMenu}>Forms</Link>
         <Link to="/join" onClick={closeMenu}>Join</Link>
         <Link to="/about" onClick={closeMenu}>About</Link>
       </div>

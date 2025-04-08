@@ -1,0 +1,128 @@
+.forms-page {
+  padding: 2rem;
+  min-height: 100vh;
+  background: transparent;
+}
+
+.page-title {
+  text-align: center;
+  color: #4285f4;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  font-weight: 600;
+  position: relative;
+}
+
+.page-title::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(to right, #4285f4, #0f9d58, #f4b400, #db4437);
+  border-radius: 2px;
+}
+
+.forms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.form-card {
+  position: relative;
+  border-radius: 12px;
+  border-width: 2px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.form-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.admin-buttons {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.form-card:hover .admin-buttons {
+  opacity: 1;
+}
+
+.form-link {
+  display: inline-block;
+  padding: 8px 16px;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-top: 1rem;
+  transition: opacity 0.3s ease;
+}
+
+.form-link:hover {
+  opacity: 0.9;
+  color: white;
+}
+
+.add-form-button {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+}
+
+.admin-login-button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+}
+
+.form-input-group {
+  margin-bottom: 1rem;
+}
+
+.color-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.color-preview {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+@media (max-width: 768px) {
+  .forms-page {
+    padding: 1rem;
+  }
+
+  .forms-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-title {
+    font-size: 2rem;
+  }
+
+  .admin-buttons {
+    opacity: 1;
+  }
+} 

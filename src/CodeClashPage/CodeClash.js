@@ -112,6 +112,11 @@ const CodeClash = ({ seo }) => {
       dataIndex: "sessionThree",
       key: "sessionThree",
     },
+    {
+      title: "Session-IV",
+      dataIndex: "sessionFour",
+      key: "sessionFour",
+    },
   ];
 
   // Fetch leaderboard data on component mount
@@ -221,6 +226,7 @@ const CodeClash = ({ seo }) => {
               sessionOne: row["Session-I"] || "0",
               sessionTwo: row["Session-II"] || "0",
               sessionThree: row["Session-III"] || "0",
+              sessionFour: row["Session-IV"] || "0",
             }));
           resolve(processedData);
         },
@@ -437,7 +443,7 @@ const CodeClash = ({ seo }) => {
             </p>
             <p className="ant-upload-text">Click or drag CSV file to upload</p>
             <p className="ant-upload-hint">
-              The CSV should contain columns: Name of Participant, Hackerrank User ID, Total Score, Session-I, Session-II, Session-III
+              The CSV should contain columns: Name of Participant, Hackerrank User ID, Total Score, Session-I, Session-II, Session-III, Session-IV
             </p>
           </Dragger>
         </Modal>

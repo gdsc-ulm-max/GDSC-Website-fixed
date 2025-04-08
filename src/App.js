@@ -17,6 +17,7 @@ import CodeClash from "./CodeClashPage/CodeClash";
 import Gallery from "./GalleryPage/Gallery";
 import AnnouncementBar from "./components/AnnouncementBar";
 import Hawkathon from "./HawkathonPage/Hawkathon";
+import Forms from "./FormsPage/Forms";
 
 // Add SEO configuration object
 const seoConfig = {
@@ -59,6 +60,11 @@ const seoConfig = {
     title: "Gallery | GDSC ULM",
     description:
       "View photos and memories from our past events, workshops, and community activities.",
+  },
+  forms: {
+    title: "Forms | GDSC ULM",
+    description:
+      "Access all GDSC ULM forms and registrations in one convenient location.",
   },
 };
 
@@ -110,6 +116,10 @@ function App() {
               <Route
                 path="/hawkathon"
                 element={<Hawkathon seo={seoConfig.hawkathon} />}
+              />
+              <Route
+                path="/forms"
+                element={<Forms seo={seoConfig.forms} />}
               />
             </Routes>
           </main>
