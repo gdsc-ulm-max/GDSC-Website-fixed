@@ -340,7 +340,7 @@ const CodeClash = ({ seo }) => {
                 className="neon-text"
                 style={{ textAlign: "center", marginBottom: "1rem" }}
               >
-                March 28
+                Coming Soon!
               </Title>
               <Title
                 level={3}
@@ -350,7 +350,7 @@ const CodeClash = ({ seo }) => {
                   marginBottom: "0.5rem",
                 }}
               >
-                TBD
+                Time: TBD
               </Title>
               <Title
                 level={4}
@@ -360,17 +360,21 @@ const CodeClash = ({ seo }) => {
                   marginBottom: "2rem",
                 }}
               >
-                Hemphill Hall 203
+                Place: TBD
               </Title>
 
-              <div style={{ display: "flex", justifyContent: "center" }}>
+                {/**
+                 * <div style={{ display: "flex", justifyContent: "center" }}>
                 <Button size="large" className="neon-button">
                   Register Now
                 </Button>
               </div>
+                 */}
+              
             </motion.div>
           </div>
-
+          
+          {/* 
           <div className="leaderboard-container">
             <Title
               level={2}
@@ -394,6 +398,8 @@ const CodeClash = ({ seo }) => {
               />
             )}
           </div>
+          **/}
+          
 
           <Text
             style={{
