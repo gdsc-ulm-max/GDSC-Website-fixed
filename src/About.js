@@ -14,7 +14,7 @@ const { Title, Paragraph } = Typography;
 const { TabPane } = Tabs;
 
 const About = ({ seo }) => {
-  const [selectedYear, setSelectedYear] = useState("2023-2024");
+  const [selectedYear, setSelectedYear] = useState("2025-2026");
 
   const renderMemberCard = (member) => (
     <div className="legacy-member-card">
@@ -65,47 +65,42 @@ const About = ({ seo }) => {
           </section>
 
           {/* Legacy Section */}
-          <section className="legacy-section">
-            <Title level={2} className="legacy-title">
-              Our Legacy
-            </Title>
-            <div className="legacy-timeline">
-              <Tabs
-                activeKey={selectedYear}
-                onChange={setSelectedYear}
-                centered
-                className="year-tabs"
-                tabBarGutter={40}
-              >
-                {timelineData.map(({ year, members, achievements }) => (
-                  <TabPane
-                    tab={<span className="year-tab">{year}</span>}
-                    key={year}
-                  >
-                    <div className="year-content">
-                      <div className="leadership-team">
-                        <Title level={4}>Leadership Team</Title>
-                        <Row gutter={[24, 24]}>
-                          {members.map((member, idx) => (
-                            <Col
-                              xs={24}
-                              sm={12}
-                              md={8}
-                              lg={6}
-                              key={idx}
-                              className="member-col"
-                            >
-                              {renderMemberCard(member)}
-                            </Col>
-                          ))}
-                        </Row>
-                      </div>
+          <div className="legacy-timeline">
+            <Tabs
+              activeKey={selectedYear}
+              onChange={setSelectedYear}
+              centered
+              className="year-tabs"
+              tabBarGutter={40}
+            >
+              {timelineData.map(({ year, members, achievements }) => (
+                <TabPane
+                  tab={<span className="year-tab">{year}</span>}
+                  key={year}
+                >
+                  <div className="year-content">
+                    <div className="leadership-team">
+                      <Title level={4}>Leadership Team</Title>
+                      <Row gutter={[24, 24]}>
+                        {members.map((member, idx) => (
+                          <Col
+                            xs={24}
+                            sm={12}
+                            md={8}
+                            lg={6}
+                            key={idx}
+                            className="member-col"
+                          >
+                            {renderMemberCard(member)}
+                          </Col>
+                        ))}
+                      </Row>
                     </div>
-                  </TabPane>
-                ))}
-              </Tabs>
-            </div>
-          </section>
+                  </div>
+                </TabPane>
+              ))}
+            </Tabs>
+          </div>
         </div>
       </div>
     </>
