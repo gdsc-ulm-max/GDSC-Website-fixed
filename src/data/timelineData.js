@@ -10,6 +10,7 @@ import lochanpic from "../assets/teams/lochan.png";
 import barnettpic from "../assets/teams/barnett.jpg";
 import georgePic from "../assets/teams/george.png"; 
 import srijanPic from "../assets/teams/Srijan.jpg";
+import prasannaPic from "../assets/teams/prasanna.png";
 import defaultPic from "../assets/teams/defaultProfilePic.png";
 
 export const timelineData = [
@@ -49,7 +50,7 @@ export const timelineData = [
       {
         name: "Prasanna Jha",
         role: "Technical Lead",
-        image: defaultPic,
+        image: prasannaPic,
         linkedin: "https://www.linkedin.com/in/prasanna-kumar-jha-77b82230a/",
       },
       {
