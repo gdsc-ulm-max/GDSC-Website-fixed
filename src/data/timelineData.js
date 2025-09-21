@@ -10,6 +10,7 @@ import lochanpic from "../assets/teams/lochan.png";
 import barnettpic from "../assets/teams/barnett.jpg";
 import georgePic from "../assets/teams/george.png"; 
 import srijanPic from "../assets/teams/Srijan.jpg";
+import defaultPic from "../assets/teams/defaultProfilePic.png";
 
 export const timelineData = [
   {
@@ -24,50 +25,55 @@ export const timelineData = [
       {
         name: "Prasiddhi Luitel",
         role: "External Vice President",
-        image: abhishekPic,
+        image: defaultPic,
         linkedin: "https://www.linkedin.com/in/prasiddhix/",
       },
       {
         name: "Jeevan Parajuli",
         role: "Internal Vice President",
-        image: georgePic,
+        image: defaultPic,
         linkedin: "https://www.linkedin.com/in/jeevanparajuli856/",
       },
       {
         name: "Srijan Dahal",
         role: "Secretary",
+        image: srijanPic,
         linkedin: "https://www.linkedin.com/in/srijan-dahal-51961233a/",
       },
       {
         name: "Prajwol Ramatel",
         role: "Treasurer",
+        image: defaultPic,
         linkedin: "https://www.linkedin.com/in/prajwol-ramtel-00a6a9283/",
       },
       {
         name: "Prasanna Jha",
         role: "Technical Lead",
-        image: lochanpic,
+        image: defaultPic,
         linkedin: "https://www.linkedin.com/in/prasanna-kumar-jha-77b82230a/",
       },
       {
         name: "Anmol Subedi",
         role: "Graphic Design Lead",
+        image: defaultPic,
         linkedin: "",
       },
       {
         name: "Isaac Iyobebe",
         role: "Public Relations Officer",
+        image: defaultPic,
         linkedin: "https://www.linkedin.com/in/isaac-isidahome-iyobebe/",
       },
       {
         name: "Samayara Rijal",
         role: "Event Manager",
+        image: defaultPic,
         linkedin: "",
       },
       {
         name: "Prabin Pokharel",
         role: "Freshman Representative",
-        image: srijanPic,
+        image: defaultPic,
         linkedin: "",
       },
       {
