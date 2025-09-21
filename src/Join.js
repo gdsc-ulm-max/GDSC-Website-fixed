@@ -65,7 +65,7 @@ const Join = ({ seo }) => {
             <Button
               type="primary"
               size="large"
-              href="https://webservices.ulm.edu/webforms/form/gdsc-interest-form"
+              href="https://ulmapps.ulm.edu/webforms/form/gdsc-membership-form"
               target="_blank"
               className="join-button"
             >
