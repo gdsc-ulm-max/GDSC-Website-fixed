@@ -13,6 +13,72 @@ import srijanPic from "../assets/teams/Srijan.jpg";
 
 export const timelineData = [
   {
+    year: "2025-2026",
+    members: [
+      {
+        name: "Abhishek Amgain",
+        role: "President",
+        image: abhishekPic,
+        linkedin: "https://www.linkedin.com/in/abhishek-amgain-04b642265/",
+      },
+      {
+        name: "Prasiddhi Luitel",
+        role: "External Vice President",
+        image: abhishekPic,
+        linkedin: "https://www.linkedin.com/in/prasiddhix/",
+      },
+      {
+        name: "Jeevan Parajuli",
+        role: "Internal Vice President",
+        image: georgePic,
+        linkedin: "https://www.linkedin.com/in/jeevanparajuli856/",
+      },
+      {
+        name: "Srijan Dahal",
+        role: "Secretary",
+        linkedin: "https://www.linkedin.com/in/srijan-dahal-51961233a/",
+      },
+      {
+        name: "Prajwol Ramatel",
+        role: "Treasurer",
+        linkedin: "https://www.linkedin.com/in/prajwol-ramtel-00a6a9283/",
+      },
+      {
+        name: "Prasanna Jha",
+        role: "Technical Lead",
+        image: lochanpic,
+        linkedin: "https://www.linkedin.com/in/prasanna-kumar-jha-77b82230a/",
+      },
+      {
+        name: "Anmol Subedi",
+        role: "Graphic Design Lead",
+        linkedin: "",
+      },
+      {
+        name: "Isaac Iyobebe",
+        role: "Public Relations Officer",
+        linkedin: "https://www.linkedin.com/in/isaac-isidahome-iyobebe/",
+      },
+      {
+        name: "Samayara Rijal",
+        role: "Event Manager",
+        linkedin: "",
+      },
+      {
+        name: "Prabin Pokharel",
+        role: "Freshman Representative",
+        image: srijanPic,
+        linkedin: "",
+      },
+      {
+        name: "William Barnett",
+        role: "Faculty/Staff",
+        image: barnettpic,
+        linkedin: "",
+      },
+    ],
+  },
+  {
     year: "2023-2024",
     members: [
       {
