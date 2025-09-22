@@ -42,7 +42,7 @@ export const timelineData = [
         linkedin: "https://www.linkedin.com/in/srijan-dahal-51961233a/",
       },
       {
-        name: "Prajwol Ramatel",
+        name: "Prajwol Ramtel",
         role: "Treasurer",
         image: defaultPic,
         linkedin: "https://www.linkedin.com/in/prajwol-ramtel-00a6a9283/",
@@ -72,7 +72,7 @@ export const timelineData = [
         linkedin: "",
       },
       {
-        name: "Prabin Pokharel",
+        name: "Prabin Pokhrel",
         role: "Freshman Representative",
         image: defaultPic,
         linkedin: "",
