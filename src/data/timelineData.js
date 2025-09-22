@@ -15,6 +15,8 @@ import prasiddhiPic from "../assets/teams/prasiddhi.png";
 import isaacPic from "../assets/teams/isaac.png";
 import anmolPic from "../assets/teams/anmol.png";
 import prajwolPic from "../assets/teams/prajwol.png";
+import jeevanPic from "../assets/teams/jeevan.png";
+import prabinPic from "../assets/teams/prabin.png";
 import defaultPic from "../assets/teams/defaultProfilePic.png";
 
 export const timelineData = [
@@ -36,7 +38,7 @@ export const timelineData = [
       {
         name: "Jeevan Parajuli",
         role: "Internal Vice President",
-        image: defaultPic,
+        image: jeevanPic,
         linkedin: "https://www.linkedin.com/in/jeevanparajuli856/",
       },
       {
@@ -78,7 +80,7 @@ export const timelineData = [
       {
         name: "Prabin Pokhrel",
         role: "Freshman Representative",
-        image: defaultPic,
+        image: prabinPic,
         linkedin: "",
       },
       {
