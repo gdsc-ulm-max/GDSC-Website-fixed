@@ -11,6 +11,9 @@ import barnettpic from "../assets/teams/barnett.jpg";
 import georgePic from "../assets/teams/george.png"; 
 import srijanPic from "../assets/teams/Srijan.jpg";
 import prasannaPic from "../assets/teams/prasanna.png";
+import prasiddhiPic from "../assets/teams/prasiddhi.png";
+import isaacPic from "../assets/teams/isaac.png";
+import anmolPic from "../assets/teams/anmol.png";
 import defaultPic from "../assets/teams/defaultProfilePic.png";
 
 export const timelineData = [
@@ -26,7 +29,7 @@ export const timelineData = [
       {
         name: "Prasiddhi Luitel",
         role: "External Vice President",
-        image: defaultPic,
+        image: prasiddhiPic,
         linkedin: "https://www.linkedin.com/in/prasiddhix/",
       },
       {
@@ -56,13 +59,13 @@ export const timelineData = [
       {
         name: "Anmol Subedi",
         role: "Graphic Design Lead",
-        image: defaultPic,
+        image: anmolPic,
         linkedin: "",
       },
       {
         name: "Isaac Iyobebe",
         role: "Public Relations Officer",
-        image: defaultPic,
+        image: isaacPic,
         linkedin: "https://www.linkedin.com/in/isaac-isidahome-iyobebe/",
       },
       {
