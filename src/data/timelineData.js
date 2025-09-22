@@ -61,7 +61,7 @@ export const timelineData = [
         name: "Anmol Subedi",
         role: "Graphic Design Lead",
         image: anmolPic,
-        linkedin: "",
+        linkedin: "https://www.linkedin.com/in/anmolsubedi/",
       },
       {
         name: "Isaac Iyobebe",
