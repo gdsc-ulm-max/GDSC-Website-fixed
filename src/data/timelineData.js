@@ -14,6 +14,7 @@ import prasannaPic from "../assets/teams/prasanna.png";
 import prasiddhiPic from "../assets/teams/prasiddhi.png";
 import isaacPic from "../assets/teams/isaac.png";
 import anmolPic from "../assets/teams/anmol.png";
+import prajwolPic from "../assets/teams/prajwol.png";
 import defaultPic from "../assets/teams/defaultProfilePic.png";
 
 export const timelineData = [
@@ -47,7 +48,7 @@ export const timelineData = [
       {
         name: "Prajwol Ramtel",
         role: "Treasurer",
-        image: defaultPic,
+        image: prajwolPic,
         linkedin: "https://www.linkedin.com/in/prajwol-ramtel-00a6a9283/",
       },
       {
