@@ -137,7 +137,7 @@ function Events({ seo }) {
   };
 
   const handlePasswordSubmit = async (values) => {
-    if (values.password === "gdsc123") {
+    if (values.password === "gdscadmin2025") {
       try {
         // Sign in with Firebase Auth using a dedicated admin email
         await signInWithEmailAndPassword(
