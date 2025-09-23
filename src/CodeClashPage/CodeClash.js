@@ -57,7 +57,7 @@ const CodeClash = ({ seo }) => {
       icon: <TrophyOutlined className="feature-icon" />,
       title: "Win Prizes",
       description:
-        "Top performers get recognized and rewarded at Hawkathon 2025",
+        "Top performers get recognized and rewarded at TechXpo 2025",
     },
     {
       icon: <LaptopOutlined className="feature-icon" />,
@@ -202,7 +202,7 @@ const CodeClash = ({ seo }) => {
   };
 
   const handlePasswordSubmit = (password) => {
-    if (password === "gdsc123") {
+    if (password === "gdscadmin2025") {
       setIsAdmin(true);
       setIsPasswordModalVisible(false);
       message.success("Admin access granted");
@@ -284,7 +284,7 @@ const CodeClash = ({ seo }) => {
             className="neon-text"
             style={{ textAlign: "center", marginBottom: "2rem" }}
           >
-            CODE CLASH
+            CODE CLASH: Evening Edition
           </Title>
 
           <Text
@@ -340,7 +340,7 @@ const CodeClash = ({ seo }) => {
                 className="neon-text"
                 style={{ textAlign: "center", marginBottom: "1rem" }}
               >
-                Coming Soon!
+                Hemphill 203
               </Title>
               <Title
                 level={3}
@@ -350,7 +350,7 @@ const CodeClash = ({ seo }) => {
                   marginBottom: "0.5rem",
                 }}
               >
-                Time: TBD
+                September 30, 2025
               </Title>
               <Title
                 level={4}
@@ -360,7 +360,7 @@ const CodeClash = ({ seo }) => {
                   marginBottom: "2rem",
                 }}
               >
-                Place: TBD
+                5:40 PM - 6:40 PM
               </Title>
 
                 {/**
@@ -409,8 +409,7 @@ const CodeClash = ({ seo }) => {
               display: "block",
             }}
           >
-            Top performers and the participants with the most attendance will be
-            awarded at our grand Hawkathon 2025!
+            Win big every month! $15 and $5 prizes for top performers, plus a $20 Freshman Award at semester’s end!
           </Text>
         </motion.div>
 
