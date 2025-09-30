@@ -409,7 +409,7 @@ const CodeClash = ({ seo }) => {
               display: "block",
             }}
           >
-            Win big every month! $15 and $5 prizes for top performers, plus a $20 Freshman Award at semester’s end!
+             We are looking to make it more competitive and engaging - join us for coding battles to win cash prizes!
           </Text>
         </motion.div>
 
