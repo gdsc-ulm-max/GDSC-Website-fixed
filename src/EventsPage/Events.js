@@ -37,8 +37,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { db, storage, auth } from "../firebase";
+import { db, storage } from "../firebase";
 import dayjs from "dayjs";
 import "./Events.css";
 import { events as initialEvents } from "../logo/EventsData";
@@ -138,35 +137,18 @@ function Events({ seo }) {
 
   const handlePasswordSubmit = async (values) => {
     if (values.password === "gdscadmin2025") {
-      try {
-        // Sign in with Firebase Auth using a dedicated admin email
-        await signInWithEmailAndPassword(
-          auth,
-          "admin@gdsc-ulm.com",
-          values.password
-        );
-        setIsPasswordModalVisible(false);
-        setIsAdmin(true);
-        message.success("Admin access granted");
-      } catch (error) {
-        console.error("Authentication error:", error);
-        message.error("Failed to authenticate. Please try again.");
-      }
+      setIsPasswordModalVisible(false);
+      setIsAdmin(true);
+      message.success("Admin access granted");
     } else {
       message.error("Incorrect password");
     }
   };
 
-  // Add sign out handler
-  const handleSignOut = async () => {
-    try {
-      await signOut(auth);
-      setIsAdmin(false);
-      message.success("Signed out successfully");
-    } catch (error) {
-      console.error("Sign out error:", error);
-      message.error("Failed to sign out");
-    }
+  // Remove sign out handler since we're not using Firebase Auth
+  const handleSignOut = () => {
+    setIsAdmin(false);
+    message.success("Signed out successfully");
   };
 
   const handleAddEventClick = () => {
@@ -195,8 +177,8 @@ function Events({ seo }) {
   // Handle image upload
   const handleUpload = async (file) => {
     try {
-      // Check if user is authenticated
-      if (!auth.currentUser) {
+      // Remove Firebase Auth check - just check if admin
+      if (!isAdmin) {
         message.error("You must be logged in as admin to upload images");
         return null;
       }
