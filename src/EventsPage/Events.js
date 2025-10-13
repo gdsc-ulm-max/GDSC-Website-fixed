@@ -136,7 +136,7 @@ function Events({ seo }) {
   };
 
   const handlePasswordSubmit = async (values) => {
-    if (values.password === "gdscadmin2025") {
+    if (values.password === process.env.REACT_APP_ADMIN_PASSWORD) {
       setIsPasswordModalVisible(false);
       setIsAdmin(true);
       message.success("Admin access granted");

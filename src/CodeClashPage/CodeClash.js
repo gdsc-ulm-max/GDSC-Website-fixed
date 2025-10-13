@@ -243,7 +243,7 @@ const CodeClash = ({ seo }) => {
   };
 
   const handlePasswordSubmit = (password) => {
-    if (password === "gdscadmin2025") {
+    if (password === process.env.REACT_APP_ADMIN_PASSWORD) {
       setIsAdmin(true);
       setIsPasswordModalVisible(false);
       message.success("Admin access granted");
