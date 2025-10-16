@@ -399,7 +399,7 @@ const CodeClash = ({ seo }) => {
                   marginBottom: "0.5rem",
                 }}
               >
-                September 30, 2025
+                October 28, 2025
               </Title>
               <Title
                 level={4}
