@@ -18,6 +18,7 @@ import prajwolPic from "../assets/teams/prajwol.png";
 import jeevanPic from "../assets/teams/jeevan.png";
 import prabinPic from "../assets/teams/prabin.png";
 import defaultPic from "../assets/teams/defaultProfilePic.png";
+import samayaraPic from "../assets/teams/samayara.JPG";
 
 export const timelineData = [
   {
@@ -74,7 +75,7 @@ export const timelineData = [
       {
         name: "Samayara Rijal",
         role: "Event Manager",
-        image: defaultPic,
+        image: samayaraPic,
         linkedin: "",
       },
       {
