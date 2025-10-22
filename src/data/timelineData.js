@@ -145,7 +145,7 @@ export const timelineData = [
         linkedin: "",
       },
       {
-        name: "Issac Iyobebe",
+        name: "Isaac Iyobebe",
         role: "Sophomore Representative",
         linkedin: "",
       },
