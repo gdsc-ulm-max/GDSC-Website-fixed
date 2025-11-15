@@ -10,7 +10,7 @@ const techXpoData = {
     subtitle: "Celebrating Student Innovation",
     description: "Join us for a day of innovation, learning, and networking",
   },
-  eventDate: "TBA",
+  eventDate: "November 21, 2025",
   timeline: [
     {
       time: "9:00 AM - 11:00 AM",
@@ -72,21 +72,23 @@ function TechXpo2025({ seo }) {
       <section className="hero-section">
         <div className="hero-content">
           <div className="hero-text">
-            <div className="gdsc-badge">
-              <span>GDSC ULM</span>
-            </div>
             <h1>
-              <span className="google-gradient">{techXpoData.edition}</span>
-              <span className="title">TechXpo</span>
+              <div className="title-line">
+                <span className="gdsc-text">GDSC</span>
+                <span className="ulm-text">ULM</span>
+                <span className="techxpo-text">TechXpo</span>
+              </div>
               <span className="year">{techXpoData.year}</span>
             </h1>
             <p className="theme">{techXpoData.theme.title}</p>
             <p className="subtitle">{techXpoData.theme.subtitle}</p>
             <p className="description">{techXpoData.theme.description}</p>
-            <p className="event-date">
-              <span className="material-icons">event</span>
-              {techXpoData.eventDate}
-            </p>
+            <div className="event-date-wrapper">
+              <p className="event-date">
+                <span className="material-icons">event</span>
+                {techXpoData.eventDate}
+              </p>
+            </div>
           </div>
         </div>
       </section>

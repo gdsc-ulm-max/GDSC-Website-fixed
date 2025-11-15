@@ -67,6 +67,10 @@
 .hero-text {
   margin-bottom: 3rem;
   text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .hero-text h1 {
@@ -76,22 +80,37 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  align-items: center;
 }
 
-.google-gradient {
-  background: linear-gradient(45deg, #4285f4, #db4437, #f4b400, #0f9d58);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  font-weight: 700;
-  font-size: 1.2rem;
+.title-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
-.title {
+.gdsc-text {
+  font-weight: 800;
+  letter-spacing: -2px;
+  font-size: clamp(3rem, 8vw, 5rem);
+  color: var(--google-yellow);
+}
+
+.ulm-text {
+  font-weight: 800;
+  letter-spacing: -2px;
+  font-size: clamp(3rem, 8vw, 5rem);
+  color: var(--google-red);
+}
+
+.techxpo-text {
   display: block;
   font-weight: 800;
   letter-spacing: -2px;
-  color: #202124;
+  color: var(--google-blue);
+  font-size: clamp(3rem, 8vw, 5rem);
 }
 
 .year {
@@ -105,6 +124,7 @@
   font-size: 1.5rem;
   color: var(--text-secondary);
   margin: 0.5rem 0;
+  text-align: center;
 }
 
 .subtitle {
@@ -117,10 +137,17 @@
   color: var(--text-secondary);
 }
 
+.event-date-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
 .event-date {
   font-size: 1.3rem;
   color: var(--text-secondary);
-  margin: 1.5rem auto;
+  margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
