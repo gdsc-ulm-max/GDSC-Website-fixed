@@ -144,26 +144,16 @@ function TechXpo2025({ seo }) {
       </section>
 
       {/* Contact Section */}
-      <section className="contact-section">
+      <section className="voting-section">
         <div className="container">
-          <h2>Stay Connected</h2>
-          <div className="contact-info">
-            <p>For more information, reach out to us:</p>
-            <a href={`mailto:${techXpoData.contact.email}`} className="contact-email">
-              <span className="material-icons">email</span>
-              {techXpoData.contact.email}
+          <h2>Vote for Your Favorite Project</h2>
+          <div className="voting-info">
+            <p>Support the projects you love! Cast your vote and help recognize outstanding student innovation.</p>
+            <p className="voting-note">Voting will be available during the event.</p>
+            <a href="#vote" className="vote-btn">
+              <span className="material-icons">how_to_vote</span>
+              Vote Now
             </a>
-            <div className="social-links">
-              <a href={techXpoData.contact.social.instagram} target="_blank" rel="noopener noreferrer">
-                <span className="material-icons">camera_alt</span>
-              </a>
-              <a href={techXpoData.contact.social.linkedin} target="_blank" rel="noopener noreferrer">
-                <span className="material-icons">business</span>
-              </a>
-              <a href={techXpoData.contact.social.github} target="_blank" rel="noopener noreferrer">
-                <span className="material-icons">code</span>
-              </a>
-            </div>
           </div>
         </div>
       </section>
