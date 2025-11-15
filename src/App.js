@@ -13,6 +13,7 @@ import Events from "./EventsPage/Events";
 import HawkthonAnnouncement from "./Hawkthon/HawkthonAnnouncement";
 import Hawkthon2025 from "./Hawkthon/Hawkthon2025";
 import TechXpo from "./TechXpo/TechXpo";
+import TechXpo2025 from "./TechXpo2025/TechXpo2025";
 import CodeClash from "./CodeClashPage/CodeClash";
 import Gallery from "./GalleryPage/Gallery";
 import AnnouncementBar from "./components/AnnouncementBar";
@@ -50,6 +51,11 @@ const seoConfig = {
     title: "TechXpo | GDSC ULM",
     description:
       "Experience our annual technology exposition showcasing student projects and innovations.",
+  },
+  techxpo2025: {
+    title: "TechXpo 2025 | GDSC ULM",
+    description:
+      "Join us for TechXpo 2025 - A showcase of student innovation featuring project exhibitions, panel discussions, and awards.",
   },
   codeClash: {
     title: "Code Clash | GDSC ULM",
@@ -104,6 +110,10 @@ function App() {
               <Route
                 path="/events/techxpo"
                 element={<TechXpo seo={seoConfig.techxpo} />}
+              />
+              <Route
+                path="/techxpo-2025"
+                element={<TechXpo2025 seo={seoConfig.techxpo2025} />}
               />
               <Route
                 path="/code-clash"
