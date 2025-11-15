@@ -1,5 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
+import techXpoLogo from "../assets/techxpo.png";
 import "./TechXpo2025.css";
 
 const techXpoData = {
@@ -68,18 +69,23 @@ function TechXpo2025({ seo }) {
         <meta property="og:description" content={seo?.description || "Join us for TechXpo 2025 - A showcase of student innovation and technology"} />
       </Helmet>
 
+      {/* Title Above Card */}
+      <div className="page-title">
+        <h1>
+          <span className="gdsc-text">GDSC</span>
+          <span className="ulm-text">ULM</span>
+          <span className="techxpo-text">TechXpo</span>
+          <span className="year">{techXpoData.year}</span>
+        </h1>
+      </div>
+
       {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-content">
+          <div className="techxpo-logo-wrapper">
+            <img src={techXpoLogo} alt="TechXpo 2025 Logo" className="techxpo-logo" />
+          </div>
           <div className="hero-text">
-            <h1>
-              <div className="title-line">
-                <span className="gdsc-text">GDSC</span>
-                <span className="ulm-text">ULM</span>
-                <span className="techxpo-text">TechXpo</span>
-              </div>
-              <span className="year">{techXpoData.year}</span>
-            </h1>
             <p className="theme">{techXpoData.theme.title}</p>
             <p className="subtitle">{techXpoData.theme.subtitle}</p>
             <p className="description">{techXpoData.theme.description}</p>

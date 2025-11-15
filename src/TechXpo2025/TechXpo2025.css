@@ -14,20 +14,72 @@
   position: relative;
   overflow: hidden;
   width: 100%;
-  margin: 6rem 0rem;
+  margin: 2rem 0rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
+.page-title {
+  text-align: center;
+  margin-bottom: 0.5rem;
+  padding: 0 1rem;
+}
+
+.page-title h1 {
+  font-size: clamp(1.2rem, 4vw, 2rem);
+  line-height: 1.2;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  border: none;
+}
+
+.page-title h1::before,
+.page-title h1::after {
+  display: none;
+}
+
+.page-title .gdsc-text {
+  font-weight: 800;
+  letter-spacing: -2px;
+  color: var(--google-blue);
+  font-size: inherit;
+}
+
+.page-title .ulm-text {
+  font-weight: 800;
+  letter-spacing: -2px;
+  color: var(--google-red);
+  font-size: inherit;
+}
+
+.page-title .techxpo-text {
+  font-weight: 800;
+  letter-spacing: -2px;
+  color: var(--google-yellow);
+  font-size: inherit;
+}
+
+.page-title .year {
+  font-weight: 800;
+  letter-spacing: -2px;
+  color: var(--google-green);
+  font-size: inherit;
+}
+
 .hero-section {
   position: relative;
-  min-height: calc(100vh - 4rem);
+  min-height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: 1rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
   z-index: 1;
@@ -37,14 +89,14 @@
 .hero-content {
   width: 80%;
   max-width: 1200px;
-  min-height: 60vh;
+  min-height: auto;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
-  padding: 2rem;
+  gap: 1rem;
+  padding: 1.5rem;
 }
 
 .gdsc-badge {
@@ -62,6 +114,21 @@
 
 .gdsc-badge span {
   font-size: 1.1rem;
+}
+
+.techxpo-logo-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.techxpo-logo {
+  max-width: 250px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 .hero-text {
@@ -444,6 +511,14 @@
     min-height: 80vh;
     padding: 1rem;
     gap: 1.5rem;
+  }
+
+  .techxpo-logo {
+    max-width: 200px;
+  }
+
+  .page-title h1 {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
   }
 
   .hero-text h1 {
