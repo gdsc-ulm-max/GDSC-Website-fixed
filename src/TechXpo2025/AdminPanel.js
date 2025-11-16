@@ -355,10 +355,10 @@ const AdminPanel = ({ isOpen, onClose }) => {
                 <h3>Manage Codes ({codes.length} total)</h3>
                 <div className="admin-btn-group">
                   <button className="admin-btn admin-btn-secondary" onClick={handleExportCodes} disabled={codes.length === 0}>
-                    📥 Export to CSV
+                    Export to CSV
                   </button>
                   <button className="admin-btn admin-btn-danger" onClick={handleDeleteAllCodes} disabled={codes.length === 0}>
-                    🗑️ Delete All Codes
+                    Delete All Codes
                   </button>
                 </div>
               </div>
