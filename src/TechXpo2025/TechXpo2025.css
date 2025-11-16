@@ -626,3 +626,138 @@
     font-size: 1.3rem;
   }
 }
+
+/* Password Prompt Modal */
+.password-prompt-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1500;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.password-prompt-content {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 400px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease-out;
+}
+
+.password-prompt-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #6c757d;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.password-prompt-close:hover {
+  background-color: #f1f3f5;
+  color: #495057;
+  transform: rotate(90deg);
+}
+
+.password-prompt-content h3 {
+  margin: 0 0 20px 0;
+  font-size: 24px;
+  color: #212529;
+}
+
+.password-prompt-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.password-prompt-content input {
+  padding: 12px 16px;
+  font-size: 16px;
+  border: 2px solid #dee2e6;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.password-prompt-content input:focus {
+  border-color: #4285f4;
+  box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
+}
+
+.password-prompt-content button {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.password-prompt-content button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(66, 133, 244, 0.4);
+}
+
+/* Floating Admin Button */
+.floating-admin-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.floating-admin-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
+}
+
+.floating-admin-btn .material-icons {
+  font-size: 28px;
+}
+
+@media (max-width: 768px) {
+  .floating-admin-btn {
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .floating-admin-btn .material-icons {
+    font-size: 24px;
+  }
+}

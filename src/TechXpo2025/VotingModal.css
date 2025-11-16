@@ -1,0 +1,386 @@
+/* Voting Modal Overlay */
+.voting-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modal Content */
+.voting-modal-content {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 20px;
+  max-width: 700px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 40px;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Close Button */
+.voting-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 32px;
+  color: #6c757d;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.voting-modal-close:hover {
+  background-color: #f1f3f5;
+  color: #495057;
+  transform: rotate(90deg);
+}
+
+/* Modal Title */
+.voting-modal-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-align: center;
+  background: linear-gradient(135deg, #4285f4 0%, #34a853 50%, #fbbc04 75%, #ea4335 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Form Styles */
+.voting-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.voting-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.voting-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #212529;
+  margin-bottom: 5px;
+}
+
+/* Code Input */
+.voting-input {
+  padding: 14px 18px;
+  font-size: 18px;
+  border: 2px solid #dee2e6;
+  border-radius: 10px;
+  outline: none;
+  transition: all 0.3s ease;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.voting-input:focus {
+  border-color: #4285f4;
+  box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
+}
+
+.voting-input:disabled {
+  background-color: #f8f9fa;
+  cursor: not-allowed;
+}
+
+.voting-hint {
+  font-size: 13px;
+  color: #6c757d;
+  margin: 0;
+}
+
+/* Projects Grid */
+.voting-projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+/* Custom Scrollbar */
+.voting-projects-grid::-webkit-scrollbar {
+  width: 6px;
+}
+
+.voting-projects-grid::-webkit-scrollbar-track {
+  background: #f1f3f5;
+  border-radius: 10px;
+}
+
+.voting-projects-grid::-webkit-scrollbar-thumb {
+  background: #adb5bd;
+  border-radius: 10px;
+}
+
+.voting-projects-grid::-webkit-scrollbar-thumb:hover {
+  background: #868e96;
+}
+
+/* Project Card */
+.voting-project-card {
+  padding: 18px;
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #ffffff;
+}
+
+.voting-project-card:hover {
+  border-color: #4285f4;
+  box-shadow: 0 4px 12px rgba(66, 133, 244, 0.15);
+  transform: translateY(-2px);
+}
+
+.voting-project-card.selected {
+  border-color: #4285f4;
+  background-color: #e7f1ff;
+  box-shadow: 0 4px 16px rgba(66, 133, 244, 0.2);
+}
+
+.project-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.project-card-header h4 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #212529;
+}
+
+.selected-badge {
+  background-color: #4285f4;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.project-description {
+  font-size: 14px;
+  color: #495057;
+  margin: 8px 0;
+  line-height: 1.5;
+}
+
+.project-team {
+  font-size: 13px;
+  color: #6c757d;
+  margin: 8px 0;
+}
+
+.project-team strong {
+  color: #495057;
+}
+
+.project-votes {
+  font-size: 13px;
+  color: #4285f4;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+/* Loading & Empty States */
+.voting-loading,
+.voting-no-projects {
+  padding: 40px;
+  text-align: center;
+  color: #6c757d;
+  font-size: 15px;
+}
+
+/* Error Message */
+.voting-error-message {
+  background-color: #fff5f5;
+  border: 1px solid #fc8181;
+  border-radius: 10px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #c53030;
+  font-size: 14px;
+}
+
+.error-icon {
+  font-size: 20px;
+}
+
+/* Submit Button */
+.voting-submit-btn {
+  padding: 16px 32px;
+  background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.voting-submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(66, 133, 244, 0.4);
+}
+
+.voting-submit-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.voting-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Footer Note */
+.voting-footer-note {
+  text-align: center;
+  font-size: 13px;
+  color: #6c757d;
+  margin: 0;
+  padding-top: 10px;
+}
+
+/* Success Message */
+.voting-success-message {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #34a853 0%, #0f9d58 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  color: white;
+  font-size: 48px;
+  font-weight: bold;
+  animation: successPop 0.5s ease-out;
+}
+
+@keyframes successPop {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.voting-success-message h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #212529;
+  margin: 0 0 12px 0;
+}
+
+.voting-success-message p {
+  font-size: 16px;
+  color: #6c757d;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .voting-modal-content {
+    padding: 30px 20px;
+    margin: 10px;
+  }
+
+  .voting-modal-title {
+    font-size: 24px;
+  }
+
+  .voting-projects-grid {
+    max-height: 300px;
+  }
+
+  .voting-submit-btn {
+    font-size: 16px;
+    padding: 14px 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .voting-modal-content {
+    padding: 25px 16px;
+  }
+
+  .voting-modal-title {
+    font-size: 20px;
+  }
+
+  .project-card-header h4 {
+    font-size: 16px;
+  }
+
+  .project-description {
+    font-size: 13px;
+  }
+}

@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import techXpoLogo from "../assets/techxpo.png";
 import "./TechXpo2025.css";
+import VotingModal from "./VotingModal";
+import AdminPanel from "./AdminPanel";
+import { getProjects } from "../services/votingService";
 
 const techXpoData = {
   edition: "1st Annual",
@@ -60,6 +63,56 @@ const techXpoData = {
 };
 
 function TechXpo2025({ seo }) {
+  const [votingModalOpen, setVotingModalOpen] = useState(false);
+  const [adminPanelOpen, setAdminPanelOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [adminPassword, setAdminPassword] = useState("");
+  const [showPasswordPrompt, setShowPasswordPrompt] = useState(false);
+  const [projects, setProjects] = useState([]);
+  const [loadingProjects, setLoadingProjects] = useState(true);
+
+  // Fetch projects on component mount
+  useEffect(() => {
+    fetchProjects();
+  }, []);
+
+  const fetchProjects = async () => {
+    try {
+      setLoadingProjects(true);
+      const fetchedProjects = await getProjects();
+      setProjects(fetchedProjects);
+    } catch (error) {
+      console.error('Error fetching projects:', error);
+    } finally {
+      setLoadingProjects(false);
+    }
+  };
+
+  const handleVoteClick = () => {
+    setVotingModalOpen(true);
+  };
+
+  const handleAdminClick = () => {
+    if (isAdmin) {
+      setAdminPanelOpen(true);
+    } else {
+      setShowPasswordPrompt(true);
+    }
+  };
+
+  const handlePasswordSubmit = (e) => {
+    e.preventDefault();
+    if (adminPassword === process.env.REACT_APP_ADMIN_PASSWORD) {
+      setIsAdmin(true);
+      setShowPasswordPrompt(false);
+      setAdminPanelOpen(true);
+      setAdminPassword("");
+    } else {
+      alert("Incorrect password");
+      setAdminPassword("");
+    }
+  };
+
   return (
     <div className="techxpo-page">
       <Helmet>
@@ -155,14 +208,55 @@ function TechXpo2025({ seo }) {
           <h2>Vote for Your Favorite Project</h2>
           <div className="voting-info">
             <p>Support the projects you love! Cast your vote and help recognize outstanding student innovation.</p>
-            <p className="voting-note">Voting will be available during the event.</p>
-            <a href="#vote" className="vote-btn">
+            {projects.length > 0 ? (
+              <p className="voting-note">{projects.length} amazing projects competing for People's Choice Award!</p>
+            ) : (
+              <p className="voting-note">Projects will be available soon.</p>
+            )}
+            <button onClick={handleVoteClick} className="vote-btn">
               <span className="material-icons">how_to_vote</span>
               Vote Now
-            </a>
+            </button>
           </div>
         </div>
       </section>
+
+      {/* Voting Modal */}
+      <VotingModal 
+        isOpen={votingModalOpen} 
+        onClose={() => setVotingModalOpen(false)} 
+      />
+
+      {/* Admin Panel */}
+      <AdminPanel 
+        isOpen={adminPanelOpen} 
+        onClose={() => setAdminPanelOpen(false)} 
+      />
+
+      {/* Admin Password Prompt */}
+      {showPasswordPrompt && (
+        <div className="password-prompt-overlay" onClick={() => setShowPasswordPrompt(false)}>
+          <div className="password-prompt-content" onClick={(e) => e.stopPropagation()}>
+            <button className="password-prompt-close" onClick={() => setShowPasswordPrompt(false)}>×</button>
+            <h3>Admin Access</h3>
+            <form onSubmit={handlePasswordSubmit}>
+              <input
+                type="password"
+                value={adminPassword}
+                onChange={(e) => setAdminPassword(e.target.value)}
+                placeholder="Enter admin password"
+                autoFocus
+              />
+              <button type="submit">Access Admin Panel</button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Floating Admin Button */}
+      <button className="floating-admin-btn" onClick={handleAdminClick} title="Admin Panel">
+        <span className="material-icons">{isAdmin ? 'admin_panel_settings' : 'lock'}</span>
+      </button>
     </div>
   );
 }
