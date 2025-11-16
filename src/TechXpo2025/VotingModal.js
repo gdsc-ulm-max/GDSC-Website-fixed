@@ -130,7 +130,7 @@ const VotingModal = ({ isOpen, onClose }) => {
 
             {/* Project Selection */}
             <div className="voting-form-group">
-              <label className="voting-label">
+              <label htmlFor="projectSelect" className="voting-label">
                 Select Your Favorite Project
               </label>
               
@@ -141,37 +141,23 @@ const VotingModal = ({ isOpen, onClose }) => {
                   No projects available yet. Please check back later.
                 </div>
               ) : (
-                <div className="voting-projects-grid">
+                <select
+                  id="projectSelect"
+                  value={selectedProject}
+                  onChange={(e) => handleProjectSelect(e.target.value)}
+                  className="voting-select"
+                  disabled={loading}
+                >
+                  <option value="">-- Choose a project --</option>
                   {projects.map((project) => (
-                    <div
-                      key={project.id}
-                      className={`voting-project-card ${
-                        selectedProject === project.id ? 'selected' : ''
-                      }`}
-                      onClick={() => handleProjectSelect(project.id)}
-                    >
-                      <div className="project-card-header">
-                        <h4>{project.name}</h4>
-                        {selectedProject === project.id && (
-                          <span className="selected-badge">✓</span>
-                        )}
-                      </div>
-                      {project.description && (
-                        <p className="project-description">
-                          {project.description}
-                        </p>
-                      )}
-                      {project.teamMembers && project.teamMembers.length > 0 && (
-                        <div className="project-team">
-                          <strong>Team:</strong> {project.teamMembers.join(', ')}
-                        </div>
-                      )}
-                      <div className="project-votes">
-                        {project.votes || 0} vote{project.votes !== 1 ? 's' : ''}
-                      </div>
-                    </div>
+                    <option key={project.id} value={project.id}>
+                      {project.name}
+                      {project.teamMembers && project.teamMembers.length > 0 
+                        ? ` - ${project.teamMembers.join(', ')}` 
+                        : ''}
+                    </option>
                   ))}
-                </div>
+                </select>
               )}
             </div>
 
