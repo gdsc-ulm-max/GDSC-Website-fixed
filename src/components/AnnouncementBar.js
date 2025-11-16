@@ -11,11 +11,11 @@ function AnnouncementBar() {
             🚀 Next Up! TechXpo 2025
           </span>
           <span className="announcement-date">November 21</span>
-          {/**
-           * <Link to="/techXpo" className="announcement-link">
+          {
+           <Link to="/techxpo-2025" className="announcement-link">
             Learn More →
           </Link>
-           */}
+           }
           
         </div>
       </div>
