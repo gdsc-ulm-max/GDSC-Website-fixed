@@ -202,22 +202,23 @@ function TechXpo2025({ seo }) {
         </div>
       </section>
 
-      {/* Contact Section */}
+      {/* Voting Section */}
       <section className="voting-section">
         <div className="container">
-          <h2>Vote for Your Favorite Project</h2>
-          <div className="voting-info">
-            <p>Support the projects you love! Cast your vote and help recognize outstanding student innovation.</p>
-            {projects.length > 0 ? (
-              <p className="voting-note">{projects.length} amazing projects competing for People's Choice Award!</p>
-            ) : (
-              <p className="voting-note">Projects will be available soon.</p>
-            )}
-            <button onClick={handleVoteClick} className="vote-btn">
-              <span className="material-icons">how_to_vote</span>
-              Vote Now
-            </button>
+          <div className="voting-header">
+            <svg className="trophy-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24 28C27.866 28 31 24.866 31 21V10H17V21C17 24.866 20.134 28 24 28Z" fill="#4285F4"/>
+              <path d="M31 10H35C36.6569 10 38 11.3431 38 13V15C38 16.6569 36.6569 18 35 18H31" stroke="#4285F4" strokeWidth="3" strokeLinecap="round"/>
+              <path d="M17 10H13C11.3431 10 10 11.3431 10 13V15C10 16.6569 11.3431 18 13 18H17" stroke="#4285F4" strokeWidth="3" strokeLinecap="round"/>
+              <path d="M24 28V34" stroke="#4285F4" strokeWidth="3" strokeLinecap="round"/>
+              <rect x="16" y="34" width="16" height="3" rx="1.5" fill="#4285F4"/>
+              <rect x="14" y="38" width="20" height="3" rx="1.5" fill="#4285F4"/>
+            </svg>
+            <h2>Vote for Your Favorite Project</h2>
           </div>
+          <button onClick={handleVoteClick} className="vote-btn">
+            Vote Now
+          </button>
         </div>
       </section>
 

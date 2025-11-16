@@ -397,63 +397,68 @@
 
 /* Voting Section */
 .voting-section {
-  padding: 4rem 2rem;
-  background: linear-gradient(135deg, var(--bg-primary) 0%, #e8f0fe 100%);
+  padding: 6rem 2rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
   text-align: center;
 }
 
 .voting-section .container {
-  max-width: 800px;
+  max-width: 700px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+.voting-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.trophy-icon {
+  width: 80px;
+  height: 80px;
+  filter: drop-shadow(0 4px 12px rgba(66, 133, 244, 0.2));
 }
 
 .voting-section h2 {
-  margin-bottom: 2rem;
-  color: var(--text-primary);
-  font-size: 2.5rem;
+  margin: 0;
+  color: #202124;
+  font-size: 2.8rem;
   font-weight: 600;
-}
-
-.voting-info {
-  background: white;
-  padding: 3rem 2rem;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-}
-
-.voting-info p {
-  color: var(--text-secondary);
-  font-size: 1.2rem;
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
-}
-
-.voting-note {
-  font-size: 1rem !important;
-  color: var(--google-blue);
-  font-weight: 500;
-  margin-bottom: 2rem !important;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
 }
 
 .vote-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 1rem 2.5rem;
-  background: linear-gradient(45deg, var(--google-blue), var(--google-green));
+  gap: 0.75rem;
+  padding: 1.125rem 3.5rem;
+  background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
   color: white;
+  border: none;
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 600;
   border-radius: 50px;
-  box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);
-  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(66, 133, 244, 0.25);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  letter-spacing: 0.3px;
 }
 
 .vote-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(66, 133, 244, 0.4);
+  box-shadow: 0 10px 28px rgba(66, 133, 244, 0.35);
+}
+
+.vote-btn:active {
+  transform: translateY(0);
 }
 
 .vote-btn .material-icons {
