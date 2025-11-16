@@ -206,7 +206,7 @@ const AdminPanel = ({ isOpen, onClose }) => {
       <div className="admin-panel-content" onClick={(e) => e.stopPropagation()}>
         <button className="admin-panel-close" onClick={onClose}>×</button>
 
-        <h2 className="admin-panel-title">🔧 Admin Panel</h2>
+        <h2 className="admin-panel-title">Admin Panel</h2>
 
         {/* Message Display */}
         {message.text && (
@@ -221,19 +221,19 @@ const AdminPanel = ({ isOpen, onClose }) => {
             className={`admin-tab ${activeTab === 'projects' ? 'active' : ''}`}
             onClick={() => setActiveTab('projects')}
           >
-            📋 Projects
+            Projects
           </button>
           <button
             className={`admin-tab ${activeTab === 'codes' ? 'active' : ''}`}
             onClick={() => setActiveTab('codes')}
           >
-            🎫 Codes
+            Codes
           </button>
           <button
             className={`admin-tab ${activeTab === 'stats' ? 'active' : ''}`}
             onClick={() => setActiveTab('stats')}
           >
-            📊 Statistics
+            Statistics
           </button>
         </div>
 
@@ -453,7 +453,7 @@ const AdminPanel = ({ isOpen, onClose }) => {
                   <hr className="admin-divider" />
 
                   <div className="admin-danger-zone">
-                    <h3>⚠️ Danger Zone</h3>
+                    <h3>Danger Zone</h3>
                     <p>These actions cannot be undone!</p>
                     <button className="admin-btn admin-btn-danger" onClick={handleResetVotes}>
                       Reset All Votes
