@@ -25,8 +25,8 @@ const techXpoData = {
     },
     {
       time: "11:00 AM - 11:30 AM",
-      title: '"Talk with an Intern" Panel Session',
-      description: "An interactive Q&A session focused on internships and early-career development.",
+      title: '"Skills for Your First Job" Session',
+      description: "Keynote address by Chief Operation Officer from Kinetix Solutions.",
       icon: "forum",
       color: "#DB4437",
     },
@@ -191,7 +191,7 @@ function TechXpo2025({ seo }) {
             <div className="highlight-card">
               <span className="material-icons">school</span>
               <h3>Learning</h3>
-              <p>Gain insights from the "Talk with an Intern" panel session</p>
+              <p>Gain insights from "Skills for Your First Job" session with Kinetix Solutions COO</p>
             </div>
             <div className="highlight-card">
               <span className="material-icons">emoji_events</span>
