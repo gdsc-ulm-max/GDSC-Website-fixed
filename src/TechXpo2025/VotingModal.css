@@ -50,10 +50,11 @@
 
 /* Close Button */
 .voting-modal-close {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background: none;
+  position: sticky;
+  top: 0;
+  right: 0;
+  float: right;
+  background: white;
   border: none;
   font-size: 32px;
   color: #6c757d;
@@ -65,6 +66,9 @@
   justify-content: center;
   border-radius: 50%;
   transition: all 0.2s ease;
+  z-index: 10;
+  margin: -8px -8px 0 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .voting-modal-close:hover {
