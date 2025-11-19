@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './VotingModal.css';
 import { submitVote, getProjects } from '../services/votingService';
 
@@ -10,6 +10,32 @@ const VotingModal = ({ isOpen, onClose }) => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
   const [loadingProjects, setLoadingProjects] = useState(true);
+  const [closeButtonStyle, setCloseButtonStyle] = useState({});
+  const modalContentRef = useRef(null);
+
+  // Update close button position
+  useEffect(() => {
+    const updateCloseButtonPosition = () => {
+      if (modalContentRef.current && isOpen) {
+        const rect = modalContentRef.current.getBoundingClientRect();
+        setCloseButtonStyle({
+          top: `${rect.top}px`,
+          right: `${window.innerWidth - rect.right}px`,
+        });
+      }
+    };
+
+    if (isOpen) {
+      updateCloseButtonPosition();
+      window.addEventListener('resize', updateCloseButtonPosition);
+      window.addEventListener('scroll', updateCloseButtonPosition);
+      
+      return () => {
+        window.removeEventListener('resize', updateCloseButtonPosition);
+        window.removeEventListener('scroll', updateCloseButtonPosition);
+      };
+    }
+  }, [isOpen]);
 
   // Fetch projects when modal opens
   useEffect(() => {
@@ -90,8 +116,16 @@ const VotingModal = ({ isOpen, onClose }) => {
 
   return (
     <div className="voting-modal-overlay" onClick={onClose}>
-      <div className="voting-modal-content" onClick={(e) => e.stopPropagation()}>
-        <button className="voting-modal-close" onClick={onClose}>
+      <div 
+        className="voting-modal-content" 
+        ref={modalContentRef}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button 
+          className="voting-modal-close" 
+          onClick={onClose}
+          style={closeButtonStyle}
+        >
           ×
         </button>
 
