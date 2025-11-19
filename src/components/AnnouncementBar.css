@@ -1,9 +1,5 @@
 .announcement-container {
-  position: fixed;
-  top: 64px; /* Height of NavBar */
-  left: 0;
-  right: 0;
-  z-index: 999;
+  display: none;
 }
 
 .announcement-bar {
