@@ -12,7 +12,6 @@ import {
   Row,
   Col,
   Card,
-  Select,
 } from "antd";
 import {
   LockOutlined,
@@ -32,7 +31,6 @@ import SEO from "../components/SEO";
 
 const { Title, Text } = Typography;
 const { Dragger } = Upload;
-const { Option } = Select;
 
 const CodeClash = ({ seo }) => {
   const [allStudentsData, setAllStudentsData] = useState([]);
@@ -73,20 +71,7 @@ const CodeClash = ({ seo }) => {
     },
   ];
 
-  // Get current leaderboard data based on selected contest
-  const getCurrentLeaderboardData = () => {
-    return currentContest === "all-students" ? allStudentsData : freshmanData;
-  };
 
-  // Check if current contest is visible to public
-  const isCurrentContestVisible = () => {
-    return currentContest === "all-students" ? allStudentsVisible : freshmanVisible;
-  };
-
-  // Get contest display name
-  const getContestDisplayName = (contestType) => {
-    return contestType === "all-students" ? "All Students Contest" : "Freshman Contest";
-  };
 
   // Table columns configuration
   const columns = [
@@ -143,29 +128,18 @@ const CodeClash = ({ seo }) => {
 
   // Fetch leaderboard data on component mount
   useEffect(() => {
-    fetchAllContestData();
+    fetchContestData();
     fetchChallenges();
   }, []);
 
-  const fetchAllContestData = async () => {
+  const fetchContestData = async () => {
     try {
       setLoading(true);
-      await Promise.all([
-        fetchContestData("all-students", setAllStudentsData),
-        fetchContestData("freshman", setFreshmanData)
-      ]);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const fetchContestData = async (contestType, setDataFunction) => {
-    try {
       if (!db) {
         throw new Error("Firebase DB is not initialized");
       }
 
-      const collectionName = contestType === "all-students" ? "all-contest" : "freshman-contest";
+      const collectionName = "all-contest";
       const leaderboardRef = doc(db, collectionName, "leaderboard");
 
       try {
@@ -174,33 +148,29 @@ const CodeClash = ({ seo }) => {
           const data = leaderboardDoc.data().participants || [];
           const isVisible = leaderboardDoc.data().isVisible || false;
           
-          setDataFunction(data);
-          
-          // Set visibility state
-          if (contestType === "all-students") {
-            setAllStudentsVisible(isVisible);
-          } else {
-            setFreshmanVisible(isVisible);
-          }
+          setAllStudentsData(data);
+          setAllStudentsVisible(isVisible);
         } else {
           await setDoc(leaderboardRef, {
             participants: [],
             isVisible: false,
           });
-          setDataFunction([]);
+          setAllStudentsData([]);
         }
       } catch (error) {
-        console.error(`Firebase error for ${contestType}:`, error);
+        console.error(`Firebase error:`, error);
         if (error.code === "failed-precondition" || error.message.includes("offline")) {
           message.warning("You appear to be offline. Some data may not be available.");
-          setDataFunction([]);
+          setAllStudentsData([]);
         } else {
-          message.error(`Failed to load ${getContestDisplayName(contestType)} data`);
+          message.error(`Failed to load contest data`);
         }
       }
     } catch (error) {
-      console.error(`Error fetching ${contestType} data:`, error);
-      message.error(`Failed to load ${getContestDisplayName(contestType)} data`);
+      console.error(`Error fetching contest data:`, error);
+      message.error(`Failed to load contest data`);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -283,8 +253,7 @@ const CodeClash = ({ seo }) => {
       setLoading(true);
       const processedData = await processCSV(file);
 
-      // Determine collection name based on upload contest type
-      const collectionName = uploadContestType === "all-students" ? "all-contest" : "freshman-contest";
+      const collectionName = "all-contest";
       const leaderboardRef = doc(db, collectionName, "leaderboard");
       
       await setDoc(leaderboardRef, {
@@ -293,14 +262,9 @@ const CodeClash = ({ seo }) => {
         isVisible: true, // Make visible when CSV is uploaded
       });
 
-      // Refresh the specific contest data and visibility
-      if (uploadContestType === "all-students") {
-        await fetchContestData("all-students", setAllStudentsData);
-      } else {
-        await fetchContestData("freshman", setFreshmanData);
-      }
+      await fetchContestData();
       
-      message.success(`${getContestDisplayName(uploadContestType)} leaderboard updated and made visible!`);
+      message.success(`Leaderboard updated and made visible!`);
       setIsUploadModalVisible(false);
     } catch (error) {
       console.error("Error uploading CSV:", error);
@@ -423,7 +387,7 @@ const CodeClash = ({ seo }) => {
             </motion.div>
           </div>
           
-          {(isAdmin || allStudentsVisible || freshmanVisible) && (
+          {(isAdmin || allStudentsVisible) && (
             <div className="leaderboard-container">
               <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginBottom: "2rem", flexDirection: "column", gap: "1rem" }}>
                 <Title
@@ -433,43 +397,17 @@ const CodeClash = ({ seo }) => {
                 >
                   Leaderboard
                 </Title>
-                
-                {(allStudentsVisible || freshmanVisible || isAdmin) && (
-                  <div className="contest-selector">
-                    <div 
-                      className={`contest-tab ${currentContest === "all-students" ? "active" : ""} ${!allStudentsVisible && !isAdmin ? "disabled" : ""}`}
-                      onClick={() => (allStudentsVisible || isAdmin) && setCurrentContest("all-students")}
-                    >
-                      All Students Contest
-                      {!allStudentsVisible && !isAdmin && <LockOutlined style={{ marginLeft: "8px" }} />}
-                    </div>
-                    <div 
-                      className={`contest-tab ${currentContest === "freshman" ? "active" : ""} ${!freshmanVisible && !isAdmin ? "disabled" : ""}`}
-                      onClick={() => (freshmanVisible || isAdmin) && setCurrentContest("freshman")}
-                    >
-                      Freshman Contest
-                      {!freshmanVisible && !isAdmin && <LockOutlined style={{ marginLeft: "8px" }} />}
-                    </div>
-                  </div>
-                )}
               </div>
 
-              {(isAdmin || isCurrentContestVisible()) && (
+              {(isAdmin || allStudentsVisible) && (
                 <>
-                  <Title
-                    level={4}
-                    style={{ textAlign: "center", color: "white", marginBottom: "1rem" }}
-                  >
-                    {getContestDisplayName(currentContest)}
-                  </Title>
-
                   {loading ? (
                     <div className="loading-container">
                       <Spin size="large" />
                     </div>
                   ) : (
                     <Table
-                      dataSource={getCurrentLeaderboardData()}
+                      dataSource={allStudentsData}
                       columns={columns}
                       rowKey="sn"
                       pagination={false}
@@ -479,7 +417,7 @@ const CodeClash = ({ seo }) => {
                 </>
               )}
 
-              {!isAdmin && !isCurrentContestVisible() && (
+              {!isAdmin && !allStudentsVisible && (
                 <div style={{ textAlign: "center", padding: "2rem", color: "rgba(255, 255, 255, 0.6)" }}>
                   <LockOutlined style={{ fontSize: "2rem", marginBottom: "1rem" }} />
                   <Text style={{ display: "block", color: "rgba(255, 255, 255, 0.6)" }}>
@@ -522,19 +460,7 @@ const CodeClash = ({ seo }) => {
           onCancel={() => setIsUploadModalVisible(false)}
           footer={null}
         >
-          <div style={{ marginBottom: "1rem" }}>
-            <Text strong>Select Contest Type:</Text>
-            <Select
-              value={uploadContestType}
-              onChange={setUploadContestType}
-              style={{ width: "100%", marginTop: "0.5rem" }}
-              size="large"
-            >
-              <Option value="all-students">All Students Contest</Option>
-              <Option value="freshman">Freshman Contest</Option>
-            </Select>
-          </div>
-          
+
           <Dragger
             name="file"
             multiple={false}
@@ -550,7 +476,7 @@ const CodeClash = ({ seo }) => {
             </p>
             <p className="ant-upload-text">Click or drag CSV file to upload</p>
             <p className="ant-upload-hint">
-              Upload CSV for {getContestDisplayName(uploadContestType)}
+              Upload CSV for the Contest
             </p>
             <p className="ant-upload-hint">
               The CSV should contain columns: Name of Participant, Hackerrank User ID, Total Score, Session-I, Session-II, Session-III, Session-IV
