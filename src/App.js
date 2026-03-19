@@ -18,6 +18,7 @@ import CodeClash from "./CodeClashPage/CodeClash";
 import Gallery from "./GalleryPage/Gallery";
 import AnnouncementBar from "./components/AnnouncementBar";
 import Hawkathon from "./HawkathonPage/Hawkathon";
+import Hawkathon2026 from "./Hawkathon2026/Hawkathon2026";
 import Forms from "./FormsPage/Forms";
 
 // Add SEO configuration object
@@ -46,6 +47,11 @@ const seoConfig = {
     title: "Hawkathon 2025 | GDSC ULM",
     description:
       "Join ULM's premier hackathon event. 48 hours of coding, innovation, and fun with amazing prizes to be won.",
+  },
+  hawkathon2026: {
+    title: "Hawkathon 2026 | GDSC ULM",
+    description:
+      "Hawkathon 2026 — ULM's premier hackathon event. Stay tuned for announcements on dates, theme, and registration.",
   },
   techxpo: {
     title: "TechXpo | GDSC ULM",
@@ -126,6 +132,10 @@ function App() {
               <Route
                 path="/hawkathon"
                 element={<Hawkathon seo={seoConfig.hawkathon} />}
+              />
+              <Route
+                path="/hawkathon-2026"
+                element={<Hawkathon2026 seo={seoConfig.hawkathon2026} />}
               />
               <Route
                 path="/forms"
