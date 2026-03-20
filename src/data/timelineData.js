@@ -8,7 +8,7 @@ import dineshPic from "../assets/teams/dinesh.png";
 import abhishekPic from "../assets/teams/abhishek.jpeg";
 import lochanpic from "../assets/teams/lochan.png";
 import barnettpic from "../assets/teams/barnett.jpg";
-import georgePic from "../assets/teams/george.png"; 
+import georgePic from "../assets/teams/george.png";
 import srijanPic from "../assets/teams/Srijan.jpg";
 import prasannaPic from "../assets/teams/prasanna.png";
 import prasiddhiPic from "../assets/teams/prasiddhi.png";
@@ -19,6 +19,8 @@ import jeevanPic from "../assets/teams/jeevan.png";
 import prabinPic from "../assets/teams/prabin.png";
 import defaultPic from "../assets/teams/defaultProfilePic.png";
 import samayaraPic from "../assets/teams/samayara.JPG";
+import nishuPic from "../assets/teams/nishu.png";
+import suruchiPic from "../assets/teams/suruchi.jpeg";
 
 export const timelineData = [
   {
@@ -121,7 +123,8 @@ export const timelineData = [
       {
         name: "Suruchi Bista",
         role: "Treasurer",
-        linkedin: "",
+        image: suruchiPic,
+        linkedin: "https://www.linkedin.com/in/suruchi-bista/",
       },
       {
         name: "Lochan Acharya",
@@ -132,22 +135,26 @@ export const timelineData = [
       {
         name: "Nishu Shrestha",
         role: "Graphic Design Lead",
-        linkedin: "",
+        image: nishuPic,
+        linkedin: "https://www.linkedin.com/in/nishushrestha/",
       },
       {
         name: "Prasiddhi Luitel",
         role: "Public Relations Officer",
-        linkedin: "",
+        image: prasiddhiPic,
+        linkedin: "https://www.linkedin.com/in/prasiddhix/",
       },
       {
         name: "Jeevan Parajuli",
         role: "Sophomore Representative",
-        linkedin: "",
+        image: jeevanPic,
+        linkedin: "https://www.linkedin.com/in/jeevanparajuli856/",
       },
       {
         name: "Isaac Iyobebe",
         role: "Sophomore Representative",
-        linkedin: "",
+        image: isaacPic,
+        linkedin: "https://www.linkedin.com/in/isaac-isidahome-iyobebe/",
       },
       {
         name: "Srijan Dahal",
