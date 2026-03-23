@@ -51,7 +51,7 @@ const Hawkathon2026 = ({ seo }) => {
 
         <p className="h26-footer">
           Follow us on{' '}
-          <a href="https://www.instagram.com/gdsc.ulm/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.instagram.com/gdsc_ulm/" target="_blank" rel="noopener noreferrer">
             Instagram
           </a>{' '}
           for updates

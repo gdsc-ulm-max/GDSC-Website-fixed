@@ -1,0 +1,141 @@
+.hawkathon2026-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0d1117 0%, #1a1f2e 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hawkathon2026-container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at center, rgba(66, 133, 244, 0.08) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 20%, rgba(15, 157, 88, 0.06) 0%, transparent 50%);
+  animation: pulse 8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.8; }
+}
+
+.hawkathon2026-content {
+  text-align: center;
+  max-width: 700px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.hawkathon2026-badge {
+  display: inline-block;
+  background: linear-gradient(90deg, #4285f4, #0f9d58);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.4rem 1.2rem;
+  border-radius: 999px;
+  margin-bottom: 2rem;
+}
+
+.hawkathon2026-logo {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  margin-bottom: 1.5rem;
+  border-radius: 50%;
+  box-shadow: 0 0 40px rgba(66, 133, 244, 0.3);
+}
+
+.hawkathon2026-title {
+  font-size: 4rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, #4285f4, #0f9d58, #f4b400, #db4437);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.1;
+}
+
+.hawkathon2026-subtitle {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 3rem;
+  letter-spacing: 0.05em;
+}
+
+.hawkathon2026-announcement {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 3rem 2.5rem;
+  backdrop-filter: blur(10px);
+}
+
+.announcement-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.announcement-heading {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 1rem 0;
+}
+
+.announcement-text {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.7;
+  margin: 0 0 2rem 0;
+}
+
+.announcement-divider {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #4285f4, #0f9d58);
+  border-radius: 999px;
+  margin: 0 auto 2rem auto;
+}
+
+.announcement-tags {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.announcement-tag {
+  background: rgba(66, 133, 244, 0.12);
+  border: 1px solid rgba(66, 133, 244, 0.25);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+}
+
+@media (max-width: 600px) {
+  .hawkathon2026-title {
+    font-size: 2.5rem;
+  }
+
+  .hawkathon2026-announcement {
+    padding: 2rem 1.5rem;
+  }
+
+  .announcement-heading {
+    font-size: 1.4rem;
+  }
+}
