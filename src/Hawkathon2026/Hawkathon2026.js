@@ -19,7 +19,7 @@ const Hawkathon2026 = ({ seo }) => {
 
         <div className="h26-label">
           <span className="h26-label-dot" />
-          GDSC ULM Presents
+          GDSC ULM & ACM Presents
         </div>
 
         <h1 className="h26-title">
