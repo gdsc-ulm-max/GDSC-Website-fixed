@@ -8,14 +8,12 @@ function AnnouncementBar() {
       <div className="announcement-bar">
         <div className="announcement-content">
           <span className="announcement-text">
-            🚀 Next Up! TechXpo 2025
+            🦅 Hawkathon 2026 is here — Register Now!
           </span>
-          <span className="announcement-date">November 21</span>
-          {
-           <Link to="/techxpo-2025" className="announcement-link">
+          <span className="announcement-date">April 17 – 19</span>
+          <Link to="/hawkathon-2026" className="announcement-link">
             Learn More →
           </Link>
-           }
           
         </div>
       </div>
