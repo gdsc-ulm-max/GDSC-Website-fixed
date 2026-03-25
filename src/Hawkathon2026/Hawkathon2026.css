@@ -3,8 +3,8 @@
   font-family: 'Google Sans', 'Inter', 'Segoe UI', sans-serif;
   color: #1a1a2e;
   min-height: 100vh;
-  /* Pull up to remove the excess content-wrapper margin-top */
-  margin-top: -4rem;
+  /* Cancel both content-wrapper margin-top (4rem) and padding-top (60px) */
+  margin-top: calc(-4rem - 60px);
   /* Match home page: dot-grid over white */
   background-color: #ffffff;
   background-image: radial-gradient(#d1d5db 1px, transparent 1px);
