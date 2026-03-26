@@ -18,6 +18,7 @@ import prajwolPic from "../assets/teams/prajwol.png";
 import jeevanPic from "../assets/teams/jeevan.png";
 import prabinPic from "../assets/teams/prabin.png";
 import defaultPic from "../assets/teams/defaultProfilePic.png";
+import karinaPic from "../assets/teams/KarinaKarki.JPG";
 import samayaraPic from "../assets/teams/samayara.JPG";
 import nishuPic from "../assets/teams/nishu.png";
 import suruchiPic from "../assets/teams/suruchi.jpeg";
@@ -45,10 +46,10 @@ export const timelineData = [
         linkedin: "https://www.linkedin.com/in/jeevanparajuli856/",
       },
       {
-        name: "Srijan Dahal",
+        name: "Karina Karki",
         role: "Secretary",
-        image: srijanPic,
-        linkedin: "https://www.linkedin.com/in/srijan-dahal-51961233a/",
+        image: karinaPic,
+        linkedin: "https://www.linkedin.com/in/karina-karkii",
       },
       {
         name: "Prajwol Ramtel",
