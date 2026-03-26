@@ -1,116 +1,166 @@
-.joinPage {
-  position: relative;
-  z-index: 1;
-  width: 90%;
-  max-width: 1200px;
-  margin: 2rem auto;
-  padding: 2rem 0;
+.join-page {
+  width: 100%;
+  min-height: 100vh;
+  /* Dot-grid background — full width */
+  background-color: #ffffff;
+  background-image: radial-gradient(#d1d5db 1px, transparent 1px);
+  background-size: 24px 24px;
+  /* Cancel content-wrapper offset */
+  margin-top: calc(-4rem - 60px);
+  padding-top: calc(60px + 3rem);
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 3rem;
+  /* Center children */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+/* Page title */
+.join-page > .ant-typography {
+  font-size: clamp(2.5rem, 7vw, 4rem) !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.04em;
+  color: #111827 !important;
+  text-align: center;
+  margin-bottom: 2.75rem !important;
+  position: relative;
+  padding-bottom: 1rem;
+  max-width: 1000px;
+  width: 100%;
+}
+
+.join-page > .ant-typography::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(to right, #4285f4, #0f9d58, #f4b400, #db4437);
+  border-radius: 2px;
+}
+
+/* Card grid */
 .joinCards {
   display: flex;
   justify-content: center;
-  gap: 2rem;
-  margin-top: 2rem;
+  gap: 1.5rem;
+  max-width: 1000px;
+  width: 100%;
 }
 
+/* Card styling */
 .joinCard {
   flex: 1;
-  max-width: 500px;
-  background-color: rgba(255, 255, 255, 0.98) !important;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  max-width: 460px;
+  background: white !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 12px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.04) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
 }
 
 .joinCard:hover {
-  transform: translateY(-4px);
+  transform: translateY(-4px) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.09) !important;
 }
 
 .joinCard .ant-card-head {
-  border-bottom: 2px solid #f0f0f0;
-  padding: 1.5rem 1rem;
-  background: linear-gradient(135deg, rgba(24, 144, 255, 0.08), rgba(24, 144, 255, 0.02));
+  border-bottom: 1px solid #e5e7eb;
+  padding: 1.25rem 1.5rem;
+  background: #f9fafb;
+  border-radius: 12px 12px 0 0;
+}
+
+.joinCard .ant-card-head-title .ant-typography {
+  font-weight: 800 !important;
+  letter-spacing: -0.02em;
+  color: #111827 !important;
 }
 
 .joinCard .ant-card-body {
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  min-height: 400px;
+  min-height: 380px;
 }
 
+/* Benefits list */
 .benefits-list {
   flex-grow: 1;
-  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
 }
 
 .benefit-wrapper {
-  padding: 12px 16px;
-  transition: background-color 0.3s ease;
-  border-radius: 4px;
+  padding: 0.6rem 0.75rem;
+  transition: background-color 0.2s ease;
+  border-radius: 8px;
 }
 
 .benefit-wrapper:hover {
-  background-color: rgba(24, 144, 255, 0.02);
+  background-color: rgba(66, 133, 244, 0.04);
 }
 
 .benefit-item {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 0.75rem;
 }
 
 .check-icon {
-  color: #1890ff;
-  font-size: 16px;
+  color: #4285f4;
+  font-size: 14px;
   margin-top: 4px;
 }
 
 .benefit-item .ant-typography {
-  font-size: 16px;
-  line-height: 24px;
-  color: rgba(0, 0, 0, 0.85);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: #4b5563;
 }
 
+/* Join button */
 .join-button {
   margin-top: auto;
-  height: 48px;
-  font-size: 16px;
+  height: 44px !important;
+  font-size: 0.92rem !important;
+  font-weight: 700 !important;
   width: 100%;
-  border-radius: 6px;
+  border-radius: 8px !important;
 }
 
-.joinCard.member .ant-card-head {
-  background: linear-gradient(135deg, rgba(24, 144, 255, 0.08), rgba(24, 144, 255, 0.02));
-}
-
+/* Remove member/team gradient headers — use clean #f9fafb */
+.joinCard.member .ant-card-head,
 .joinCard.team .ant-card-head {
-  background: linear-gradient(135deg, rgba(82, 196, 26, 0.08), rgba(82, 196, 26, 0.02));
+  background: #f9fafb;
 }
 
 @media screen and (max-width: 800px) {
-  .joinPage {
-    width: 95%;
-    margin: 1rem auto;
-    padding: 1rem 0;
+  .join-page {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: calc(60px + 2rem);
   }
 
   .joinCards {
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
 
   .joinCard {
     width: 100%;
+    max-width: 100%;
   }
 
   .joinCard .ant-card-body {
-    min-height: 350px;
+    min-height: 320px;
   }
 
   .benefit-wrapper {
-    padding: 10px 12px;
+    padding: 0.5rem 0.6rem;
   }
 }
