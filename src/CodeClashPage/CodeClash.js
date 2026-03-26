@@ -147,7 +147,7 @@ const CodeClash = ({ seo }) => {
         if (leaderboardDoc.exists()) {
           const data = leaderboardDoc.data().participants || [];
           const isVisible = leaderboardDoc.data().isVisible || false;
-          
+
           setAllStudentsData(data);
           setAllStudentsVisible(isVisible);
         } else {
@@ -255,7 +255,7 @@ const CodeClash = ({ seo }) => {
 
       const collectionName = "all-contest";
       const leaderboardRef = doc(db, collectionName, "leaderboard");
-      
+
       await setDoc(leaderboardRef, {
         participants: processedData,
         lastUpdated: new Date().toISOString(),
@@ -263,7 +263,7 @@ const CodeClash = ({ seo }) => {
       });
 
       await fetchContestData();
-      
+
       message.success(`Leaderboard updated and made visible!`);
       setIsUploadModalVisible(false);
     } catch (error) {
@@ -363,7 +363,7 @@ const CodeClash = ({ seo }) => {
                   marginBottom: "0.5rem",
                 }}
               >
-                October 28, 2025
+                5:40 PM - 6:40 PM
               </Title>
               <Title
                 level={4}
@@ -373,20 +373,20 @@ const CodeClash = ({ seo }) => {
                   marginBottom: "2rem",
                 }}
               >
-                5:40 PM - 6:40 PM
+
               </Title>
 
-                {/**
+              {/**
                  * <div style={{ display: "flex", justifyContent: "center" }}>
                 <Button size="large" className="neon-button">
                   Register Now
                 </Button>
               </div>
                  */}
-              
+
             </motion.div>
           </div>
-          
+
           {(isAdmin || allStudentsVisible) && (
             <div className="leaderboard-container">
               <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginBottom: "2rem", flexDirection: "column", gap: "1rem" }}>
@@ -436,7 +436,7 @@ const CodeClash = ({ seo }) => {
               display: "block",
             }}
           >
-             We are looking to make it more competitive and engaging - join us for coding battles to win cash prizes!
+            We are looking to make it more competitive and engaging - join us for coding battles to win cash prizes!
           </Text>
         </motion.div>
 
