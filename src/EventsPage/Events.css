@@ -2,140 +2,44 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
-  margin: 2rem auto;
-  padding: 2rem 0;
-  background: transparent;
+  padding: 0;
   overflow: hidden;
+  /* Dot-grid background matching home page */
+  background-color: #ffffff;
+  background-image: radial-gradient(#d1d5db 1px, transparent 1px);
+  background-size: 24px 24px;
+  /* Cancel the content-wrapper margin-top so it sits flush below banner */
+  margin-top: calc(-4rem - 60px);
+  padding-top: 60px;
 }
 
-.eventGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1rem;
-}
-
-.event-card {
-  background: white;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.event-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-}
-
-.event-header {
-  padding: 1.5rem;
+/* Page Title */
+.events-page > .ant-typography {
+  font-size: clamp(2.5rem, 7vw, 4rem) !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.04em;
+  color: #111827 !important;
   text-align: center;
+  margin-top: 3rem !important;
+  margin-bottom: 1rem !important;
 }
 
-.event-logo {
-  width: 120px;
-  height: 120px;
-  object-fit: contain;
-  margin-bottom: 1rem;
-}
-
-.event-header h3 {
-  font-size: 1.8rem;
-  font-weight: 600;
-  margin: 0;
-}
-
-.event-content {
-  padding: 1.5rem;
-}
-
-.event-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.event-tag {
-  padding: 0.3rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.event-description {
-  color: #5f6368;
-  line-height: 1.6;
-  margin: 1rem 0;
-}
-
-.event-dates {
-  background: #f8f9fa;
-  border-radius: 12px;
-  padding: 1rem;
-  margin: 1rem 0;
-}
-
-.date-item {
-  margin-bottom: 0.5rem;
-}
-
-.date-item:last-child {
-  margin-bottom: 0;
-}
-
-.date-label {
-  display: block;
-  font-size: 0.9rem;
-  color: #5f6368;
-  margin-bottom: 0.2rem;
-}
-
-.date-value {
-  font-weight: 600;
-  color: #202124;
-}
-
-.event-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 16px;
-  flex-wrap: wrap;
-}
-
-.event-button {
-  color: white;
-  text-decoration: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.event-button:hover {
-  opacity: 0.9;
-  transform: translateY(-2px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
+/* Section Titles */
 .section-title {
   position: relative;
   padding-bottom: 1rem;
-  margin-bottom: 2rem !important;
+  margin-bottom: 2.75rem !important;
   text-align: center;
-  color: #4285f4;
-  font-size: 2.5rem;
-  font-weight: 600;
+  font-size: 1.85rem !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em;
+  color: #111827 !important;
 }
 
 .section-title::after {
   content: "";
   position: absolute;
-  bottom: -10px;
+  bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   width: 60px;
@@ -144,6 +48,164 @@
   border-radius: 2px;
 }
 
+/* Event Grid */
+.eventGrid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.eventGrid .event-card {
+  width: 420px;
+  flex-shrink: 0;
+}
+
+/* Event Card */
+.event-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+}
+
+.event-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.09);
+}
+
+.event-header {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.event-logo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 0.75rem;
+}
+
+.event-header h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.event-content {
+  padding: 1rem 1.5rem 1.5rem;
+}
+
+.event-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.event-tag {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+}
+
+.event-description {
+  color: #4b5563;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  margin: 0.75rem 0;
+}
+
+.event-dates {
+  background: rgba(248, 249, 250, 0.9);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  margin: 0.75rem 0;
+}
+
+.date-item {
+  margin-bottom: 0.35rem;
+}
+
+.date-item:last-child {
+  margin-bottom: 0;
+}
+
+.date-label {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #9ca3af;
+  margin-bottom: 0.15rem;
+}
+
+.date-value {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.event-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.event-button {
+  color: white;
+  text-decoration: none;
+  padding: 0.55rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.event-button:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  color: white;
+}
+
+/* Section Divider */
+.section-divider {
+  max-width: 1000px;
+  margin: 3rem auto !important;
+  border-color: #e5e7eb !important;
+}
+
+/* Event Sections */
+.event-section {
+  padding: 2rem 0;
+}
+
+/* Past events slightly muted */
+.past-events .event-card {
+  opacity: 0.85;
+}
+
+.past-events .event-card:hover {
+  opacity: 1;
+}
+
+/* Loading */
 .loading-container {
   display: flex;
   justify-content: center;
@@ -151,36 +213,31 @@
   min-height: 200px;
 }
 
-/* Admin Button Animation */
+.no-events {
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.92rem;
+  grid-column: 1 / -1;
+  padding: 2rem;
+}
+
+/* Admin Buttons */
 .ant-float-button {
-  transition: transform 0.3s ease;
+  transition: transform 0.2s ease;
 }
 
 .ant-float-button:hover {
-  transform: scale(1.1);
-}
-
-/* Delete button */
-.delete-button {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.event-card:hover .delete-button {
-  opacity: 1;
+  transform: scale(1.05);
 }
 
 .admin-buttons {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 0.75rem;
+  right: 0.75rem;
   display: flex;
-  gap: 8px;
+  gap: 6px;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.2s ease;
 }
 
 .event-card:hover .admin-buttons {
@@ -189,50 +246,56 @@
 
 .edit-button,
 .delete-button {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   border-radius: 50%;
   padding: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
 }
 
 .edit-button:hover {
-  background: #1890ff;
+  background: #4285f4;
   color: white;
 }
 
 .delete-button:hover {
-  background: #ff4d4f;
+  background: #db4437;
   color: white;
 }
 
+/* Responsive */
 @media screen and (max-width: 768px) {
   .events-page {
-    margin: 1rem auto;
-    padding: 1rem;
+    padding-top: 60px;
+  }
+
+  .events-page > .ant-typography {
+    margin-top: 2rem !important;
   }
 
   .eventGrid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1.25rem;
+    padding: 0 1rem;
   }
 
   .section-title {
-    font-size: 2rem;
+    font-size: 1.5rem !important;
   }
 
   .event-header h3 {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
   }
 
   .event-logo {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
   }
 
-  .delete-button {
+  .admin-buttons {
     opacity: 1;
   }
 
@@ -244,9 +307,5 @@
     width: 100% !important;
     margin: 4px 0 !important;
     text-align: center;
-  }
-
-  .admin-buttons {
-    opacity: 1;
   }
 }
