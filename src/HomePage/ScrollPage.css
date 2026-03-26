@@ -1,11 +1,13 @@
 .scrollPage {
   min-height: 100vh;
-  padding: 2rem;
-  background: #fff;
+  padding: 4.5rem 0;
+  background-color: #ffffff;
+  background-image: radial-gradient(#d1d5db 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
 @media (max-width: 768px) {
   .scrollPage {
-    padding: 1rem;
+    padding: 3rem 1rem;
   }
 } 

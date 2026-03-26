@@ -1,8 +1,13 @@
 .homePage {
   min-height: 100vh;
-  background: transparent;
+  background-color: #ffffff;
+  background-image: radial-gradient(#d1d5db 1px, transparent 1px);
+  background-size: 24px 24px;
   position: relative;
   z-index: 0;
+  /* Cancel the content-wrapper margin-top AND padding-top so hero sits flush below banner */
+  margin-top: calc(-4rem - 60px);
+  padding-top: 60px; /* restore just navbar height so content isn't hidden */
 }
 
 /* Hero Section */
