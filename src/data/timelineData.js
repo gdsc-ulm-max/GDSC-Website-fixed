@@ -25,6 +25,41 @@ import suruchiPic from "../assets/teams/suruchi.jpeg";
 
 export const timelineData = [
   {
+    year: "2026-2027",
+    members: [
+      {
+        name: "Prasiddhi Luitel",
+        role: "President",
+        image: prasiddhiPic,
+        linkedin: "https://www.linkedin.com/in/prasiddhix/",
+      },
+      {
+        name: "Prajwol Ramtel",
+        role: "External Vice President",
+        image: prajwolPic,
+        linkedin: "https://www.linkedin.com/in/prajwol-ramtel-00a6a9283/",
+      },
+      {
+        name: "Prasanna Jha",
+        role: "Internal Vice President",
+        image: prasannaPic,
+        linkedin: "https://www.linkedin.com/in/prasanna-kumar-jha-77b82230a/",
+      },
+      {
+        name: "Karina Karki",
+        role: "Secretary",
+        image: karinaPic,
+        linkedin: "https://www.linkedin.com/in/karina-karkii",
+      },
+      {
+        name: "Samayara Rijal",
+        role: "Director of Marketing and Public Relations",
+        image: samayaraPic,
+        linkedin: "",
+      },
+    ],
+  },
+  {
     year: "2025-2026",
     members: [
       {
