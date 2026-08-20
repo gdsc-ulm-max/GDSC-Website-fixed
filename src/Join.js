@@ -94,10 +94,12 @@ const Join = ({ seo }) => {
             <Button
               type="primary"
               size="large"
-              disabled
               className="join-button"
+              href="https://forms.cloud.microsoft/r/QhVyYkt6ra"
+              target="_blank"
+              rel="noreferrer"
             >
-              Applications Closed
+              Apply Now
             </Button>
           </Card>
         </div>

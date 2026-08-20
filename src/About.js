@@ -14,7 +14,7 @@ const { Title, Paragraph } = Typography;
 const { TabPane } = Tabs;
 
 const About = ({ seo }) => {
-  const [selectedYear, setSelectedYear] = useState("2025-2026");
+  const [selectedYear, setSelectedYear] = useState(timelineData[0].year);
 
   const renderMemberCard = (member) => (
     <div className="legacy-member-card">

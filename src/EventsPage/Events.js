@@ -41,6 +41,10 @@ import { db, storage } from "../firebase";
 import dayjs from "dayjs";
 import "./Events.css";
 import { events as initialEvents } from "../logo/EventsData";
+import codeClashLogo from "../assets/codeclash.png";
+import hawkathonLogo from "../assets/hawkathon.jpeg";
+import techxpoLogo from "../assets/techxpo.png";
+import gdscLogo from "../logo/logo.png";
 import Animation from "../HomePage/Animation";
 import { useNavigate, Link } from "react-router-dom";
 import SEO from "../components/SEO";
@@ -48,6 +52,17 @@ import SEO from "../components/SEO";
 const { Title, Text } = Typography;
 const { TextArea } = Input;
 const { Option } = Select;
+
+// Event logos are bundled locally so they survive Firebase Storage being
+// unavailable; Firestore's `logo` URL is used for anything not listed here.
+const localLogos = {
+  "code clash": codeClashLogo,
+  "hawkathon 2026": hawkathonLogo,
+  "techxpo 2025": techxpoLogo,
+};
+
+const getEventLogo = (event) =>
+  localLogos[event.name?.trim().toLowerCase()] || event.logo || gdscLogo;
 
 function Events({ seo }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -329,7 +344,15 @@ function Events({ seo }) {
         className="event-header"
         style={{ backgroundColor: `${event.color}15` }}
       >
-        <img src={event.logo} alt={event.name} className="event-logo" />
+        <img
+          src={getEventLogo(event)}
+          alt={event.name}
+          className="event-logo"
+          onError={(e) => {
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = gdscLogo;
+          }}
+        />
         <h3 style={{ color: event.color }}>{event.name}</h3>
       </div>
       <div className="event-content">
