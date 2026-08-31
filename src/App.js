@@ -94,7 +94,7 @@ function App() {
       >
         <div className="App">
           <NavBar />
-          <AnnouncementBar />
+          {/* <AnnouncementBar /> */}
           <Animation className="animation" />
           <main className="content-wrapper">
             <Routes>
