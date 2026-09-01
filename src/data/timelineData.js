@@ -22,6 +22,8 @@ import karinaPic from "../assets/teams/KarinaKarki.JPG";
 import samayaraPic from "../assets/teams/samayara.JPG";
 import nishuPic from "../assets/teams/nishu.png";
 import suruchiPic from "../assets/teams/suruchi.jpeg";
+import deepikaPic from "../assets/teams/deepika.jpeg";
+import sagarPic from "../assets/teams/sagar.png";
 
 export const timelineData = [
   {
@@ -56,6 +58,18 @@ export const timelineData = [
         role: "Director of Marketing and Public Relations",
         image: samayaraPic,
         linkedin: "",
+      },
+      {
+        name: "Deepika Baruwal",
+        role: "Treasurer",
+        image: deepikaPic,
+        linkedin: "https://www.linkedin.com/in/deepika-baruwal-870243252/",
+      },
+      {
+        name: "Sagar Banstola",
+        role: "Technical Lead",
+        image: sagarPic,
+        linkedin: "https://www.linkedin.com/in/sagar-banstola-1032b337b/",
       },
     ],
   },
