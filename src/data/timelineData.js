@@ -24,6 +24,7 @@ import nishuPic from "../assets/teams/nishu.png";
 import suruchiPic from "../assets/teams/suruchi.jpeg";
 import deepikaPic from "../assets/teams/deepika.jpeg";
 import sagarPic from "../assets/teams/sagar.png";
+import samratPic from "../assets/teams/samrat.png";
 
 export const timelineData = [
   {
@@ -70,6 +71,12 @@ export const timelineData = [
         role: "Technical Lead",
         image: sagarPic,
         linkedin: "https://www.linkedin.com/in/sagar-banstola-1032b337b/",
+      },
+      {
+        name: "Samrat Bhusal",
+        role: "Graphics Design",
+        image: samratPic,
+        linkedin: "",
       },
     ],
   },
