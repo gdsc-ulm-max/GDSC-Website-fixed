@@ -78,6 +78,18 @@ export const timelineData = [
         image: samratPic,
         linkedin: "",
       },
+      {
+        name: "Kritika Pandey",
+        role: "Freshmen Representative",
+        image: ,
+        linkedin: "",
+      },
+      {
+        name: "William Barnett",
+        role: "Faculty/Staff",
+        image: barnettpic,
+        linkedin: "",
+      },
     ],
   },
   {
