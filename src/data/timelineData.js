@@ -81,7 +81,7 @@ export const timelineData = [
       {
         name: "Kritika Pandey",
         role: "Freshmen Representative",
-        image: ,
+        image: "",
         linkedin: "",
       },
       {
