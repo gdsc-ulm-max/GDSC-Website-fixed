@@ -389,41 +389,127 @@
   margin: 0;
 }
 
+/* Mobile-first touch fixes (apply on all sizes) */
+.voting-modal-content {
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.voting-modal-overlay,
+.voting-modal-content button,
+.voting-project-card {
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
+  /* Bottom sheet: anchored to the bottom, thumb-reachable */
+  .voting-modal-overlay {
+    padding: 0;
+    align-items: flex-end;
+  }
+
   .voting-modal-content {
-    padding: 60px 30px 30px 30px;
-    margin: 10px;
+    max-width: none;
+    margin: 0;
+    max-height: 92vh;
+    max-height: 92dvh;
+    border-radius: 20px 20px 0 0;
+    padding: 56px 20px calc(24px + env(safe-area-inset-bottom)) 20px;
+    animation: sheetUp 0.3s ease-out;
+  }
+
+  /* drag-handle style cue */
+  .voting-modal-content::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    width: 40px;
+    height: 4px;
+    margin-left: -20px;
+    border-radius: 2px;
+    background: #ced4da;
   }
 
   .voting-modal-title {
-    font-size: 24px;
+    font-size: 22px;
+    margin-bottom: 20px;
   }
 
-  .voting-projects-grid {
-    max-height: 300px;
+  .voting-form {
+    gap: 20px;
+  }
+
+  /* 16px+ font stops iOS Safari auto-zooming on focus; 48px tap targets */
+  .voting-input,
+  .voting-select {
+    font-size: 16px;
+    min-height: 48px;
+  }
+
+  .voting-input {
+    padding: 12px 16px;
+  }
+
+  .voting-select {
+    padding: 12px 44px 12px 16px;
   }
 
   .voting-submit-btn {
-    font-size: 16px;
-    padding: 14px 28px;
+    font-size: 17px;
+    min-height: 52px;
+    padding: 14px 24px;
+    width: 100%;
+  }
+
+  /* Hover lift is meaningless on touch */
+  .voting-project-card:hover,
+  .voting-modal-close:hover {
+    transform: none;
+  }
+
+  .voting-modal-close {
+    top: 6px;
+    right: 6px;
+  }
+
+  .voting-success-message {
+    padding: 40px 10px;
+  }
+}
+
+@keyframes sheetUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
   }
 }
 
 @media (max-width: 480px) {
   .voting-modal-content {
-    padding: 60px 16px 25px 16px;
+    padding: 56px 16px calc(20px + env(safe-area-inset-bottom)) 16px;
   }
 
   .voting-modal-title {
     font-size: 20px;
   }
 
-  .project-card-header h4 {
-    font-size: 16px;
+  .voting-label {
+    font-size: 15px;
   }
 
-  .project-description {
-    font-size: 13px;
+  .voting-success-message h3 {
+    font-size: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .voting-modal-overlay,
+  .voting-modal-content,
+  .success-icon {
+    animation: none;
   }
 }

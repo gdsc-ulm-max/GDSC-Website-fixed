@@ -23,6 +23,16 @@ const VotingModal = ({ isOpen, onClose }) => {
     }
   }, [isOpen]);
 
+  // Lock background scroll while the modal is open (prevents page scrolling behind it on phones)
+  useEffect(() => {
+    if (!isOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [isOpen]);
+
   const fetchProjects = async () => {
     try {
       setLoadingProjects(true);
@@ -97,6 +107,7 @@ const VotingModal = ({ isOpen, onClose }) => {
         <button 
           className="voting-modal-close" 
           onClick={onClose}
+          aria-label="Close voting"
         >
           ×
         </button>
@@ -127,7 +138,11 @@ const VotingModal = ({ isOpen, onClose }) => {
                 className="voting-input"
                 maxLength={10}
                 disabled={loading}
-                autoFocus
+                autoCapitalize="characters"
+                autoComplete="off"
+                autoCorrect="off"
+                spellCheck={false}
+                enterKeyHint="next"
               />
               <p className="voting-hint">
                 Enter the code provided to you at the event
