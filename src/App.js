@@ -58,10 +58,10 @@ const seoConfig = {
     description:
       "Experience our annual technology exposition showcasing student projects and innovations.",
   },
-  techxpo2025: {
-    title: "TechXpo 2025 | GDSC ULM",
+  techxpo2026: {
+    title: "TechXpo 2026 | GDSC ULM",
     description:
-      "Join us for TechXpo 2025 - A showcase of student innovation featuring project exhibitions, panel discussions, and awards.",
+      "Join us for TechXpo 2026 - A showcase of student innovation featuring project exhibitions, panel discussions, and awards.",
   },
   codeClash: {
     title: "Code Clash | GDSC ULM",
@@ -94,7 +94,7 @@ function App() {
       >
         <div className="App">
           <NavBar />
-          {/* <AnnouncementBar /> */}
+          <AnnouncementBar />
           <Animation className="animation" />
           <main className="content-wrapper">
             <Routes>
@@ -118,8 +118,12 @@ function App() {
                 element={<TechXpo seo={seoConfig.techxpo} />}
               />
               <Route
+                path="/techxpo-2026"
+                element={<TechXpo2025 seo={seoConfig.techxpo2026} />}
+              />
+              <Route
                 path="/techxpo-2025"
-                element={<TechXpo2025 seo={seoConfig.techxpo2025} />}
+                element={<TechXpo2025 seo={seoConfig.techxpo2026} />}
               />
               <Route
                 path="/code-clash"

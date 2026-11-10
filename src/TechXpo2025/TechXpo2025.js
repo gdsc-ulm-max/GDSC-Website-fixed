@@ -7,49 +7,64 @@ import AdminPanel from "./AdminPanel";
 import { getProjects } from "../services/votingService";
 
 const techXpoData = {
-  edition: "1st Annual",
-  year: "2025",
+  edition: "2nd Annual",
+  year: "2026",
   theme: {
     title: "Innovation Showcase",
     subtitle: "Celebrating Student Innovation",
     description: "Join us for a day of innovation, learning, and networking",
   },
-  eventDate: "November 21, 2025",
+  eventDate: "November 13, 2026",
+  location: "Hangar Hall",
   timeline: [
     {
-      time: "9:00 AM - 11:00 AM",
-      title: "Product Showcase & Exhibition (Part 1)",
-      description: "Students present their projects to judges and attendees.",
-      icon: "rocket_launch",
+      time: "9:00 AM - 9:25 AM",
+      title: "Check-in",
+      description: "Check-in for participants and judges.",
+      icon: "how_to_reg",
       color: "#4285F4",
     },
     {
-      time: "11:00 AM - 11:30 AM",
-      title: '"Skills for Your First Job" Session',
-      description: "Keynote address by Chief Operation Officer from Kinetix Solutions.",
-      icon: "forum",
+      time: "9:30 AM - 9:45 AM",
+      title: "Opening Ceremony & Event Introduction",
+      description: "Overview of TechXpo ULM's purpose and significance, and acknowledgment of sponsors and special guests.",
+      icon: "celebration",
       color: "#DB4437",
     },
     {
-      time: "12:00 PM - 1:15 PM",
-      title: "Product Showcase & Exhibition (Part 2)",
-      description: "Continued project demonstrations, audience voting, and final evaluations by judges.",
-      icon: "how_to_vote",
+      time: "10:00 AM - 11:30 AM",
+      title: "Tech Showcases & Judging (Session 1)",
+      description: "Participants showcase their projects at designated booths while attendees and judges explore the exhibits. The Play Zone opens for hands-on experiences with VR, drones, and 3D displays.",
+      icon: "rocket_launch",
       color: "#F4B400",
     },
     {
-      time: "1:30 PM - 2:30 PM",
-      title: "Award Ceremony & Winner Announcement",
-      description: "The culmination of the event, where top projects are recognized and awarded.",
-      icon: "emoji_events",
+      time: "11:30 AM - 12:00 PM",
+      title: "Break & Guest Speaking Session",
+      description: "Refreshments and a networking break, plus a guest speaking session.",
+      icon: "forum",
       color: "#0F9D58",
     },
     {
-      time: "2:30 PM",
-      title: "Event Concludes",
-      description: "Thank you for joining us!",
-      icon: "celebration",
+      time: "12:05 PM - 1:30 PM",
+      title: "Tech Showcases & Judging (Session 2)",
+      description: "Final project showcase and judging. The Play Zone remains open and voting begins.",
+      icon: "how_to_vote",
       color: "#4285F4",
+    },
+    {
+      time: "1:30 PM - 2:00 PM",
+      title: "Award Ceremony, Raffle Draw & Closing Remarks",
+      description: "Announcement of winners, including Code Clash and Typing winners, appreciation for volunteers, and a lucky draw for MLH goodies (must be present to win).",
+      icon: "emoji_events",
+      color: "#DB4437",
+    },
+    {
+      time: "2:00 PM - 2:30 PM",
+      title: "Closing Remarks & Group Pictures",
+      description: "Thank you for joining us!",
+      icon: "photo_camera",
+      color: "#F4B400",
     },
   ],
   contact: {
@@ -116,10 +131,10 @@ function TechXpo2025({ seo }) {
   return (
     <div className="techxpo-page">
       <Helmet>
-        <title>{seo?.title || "TechXpo 2025 - GDSC ULM"}</title>
-        <meta name="description" content={seo?.description || "Join us for TechXpo 2025 - A showcase of student innovation and technology"} />
-        <meta property="og:title" content={seo?.title || "TechXpo 2025 - GDSC ULM"} />
-        <meta property="og:description" content={seo?.description || "Join us for TechXpo 2025 - A showcase of student innovation and technology"} />
+        <title>{seo?.title || "TechXpo 2026 - GDSC ULM"}</title>
+        <meta name="description" content={seo?.description || "Join us for TechXpo 2026 - A showcase of student innovation and technology"} />
+        <meta property="og:title" content={seo?.title || "TechXpo 2026 - GDSC ULM"} />
+        <meta property="og:description" content={seo?.description || "Join us for TechXpo 2026 - A showcase of student innovation and technology"} />
       </Helmet>
 
       {/* Title Above Card */}
@@ -156,7 +171,7 @@ function TechXpo2025({ seo }) {
       <section className="hero-section">
         <div className="hero-content">
           <div className="techxpo-logo-wrapper">
-            <img src={techXpoLogo} alt="TechXpo 2025 Logo" className="techxpo-logo" />
+            <img src={techXpoLogo} alt="TechXpo 2026 Logo" className="techxpo-logo" />
           </div>
           <div className="hero-text">
             <p className="theme">{techXpoData.theme.title}</p>
@@ -166,6 +181,10 @@ function TechXpo2025({ seo }) {
               <p className="event-date">
                 <span className="material-icons">event</span>
                 {techXpoData.eventDate}
+              </p>
+              <p className="event-date">
+                <span className="material-icons">location_on</span>
+                {techXpoData.location}
               </p>
             </div>
           </div>
@@ -211,7 +230,7 @@ function TechXpo2025({ seo }) {
             <div className="highlight-card">
               <span className="material-icons">school</span>
               <h3>Learning</h3>
-              <p>Gain insights from "Skills for Your First Job" session with Kinetix Solutions COO</p>
+              <p>Hear from our guest speaker during the speaking session</p>
             </div>
             <div className="highlight-card">
               <span className="material-icons">emoji_events</span>

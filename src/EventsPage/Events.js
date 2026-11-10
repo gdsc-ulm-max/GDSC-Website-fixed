@@ -59,6 +59,7 @@ const localLogos = {
   "code clash": codeClashLogo,
   "hawkathon 2026": hawkathonLogo,
   "techxpo 2025": techxpoLogo,
+  "techxpo 2026": techxpoLogo,
 };
 
 const getEventLogo = (event) =>
